@@ -1,0 +1,7 @@
+*.swp
+tmp/
+node_modules/
+copyright.txt
+ecosystem.config.js.WIP
+example.json
+jsn-notation,v3.js
