@@ -1,0 +1,27 @@
+{
+  "name": "json_song_notation",
+  "version": "1.0.0",
+  "description": "A proof of concept/reference implementation of building an app around the JSON Song Notation format.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/js",
+    "dev": "nodemon ./index.js"
+  },
+  "author": "Daryl Williams",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "morgan": "^1.9.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "dotenv": "^8.1.0",
+    "eslint": "^6.5.0",
+    "nodemon": "^1.19.2"
+  }
+}
