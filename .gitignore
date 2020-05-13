@@ -1,5 +1,6 @@
 *.swp
 tmp/
+.Attic/
 node_modules/
 copyright.txt
 ecosystem.config.js.WIP
