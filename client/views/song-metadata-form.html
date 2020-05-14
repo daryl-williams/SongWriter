@@ -1,0 +1,102 @@
+      <form id="song-metadata">
+         <div>
+           <label for="song[title]"><span class="required" id="song[title].error">*</span> Song Title</label>
+           <div class="header-values-div"><input data-type="header" required name="title" id="song[title]"></div>
+            <span class="error-reason" id="song[title].error-reason"/>
+         </div>
+
+         <div>
+           <label for="song[composer]"><span class="required" id="song[composer].error">*</span> Written by</label>
+           <div class="header-values-div"><input data-type="header" required name="composer" id="song[composer]"></div>
+           <span class="error-reason" id="song[composer].error-reason" />
+         </div>
+
+         <div>
+           <label for="song[key]"><span class="required" id="song[key].error">*</span> Song Key</label>
+           <div class="header-values-div">
+             <select data-type="header" required name="key" id="song[key]">
+               <option value=""></option>
+               <option value="Am">A</option>
+               <option>Am</option>
+               <option>B</option>
+               <option>Bm</option>
+               <option>C</option>
+               <option>Cm</option>
+               <option>D</option>
+               <option>Dm</option>
+               <option>E</option>
+               <option>F</option>
+               <option>Fm</option>
+               <option>G</option>
+               <option>Gm</option>
+             </select>
+           </div>
+          <span class="error-reason" id="song[key].error-reason"/>
+         </div>
+
+         <div>
+           <label for="song[time-signature]"><span class="required" id="song[time-signature].error">*</span> time Signature</label>
+           <div class="header-values-div">
+             <select data-type="header" required name="time_signature" id="song[time-signature]">
+               <option value=""></option>
+               <option>2/4</option>
+               <option>4/4</option>
+               <option>3/4</option>
+             </select>
+           </div>
+          <span class="error-reason" id="song[time-signature].error-reason"/>
+         </div>
+
+         <div>
+           <label for="song[number-of-bars]"><span class="required" id="song[number-of-bars].error">*</span> Number of Measures</label>
+           <div class="header-values-div">
+             <input data-type="header" required name="number_of_bars" id="song[number-of-bars]">
+           </div>
+          <span class="error-reason" id="song[number-of-bars].error-reason"/>
+         </div>
+
+         <div>
+           <label for="song[capo-at-fret]">Capo at Fret</label>
+           <div class="header-values-div">
+             <select data-type="header" name="capo_at_fret" id="song[capo-at-fret]">
+               <option>none</option>
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>4</option>
+               <option>5</option>
+               <option>6</option>
+               <option>7</option>
+               <option>8</option>
+               <option>9</option>
+               <option>10</option>
+               <option>11</option>
+             </select>
+           </div>
+         </div>
+
+         <div>
+           <label for="song[tags]">Tags</label>
+           <div class="header-values-div"><input data-type="header" name="song_tags" id="song[tags]"></div>
+           <span class="error-reason" id="song[tags].error-reason" />
+         </div>
+
+         <div></span><input disabled name="begin_save_button" id="begin-save-button" type="submit" value="Begin"></div>
+       </form>
+
+<!--
+      <div id="song-body">
+        <div id="chord-popup">
+				  <div id="chord-popup-data">
+					  <div id="popup-controls">Chord Picker <div id="popup-close-control">X</div></div>
+					  <div id="chord-family-title"></div>
+					  <div id="chord-family"></div>
+					  <div id="chord-more-title"></div>
+					  <div id="chord-more"></div>
+					</div>
+				</div>
+        <div id="bar-identity" class="tooltip"></div>
+        <div id="song-grid" class="grid"></div>
+      </div>
+-->
+
