@@ -1,0 +1,174 @@
+
+#file-browser {
+	position: absolute;
+	z-index: 100;
+	top: 40px;
+	left: 10px;
+	visibility: hidden;
+	display: grid;
+	grid-template-areas: "header header"
+	                     "song-tags song-files";
+	grid-template-rows: 1.5em auto;
+	grid-template-columns: 25% auto;
+
+	width: 50%;
+	height: 310px;
+	padding: 0px;
+	margin: 0px;
+	border: thin solid #000;
+	box-sizing: border-box;
+	/*
+	 * If opacitiy doesn't equal .999 the dropdown menu will be see-through.
+	opacity: .999;
+	 */
+	background-color: #fff;
+}
+
+#file-browser-header {
+	grid-area: header;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 1;
+	position: relative;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	/*
+	//height: 1.5em;
+	//width: 100%;
+	//border: thin solid #ddd;
+	*/
+	cursor: move;
+	text-align: center;
+	background-color: #d3e3fe;
+}
+
+#file-browser-close-controls {
+	float: right;
+	cursor: pointer;
+	margin-top: .25em;
+	margin-right: 1em;
+}
+
+#file-browser-tags-label {
+	padding: .5em;
+}
+
+#file-browser-tags-container {
+	grid-area: song-tags;
+	overflow: auto;
+	/*
+	//height: 100%;
+	//padding: .5em;
+	//border: thin solid #ddd;
+	//border: thin solid green;
+	*/
+}
+
+label {
+	width: unset;
+}
+
+#file-browser-files-container {
+	grid-area: song-files;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	/*
+//	height: 100%;
+//	border: thin solid #ddd;
+*/
+}
+
+ul#song-tags-list li.song-tag-item:hover {
+	cursor: pointer;
+}
+
+ul#song-list li.song-list-item:hover {
+	cursor: pointer;
+}
+
+#file-browser-open-file-button {
+	align-self: flex-end;
+	width: 8em;
+	margin-right: 1em;
+}
+
+#file-browser-search {
+	width: 100%;
+	text-align: right;
+	padding-top: .30em;
+	padding-bottom: .50em;
+	padding-right: 1em;
+	/*
+	//background-color: green;
+	*/
+	border: thin solid #ddd;
+}
+
+ul#song-tags-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #c6deff;
+}
+
+ul#song-tags-list li {
+	background-color: #eee;
+	padding: .5em;
+	border: thin solid #bbb;
+}
+
+/*
+ul#song-tags-list li:hover {
+	cursor: pointer;
+	background-color: #ddd;
+}
+*/
+
+ul#song-list {
+	list-style-type: none;
+	padding-top: 0px;
+	padding-left: .5em;
+	padding-right: .5em;
+	margin-top: 0px;
+}
+
+ul#song-list li {
+	background-color: #eee;
+	padding: .5em;
+	border: thin solid #bbb;
+}
+
+/*
+ul#song-list li:hover {
+	cursor: pointer;
+	background-color: #ddd;
+}
+*/
+
+#file-browser-search label {
+	color: #ccc;
+	display: inline;
+}
+
+#file-browser-song-search-input {
+	width: 20em;
+}
+
+.selected-tag {
+	background-color: silver !important;
+}
+
+.selected-song {
+	background-color: silver !important;
+}
+
+.center-file-browser {
+	top: 100px;
+	visibility: visible;
+}
+
+

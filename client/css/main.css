@@ -1,0 +1,363 @@
+/*
+ * main.css
+ */
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+html, body {
+	min-height: 100vh;
+	height: 100vh;
+	font-family: 'Open Sans', 'sans-serif';
+	font-size: 14px;
+	color: #444;
+	background-color: #fff;
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+
+	/*
+	 * The following non-standard attributes
+	 * turn off the select highlighting effect.
+	 */
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	/*
+	 * Introduced in Internet Explorer 10.
+	 * See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	 */
+	-ms-user-select: none;
+	user-select: none;
+}
+
+nav {
+	width: 100%;
+}
+
+.page {
+	/*
+	min-height: 100vh;
+	height: 100vh;
+	display: block;
+	*/
+
+	/*
+	grid-gap: 1px;
+	grid-template-areas:
+		"app-header"
+		"app-console"
+		"song-content"
+		"app-footer";
+
+	grid-template-rows: auto auto 1fr auto;
+	grid-template-rows: auto; // auto 1fr auto;
+	*/
+}
+
+.app-header {
+	position: relative;
+	z-index: 3;
+	/*
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 1;
+	*/
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	//align-items: stretch;
+	height:28px;
+	color: #000;
+	background-color: #d0e5ff;
+}
+
+#app-console {
+	position: relative;
+	z-index: 1;
+	/*
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 2;
+	*/
+	height: 200px;
+	/* Set display to flexbox */
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	border: thin groove #ddd;
+	background-color: #eee;
+	background-color: aliceblue;
+
+	/* TODO: fix transition so
+	 * it inlcudes the song-metadara
+	 * form, which currerntly wont
+	 * transform!
+	 *
+	transition: height .75s ease-out
+	 */
+}
+
+#app-console.hide {
+	/*
+	 flex: 0;
+	height: 0px;
+	*/
+	display: none;
+}
+
+/*
+#song-metadata {
+ * The css for this element is
+ * now being defined in song-meta.css.
+}
+ */
+
+.app-multiuse {
+	position: relative;
+	z-index: 10;
+	flex: 2;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	width: 80%;
+	width: 100%;
+	border: 1px solid silver;
+	overflow: hidden;
+}
+
+#preferences-container {
+	position: relative;
+	z-index: -10;
+/*
+	padding: 0px;
+	padding: .5em;
+*/
+	margin: 0px;
+	height: 200px;
+	width: 40%;
+	display: grid;
+	grid-gap: 1px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: [preferences-header] 28px [preferences-content] 1fr [preferences-content] 1fr;
+	grid-template-areas:
+		"preferences-header  preferences-header"
+		"preferences-content preferences-content"
+		"preferences-content preferences-content";
+
+	transition: width .75s ease;
+	/*
+	visibility: hidden;
+	*/
+	display: none;
+}
+
+/*
+#preferences-container.closed {
+	width: 0px;
+	padding: 0px;
+	visibility: hidden;
+}
+*/
+
+.preferences-header {
+	grid-area: preferences-header;
+}
+
+.preferences-content {
+	border: thin solid #ddd;
+}
+
+.preferences-content select {
+	width: 50%;
+}
+
+.splitter {
+	position: relative;
+//	z-index: 200;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	width: 12px;  
+	background-color: #ddd;
+	color: #000;
+	height: 100%;
+	border: thin solid #aaa;
+}
+
+i { vertical-align: middle; }
+
+.fa-hand-o-left,
+.fa-hand-o-right {
+	cursor: pointer;
+	font-size: 8px !important;
+}
+
+.fa-circle-o {
+	cursor: col-resize;  
+	font-size: 8px !important;
+}
+
+.fa-toggle-on, .fa-toggle-off {
+	font-size: 16px !important;
+}
+
+#chords-container {
+	position: relative;
+	z-index: 5;
+	//z-index: 200;
+	cursor: pointer;
+	flex: 2;
+	flex-wrap: nowrap;
+	height: 200px;
+	padding: .5em;
+	overflow-y: scroll;
+}
+#chords-container.closed {
+	width: 0px;
+	padding: 0px;
+	visibility: hidden;
+}
+
+#chords-additional {
+	display: grid;
+	grid-template-columns: repeat(7, 80px);
+}
+
+#song-content {
+	position: relative;
+	padding: .25em;
+	z-index: 2;
+	/*
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 3;
+	margin-top: 1em;
+	*/
+	/*
+	postion: relative !important;
+	z-index: 10;
+	border: thin solid #ddd;
+	background-color: #ddd;
+	min-height: 100px;
+	justify-self: center;
+	align-self: center;
+	overflow: auto;
+	*/
+}
+
+.app-footer {
+	visibility: hidden;
+	/*
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+	*/
+
+	/*
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 5;
+	grid-row-end: 5;
+	*/
+	height: 28px;
+	margin-top: 1em;
+	/*
+	margin-bottom: 2em;
+	*/
+	background-color: #d0e5ff;
+	/* Reverse of the toolbar background. */
+	background: linear-gradient(to left top, rgba(2,0,36,1) 0%, rgba(208,229,255,1) 0%, rgba(0,212,255,1) 100%);
+
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.visible {
+	visibility: visible;
+}
+
+.selected-chord-div {
+	background-color: aliceblue;
+}
+
+/*
+	** no grid support? **
+@media screen and (min-width: 500px) {
+	.song-form {
+		float: left;
+		width: 19.1489%;
+	}
+
+	.content {
+		float: right;
+		width: 79.7872%;
+	}
+
+	.page {
+		margin: 0 auto;
+		grid-template-columns: 1fr 3fr;
+	}
+	
+	.toolbar, .song-footer {
+		grid-column: 1 / -1;
+		** needed for the floated layout **
+		clear: both;
+	}
+
+	.song-content {
+		grid-column: 1 / -1;
+		** needed for the floated layout **
+		clear: both;
+	}
+}
+
+.page > * {
+	background-color: #444;
+	color: #fff;
+//  border-radius: 5px;
+//  padding: 20px;
+	font-size: 150%;
+	** needed for the floated layout**
+	margin-bottom: 10px;
+}
+*/
+
+.hide {
+	visibility: hidden;
+}
+
+.show {
+	visibility: visible;
+}
+
+/*
+We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps.
+@supports (display: grid) {
+	.page > * {
+		width: auto;
+		margin: 0;
+	}
+}
+*/
+
+#metronome-controls {
+	display: block;
+	visibility: hidden;
+	width: 200px;
+	height: 300px;
+	background-color: #fff;
+	border: thin solid blue;
+}
+

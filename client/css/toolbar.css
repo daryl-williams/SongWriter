@@ -1,0 +1,263 @@
+/*
+ * toolbar.css
+ */
+
+#toolbar {
+	position: relative;
+	font-size: 14px;
+	height: 28px;
+	width: 100%;
+	font-weight: normal;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: flex-start;
+	padding: 0px;
+	padding-top: .25em;
+	margin: 0px;
+  background-color: #d0e5ff;
+	background: rgb(2,0,36);
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(208,229,255,1) 0%, rgba(0,212,255,1) 100%);
+
+/*
+	background: rgba(179,220,237,1);
+	background: -moz-linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
+	*/
+}
+
+#toolbar .toolbar-item {
+/*
+	width: 4em;
+	margin-right: 1em;
+*/
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	margin-top: .25em;
+}
+
+#toolbar .dropdown-label {
+	cursor: pointer;
+}
+
+#toolbar .float-right {
+	margin-left: auto;
+}
+
+#toolbar .dropdown-menu-container .dropdown-label {
+	/*
+	 color: orange;
+	 */
+	padding-left: 1em;
+}
+
+/*
+#toolbar .dropdown-menu-container:hover .dropdown-label:hover .dropdown-menu {
+#toolbar .dropdown-menu-container:hover .dropdown-menu {
+	visibility: visible;
+	color: #000;
+	font-weight: normal;
+	cursor: pointer;
+	background-color:red;
+}
+*/
+
+#toolbar ul.dropdown-menu {
+	color: #000;
+  background-color: #d0e5ff;
+	text-align: left;
+	list-style: none;
+	width: 8em;
+	padding: 0px;
+	margin: 0px;
+	margin-right: 1em;
+	margin-top: 1px;
+	overflow: hidden;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	/*
+	 * If opacitiy doesn't equal .999 the dropdown menu will be see-through.
+	cursor: pointer;
+	background-color: #fff;
+	visibility: hidden;
+	 */
+	opacity: .999;
+}
+
+#toolbar .dropdown-menu-container:hover .dropdown-menu {
+	margin-left:2px;
+	padding-left: .25em;
+	padding-right: .25em;
+	/*
+	visibility: visible;
+	cursor: pointer;
+	height: 200px;
+	color: #fff;
+	position: relative !important;
+	z-index: 1000;
+	background-color: purple;
+	*/
+}
+
+#toolbar .dropdown-menu-container:hover .dropdown-label {
+//	visibility: visible;
+//	cursor: pointer;
+	pointer: cursor;
+	display: block;
+//	color: yellow;
+	/*
+	background-color: #d0e5ff;
+	background-color: red;
+	*/
+}
+
+/*
+.dropdown-label:hover .dropdown-menu {
+	visibility: visible;
+	cursor: pointer;
+	display: block;
+	color: pink;
+	background-color: #d0e5ff;
+	background-color: yellow;
+}
+*/
+
+/*
+#toolbar .dropdown-menu-container ul.dropdown-menu:hover {
+	visibility: visible;
+	cursor: pointer;
+}
+*/
+
+ul.dropdown-menu li {
+	cursor: pointer;
+	color: #000;
+	font-weight: normal;
+	padding: .30em;
+	text-overflow: ellipsis;
+}
+
+ul.dropdown-menu li:hover {
+	cursor: pointer;
+	background-color: #a7d6ff;
+	border: thin ridge #000;
+}
+
+/*
+.hidden {
+	visibility: hidden;
+}
+
+.visible {
+	visibility: visible;
+}
+*/
+
+/*
+ul.dropdown-menu #recent-files-opened {
+	visibility: visible;
+	background-color: green;
+}
+*/
+
+/*
+ul.dropdown-menu li#recent-files-opened ul.dropdown-submenu {
+*/
+ul.dropdown-submenu {
+	position: absolute;
+	list-style: none;
+	padding: 0px;
+	visibility: hidden;
+	/*
+	display: none;
+	top: 0;
+	left: 100%;
+	background-color:red;
+	margin-top: -1px;
+	*/
+	width: 100px;
+	margin-left: 1em;
+}
+
+li#recent-files-opened:hover {
+	cursor: pointer;
+	/*
+	color: white;
+	background-color:purple;
+	*/
+}
+
+li#recent-files-opened:hover ul.dropdown-submenu {
+	cursor: pointer;
+	display: inline;
+	visibility: visible !important;
+	background-color: #a7d6ff;
+	/*
+	*/
+	width: 180px;
+	text-overflow: ellipsis;
+}
+
+li#recent-files-opened:hover ul.dropdown-submenu li:hover{
+	background-color: #ddd;
+	border: thin groove #000;
+}
+
+ul.dropdown-menu .view-menu-item:hover {
+	background-color: #a7d6ff;
+}
+
+ul.dropdown-menu .help-menu-item:hover {
+	background-color: #a7d6ff;
+}
+
+/*
+.dropdown-menu-container {
+	background-color: green;
+}
+*/
+
+.dropdown-label {
+	display: block;
+}
+
+#toolbar .dropdown-menu-container .dropdown-label:hover .dropdown-menu {
+	visibility: visible;
+	color: purple;
+	background-color: #a7d6ff;
+	background-color: green;
+	border: thin ridge #000;
+}
+
+:root {
+	--disabled-color: #aaa;
+}
+
+.disabled {
+	/*
+	color: #aaa !important;
+	*/
+	color: var(--disabled-color) !important;
+	cursor: not-allowed !important;
+}
+
+/*
+#viewmenu-toggle-console {
+	color: var(--disabled-color);
+}
+*/
+
+#button-toggle-console {
+//	visibility: hidden;
+	background-color: transparent;
+	border: none;
+}
+
+#button-toggle-console:focus {
+	outline: none;
+}
+
+.help-option {
+	margin-right: 4em;
+}
+

@@ -1,0 +1,121 @@
+
+#help-window {
+	position: absolute;
+	z-index: 100;
+	top: 40px;
+	left: 10px;
+
+	display: grid;
+	grid-template-areas: "header"
+	                     "content";
+	grid-template-rows: 1.5em auto;
+	grid-template-columns: 1fr;
+
+	width: 50%;
+	height: 310px;
+	height: 600px;
+	padding: 0px;
+	margin: 0px;
+	border: thin solid #000;
+	box-sizing: border-box;
+	background-color: #fff;
+}
+
+#help-window-header {
+	grid-area: header;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 1;
+	position: relative;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	/*
+	//height: 1.5em;
+	//width: 100%;
+	//border: thin solid #ddd;
+	*/
+	cursor: move;
+	text-align: center;
+	background-color: #d3e3fe;
+}
+
+#help-window-close-controls {
+	float: right;
+	cursor: pointer;
+	margin-top: .25em;
+	margin-right: 1em;
+}
+
+label {
+	width: unset;
+}
+
+#help-window-search label {
+	color: #ccc;
+	display: inline;
+}
+
+#help-window-content {
+	padding-left: 1em;
+	overflow: scroll;
+	width: auto;
+}
+
+div #about h1 {
+	margin-top: .5em;
+	margin-bottom: .25em;
+}
+
+/*
+@media only screen and (max-width: 600px) {
+	#help-window-content {
+		color: lightblue;
+	}
+}
+*/
+
+.toolbar-help-topic {
+	position: relative;
+	color: #000;
+	margin-bottom: 2em;
+}
+
+.toolbar-help-label {
+	font-weight: bold;
+	padding: .10em;
+	margin-top: 1em;
+	margin-bottom: .5em;
+	background-color: #ddd;
+	border: thin solid #000;
+}
+
+.toolbar-file-text {
+	position: absolute;
+	top: 53px;
+	left: 118px;
+	background-color: #fff;
+}
+
+.toolbar-view-text {
+	position: absolute;
+	top: 60px;
+	left: 230px;
+	background-color: #fff;
+}
+
+.toolbar-tools-text {
+	position: absolute;
+	top: 115px;
+	left: 230px;
+	background-color: #fff;
+}
+
+.toolbar-help-text {
+	position: absolute;
+	top: 92px;
+	left: 150px;
+	background-color: #fff;
+}
+

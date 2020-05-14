@@ -1,0 +1,91 @@
+/*
+ * song-meta sylesheet
+ */
+
+@media (max-width: 684px) {
+	body {
+		font-size: 1.53rem;
+	}
+}
+
+@media (max-width: 382px) {
+	body {
+		font-size: 1.35rem;
+	}
+}
+
+select {
+	width: 100%;
+}
+
+input {
+	width: 10em;
+}
+
+label {
+	width: 10em !important;
+	display: inline-block;
+	text-align: right;
+}
+
+#song-metadata {
+	position: relative;
+	width: 25% !important;
+	padding-top: .5em;
+	padding-left: 1em;
+	height: 200px;
+	overflow: auto;
+}
+
+#song-metadata.closed {
+	visibility: hidden;
+}
+
+#song-metadata > label {
+	text-align: right;
+}
+
+#song-metadata-form {
+	margin-top: 1em;
+	font-size: 90%;
+}
+/*
+#song-metadata-form:hover {
+	background-color: salmon;
+	transition: opacity 0.2s ease-out
+	margin:5em;
+}
+*/
+
+#begin-save-button {
+	width: 25%;
+	margin-top: 1em;
+	margin-left: 5px;
+}
+
+.required {
+	color: red;
+}
+
+.header-values-div {
+	display: inline-block;
+	width: 8em;
+	padding: 0;
+	margin: 0;
+	margin-right: .5em;
+}
+
+.error-reason {
+	visibility: hidden;
+	text-transform: capitalize;
+	font-family: monospace;
+	color: red;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+.error-reason-text {
+	color: black;
+	text-transform: lowercase;
+}
+

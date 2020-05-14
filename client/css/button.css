@@ -1,0 +1,23 @@
+
+button {
+	cursor: pointer;
+	border-radius: 10px;
+	background-color: #eee;
+/*
+	background-color: #7b38d8;
+	display: inline-block;
+	border-radius: 10px;
+	border: 4px double #cccccc;
+	color: #eeeeee;
+	text-align: center;
+	font-size: 12px;
+	padding: 20px;
+	width: 200px;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+	margin: 5px;
+*/
+}
+
