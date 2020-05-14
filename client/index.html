@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta  name = "viewport" content = "width=device-width, initial-scale=1" />
+  <meta  name="description" content="A JSON song notation prototype" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="stylesheet"  type="text/css" href="/css/main.css" />
+  <link rel="stylesheet"  type="text/css" href="/css/toolbar.css" />
+  <link rel="stylesheet"  type="text/css" href="/css/button.css" />
+<!--
+  <link rel="stylesheet"  type="text/css" href="/css/console-switch.css" />
+-->
+  <link rel="stylesheet"  type="text/css" href="/vendors/font-awesome/font-awesome-4.7.0/css/font-awesome.css" />
+
+  <link rel="stylesheet"  type="text/css" href="/css/song-meta.css" />
+  <link rel="stylesheet"  type="text/css" href="/css/file-browser.css" />
+  <link rel="stylesheet"  type="text/css" href="/css/song.css" />
+  <link rel="stylesheet"  type="text/css" href="/css/chords-container.css" />
+  <link rel="stylesheet"  type="text/css" href="/css/split.css" />
+  <link rel="stylesheet"  type="text/css" href="/css/help-window.css" />
+
+  <title>
+    Song Writer
+  </title>
+</head>
+
+<body>
+  <div class="page">
+    <header class="app-header">
+      <nav id="toolbar" class="site-navigation">
+        <div class="toolbar-item dropdown-menu-container">
+          <div onclick="" class="dropdown-label">File</div>
+          <ul class="dropdown-menu hide">
+            <li class="file-menu-item">New ...</li>
+            <li class="file-menu-item">Open ...</li>
+            <li id="recent-files-opened" class="file-menu-item disabled">
+              Open Recent
+              <ul class="dropdown-submenu"></ul>
+            </li>
+            <li id="save-menu-option"class="file-menu-item disabled">Save ...</li>
+            <li class="file-menu-item disabled">Export ...</li>
+            <li class="file-menu-item disabled">Print ...</li>
+          </ul>
+        </div>
+
+        <div class="toolbar-item dropdown-menu-container">
+          <div onclick='' class="dropdown-label">View</div>
+          <ul class="dropdown-menu hide">
+            <li class="view-menu-item disabled" id="viewmenu-toggle-console">Hide Console</li>
+            <li class="view-menu-item disabled" id="viewmenu-toggle-console">Display Format</li>
+            <li class="view-menu-item disabled">Auto Layout</li>
+            <li class="view-menu-item disabled">4 Columns</li>
+            <li class="view-menu-item disabled">5 Columns</li>
+            <li class="view-menu-item disabled">6 Columns</li>
+          </ul>
+        </div>
+
+        <div class="toolbar-item dropdown-menu-container">
+          <div onclick='' class="dropdown-label disabled">Tools</div>
+          <ul class="dropdown-menu hide">
+            <li id="tools-metronome" class="tools-menu-item disabled">
+              Metronome
+              <ul id="metronome-controls" class="dropdown-submenu">
+                <li>
+                  BPM 
+                  <input disabled id="bpm-input" class="slider"
+                    type="range"
+                    min="10"                    // default 0
+                    max="300"                   // default 100
+                    step="10"                   // default 1
+                    value="120"                 // default min + (max-min)/2
+                    data-orientation="vertical" // default horizontal
+                  >
+                  <span id="bpm-output"></span>
+
+                  Metronme Sound
+                  <select disabled id="metronome-sound-select">
+                    <option>Click</option>
+                    <option>Bell</option>
+                    <option>Banjo</option>
+                    <option>Woodblock</option>
+                  </select>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+<!--
+        <div class="toolbar-item">
+          <button id="button-toggle-console" class="console-toggle disabled" value="Hide Console">
+          <i class="fa fa-toggle-off"></i> Hide Console
+          </button>
+        </div>
+
+        <div class="toolbar-item" style="margin-left:1em;">
+          <input disabled id="metronome-button" type="button" value="Metronome">
+        </div>
+
+        <div class="toolbar-item">
+          BPM 
+          <input disabled id="bpm-input" class="slider"
+            type="range"
+            min="10"                    // default 0
+            max="300"                   // default 100
+            step="10"                   // default 1
+            value="120"                 // default min + (max-min)/2
+            data-orientation="vertical" // default horizontal
+          >
+          <span id="bpm-output"></span>
+        </div>
+
+        <div class="toolbar-item">
+          Metronme Sound
+          <select disabled id="metronome-sound-select">
+            <option>Click</option>
+            <option>Bell</option>
+            <option>Banjo</option>
+            <option>Woodblock</option>
+          </select>
+        </div>
+-->
+
+        <div class="toolbar-item dropdown-menu-container float-right">
+          <div onclick="" class="dropdown-label help-option">Help</div>
+          <ul class="dropdown-menu hide">
+            <li class="help-menu-item">About</li>
+            <li class="help-menu-item">License</li>
+            <li class="help-menu-item">Documentation</li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div id="app-console" class="display-flex hide">
+      <div id="song-metadata">
+        Song Header
+        <form id="song-metadata-form">
+          <div>
+            <label for="song[title]"><span class="required" id="song[title].error">*</span> Song Title</label>
+            <div class="header-values-div"><input data-type="header" required name="title" id="song[title]"></div>
+            <span class="error-reason" id="song[title].error-reason"/>
+          </div>
+
+          <div>
+            <label for="song[composer]"><span class="required" id="song[composer].error">*</span> Written by</label>
+            <div class="header-values-div"><input data-type="header" required name="composer" id="song[composer]"></div>
+            <span class="error-reason" id="song[composer].error-reason" />
+          </div>
+
+          <div>
+            <label for="song[key]"><span class="required" id="song[key].error">*</span> Song Key</label>
+            <div class="header-values-div">
+              <select data-type="header" required name="key" id="song[key]">
+                <option value=""></option>
+                <option value="Am">A</option>
+                <option>Am</option>
+                <option>B</option>
+                <option>Bm</option>
+                <option>C</option>
+                <option>Cm</option>
+                <option>D</option>
+                <option>Dm</option>
+                <option>E</option>
+                <option>F</option>
+                <option>Fm</option>
+                <option>G</option>
+                <option>Gm</option>
+              </select>
+            </div>
+            <span class="error-reason" id="song[key].error-reason"/>
+          </div>
+
+          <div>
+            <label for="song[time-signature]"><span class="required" id="song[time-signature].error">*</span> Beats Per Measure</label>
+            <div class="header-values-div">
+              <select data-type="header" required name="time_signature" id="song[time-signature]">
+                <option value=""></option>
+                <option>2/4</option>
+                <option>4/4</option>
+                <option>3/4</option>
+              </select>
+            </div>
+            <span class="error-reason" id="song[time-signature].error-reason"/>
+          </div>
+
+          <div>
+            <label for="song[number-of-bars]"><span class="required" id="song[number-of-bars].error">*</span> Number of Measures</label>
+            <div class="header-values-div">
+              <input data-type="header" required name="number_of_bars" id="song[number-of-bars]">
+            </div>
+            <span class="error-reason" id="song[number-of-bars].error-reason"/>
+          </div>
+
+          <div>
+            <label for="song[capo-at-fret]">Capo at Fret</label>
+            <div class="header-values-div">
+              <select data-type="header" name="capo_at_fret" id="song[capo-at-fret]">
+                <option>none</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="song[tags]">Tags</label>
+            <div class="header-values-div"><input data-type="header" name="tags" id="song[tags]"></div>
+            <span class="error-reason" id="song[tags].error-reason" />
+          </div>
+        </form>
+      </div> <!-- end of id="song-metadata -->
+
+      <div class="app-multiuse">
+        <div id="preferences-container">
+          <div class="disabled preferences-header">Preferences</div>
+          <div class="disabled preferences-content">Chord Instrument <select disabled><option>Guitar</option></select></div>
+          <div class="disabled preferences-content">Preferences 2</div>
+          <div class="disabled preferences-content">Preferences 3</div>
+          <div class="disabled preferences-content">Preferences 4</div>
+        </div>
+
+        <div id="chords-container">
+          Chord Family
+          <div id="chord-family"></div>
+          Additional Chords
+          <div id="chords-additional"></div>
+        </div>
+      </div>
+    </div> <!-- end of id=app-console -->
+
+    <div id="song-content">
+      <div id="song-grid"><!-- Song Content --></div>
+    </div>
+
+    <footer class="app-footer"><!-- App Footer --></footer>
+  </div> <!-- end of id=page -->
+
+  <div id="file-browser">
+      <header id="file-browser-header">
+        <div class="filler-div-to-push-label-right"></div> <div>Open File</div>
+        <div id="file-browser-close-controls"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+      </header>
+      <nav id="file-browser-tags-container">
+        <div id="file-browser-tags-label">Browse by Tag:</div>
+        <div id="file-browser-tags-content"></div>
+      </nav>
+      <main id="file-browser-files-container">
+        <div id="file-browser-search"><label for="file-browser-song-search-input">Search: <input disabled id="file-browser-song-search-input"></div>
+        <div id="file-browser-files"></div>
+        <button id="file-browser-open-file-button">Open</button>
+      </main>
+  </div>
+
+  <div id="help-window" class="hide">
+      <header id="help-window-header">
+        <div class="filler-div-to-push-label-right"></div> <div id="help-window-title"></div>
+        <div id="help-window-close-controls"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+      </header>
+      <main id="help-window-content"></main>
+  </div>
+
+    <!-- Javascript dependencies libraries -->
+    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <!--
+    -->
+    <script>
+      var socket = io.connect('http://weblane.com:3000');
+      socket.on('news', function (data) {
+        //console.log('client: ', data);
+        socket.emit('my other event', { 'hello': 'goodbye' });
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
+    <script src="/js/lib/Tone.js"></script>
+    <script src="/js/lib/teoria.js"></script>
+    <script src="/js/lib/raphael.js"></script>
+    <script src="/js/lib/raphael.chord.js"></script>
+    <script src="/js/index.js" type="module"></script>
+    <!-- Client local javascript -->
+
+</body>
+</html>
+
