@@ -49,7 +49,7 @@ router.get('/about', function (req, res) {
 // API Routes
 //router.use('/api', require('./api/index.js'));
 router.use('/api/1.0', require('./api/1.0/index.js'));
-router.use('/view', require('./view/index.js'));
+//router.use('/view', require('./view/index.js'));
 
 router.get('*', function(req, res, next) {
 	console.log('JSN:/server/routes/index.js: >>> NOTICE: no such route! requested url =', req.url);
