@@ -1,4 +1,5 @@
 *.swp
+*wip*
 tmp/
 .Attic/
 node_modules/
