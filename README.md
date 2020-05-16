@@ -28,11 +28,4 @@ To get the Node server running locally:
 
 - Add chord deletion 
 - Make song body scrollable.
-- There's more I'm sure.
-- There's more I'm sure.
-- There's more I'm sure.
-- There's more I'm sure.
-- There's more I'm sure.
-- There's more I'm sure.
-- There's more I'm sure.
 
