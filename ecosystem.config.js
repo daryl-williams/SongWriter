@@ -1,3 +1,6 @@
+/*
+ * config file for node module pm2 process manager.
+ */
 
 module.exports = {
   apps : [{
