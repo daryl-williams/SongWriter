@@ -27,5 +27,6 @@ To get the Node server running locally:
 # TODO
 
 - Add chord deletion 
-- make song body scrollable.
+- Make song body scrollable.
+- There's more I'm sure.
 
