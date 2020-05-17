@@ -4,7 +4,7 @@
 
 module.exports = {
   apps : [{
-    name: 'API',
+    name: 'songwriter',
     script: 'songwriter.js',
     cwd: '/home/pansq212/projects/jsn/songwriter',
 
