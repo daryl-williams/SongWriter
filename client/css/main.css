@@ -17,6 +17,8 @@ html, body {
 	margin: 0px;
 	box-sizing: border-box;
 
+	overflow: hidden;
+
 	/*
 	 * The following non-standard attributes
 	 * turn off the select highlighting effect.
@@ -69,7 +71,10 @@ nav {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	//align-items: stretch;
+	/*
 	height:28px;
+	height: 5vh;
+	*/
 	color: #000;
 	background-color: #d0e5ff;
 }
@@ -84,6 +89,7 @@ nav {
 	grid-row-end: 2;
 	*/
 	height: 200px;
+	height: 34vh;
 	/* Set display to flexbox */
 	display: flex;
 	flex-direction: row;
@@ -235,7 +241,10 @@ i { vertical-align: middle; }
 	position: relative;
 	padding: .25em;
 	z-index: 2;
+	height: 61vh;
+	overflow: auto;
 	/*
+	background-color: aqua;
 	grid-column-start: 1;
 	grid-column-end: 4;
 	grid-row-start: 3;
