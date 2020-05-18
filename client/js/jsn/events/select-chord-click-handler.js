@@ -29,6 +29,8 @@ export function selectChordClickHandler(event) {
 	 */
 	console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): event.target.id =', event.target.id);
 
+	console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): event =', event);
+
 	event.preventDefault();
 
 	if (event.target.id.substring(0, 9) === 'chord-div') {
@@ -43,31 +45,13 @@ export function selectChordClickHandler(event) {
 		// A chord has been selected, now we need to get the chord name and insert it as innerHTML to the div chosen above.
 		console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): >>> event.target.nodeName =', event.target.nodeName);
 
-		let chord_name;
-
-		if (event.target.nodeName === 'svg') {
-			chord_name = event.target.id;
+		function replacer(match, measure, beat, offset, str) {
+			return [measure-1, beat-1];
 		}
-		else {
-			chord_name = event.target.parentElement.id;
-		}
-		console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): chord_container =', chord_name);
 
-		let div_id = jsn.meta.chord_target_div;
-
-		if (document.getElementById(div_id) !== null) {
-			chord_name = chord_name.substring(6);
-			chord_name = chord_name.replace(/(.*?)\smaj/, '$1'); // We'll remove "maj" string from name of major chords.
-			chord_name = chord_name.replace(/(\w)\smin/, '$1m'); // Standardize the chord names.
-			document.getElementById(div_id).innerHTML = chord_name; 
-			document.getElementById(div_id).style.backgroundColor = "#fff";
-			jsn.meta.chord_target_div = '';
-
-			function replacer(match, measure, beat, offset, str) {
-				return [measure-1, beat-1];
-			}
-
-			let measure_beat = div_id.replace(/chord-div_bar([\d]+)-beat([\d]+)$/, replacer);
+		if (event.target.id === 'chord-delete-button') {
+			const div_id = jsn.meta.chord_target_div;
+			const measure_beat = div_id.replace(/chord-div_bar([\d]+)-beat([\d]+)$/, replacer);
 			console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): measure =', measure_beat);
 
 			const mblist = measure_beat.split(',');
@@ -76,7 +60,43 @@ export function selectChordClickHandler(event) {
 			console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): measure =', measure);
 			console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): beat =', beat);
 
-			jsn.song.body[measure][beat].chord = chord_name;
+			jsn.song.body[measure][beat].chord = '';
+			if (document.getElementById(div_id)) {
+				document.getElementById(div_id).innerHTML = '';
+			}
+		}
+		else {
+			let chord_name;
+
+			if (event.target.nodeName === 'svg') {
+				chord_name = event.target.id;
+			}
+			else {
+				chord_name = event.target.parentElement.id;
+			}
+			console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): chord_container =', chord_name);
+
+			let div_id = jsn.meta.chord_target_div;
+
+			if (document.getElementById(div_id) !== null) {
+				chord_name = chord_name.substring(6);
+				chord_name = chord_name.replace(/(.*?)\smaj/, '$1'); // We'll remove "maj" string from name of major chords.
+				chord_name = chord_name.replace(/(\w)\smin/, '$1m'); // Standardize the chord names.
+				document.getElementById(div_id).innerHTML = chord_name; 
+				document.getElementById(div_id).style.backgroundColor = "#fff";
+				jsn.meta.chord_target_div = '';
+
+				let measure_beat = div_id.replace(/chord-div_bar([\d]+)-beat([\d]+)$/, replacer);
+				console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): measure =', measure_beat);
+
+				const mblist = measure_beat.split(',');
+				let measure = mblist[0];
+				let beat = mblist[1];
+				console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): measure =', measure);
+				console.log('jsn:/client/js/events/select-action.js:selectChordClickHandler(): beat =', beat);
+
+				jsn.song.body[measure][beat].chord = chord_name;
+			}
 		}
 
 		/*

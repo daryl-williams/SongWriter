@@ -59,6 +59,18 @@ window.onload = function() {
 	});
 	*/
 
+/*
+	document.getElementById('chord-delete-button').addEventListener('click', function(event) {
+		console.log('JSN:/client/js/index.js:window.onload(): chord-delete-button click handler =', event);
+		const chord_div = jsn.meta.chord_target_div;
+		if (document.getElementById(chord_div)) {
+			document.getElementById(chord_div).innerHTML = '';
+			const measure = 
+		}
+	});
+*/
+	document.getElementById('chord-delete-button').addEventListener('click', jsn.events.selectChordClickHandler);
+
 	if (document.getElementById('song[number-of-bars]') !== null) {
 		document.getElementById('song[number-of-bars]').addEventListener('blur', function(event) {
 			jsn.meta.formDataIsReady = true;

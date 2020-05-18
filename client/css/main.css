@@ -370,3 +370,7 @@ We need to set the widths used on floated items back to auto, and remove the bot
 	border: thin solid blue;
 }
 
+#chord-delete-button {
+	margin-left: 2em;
+}
+
