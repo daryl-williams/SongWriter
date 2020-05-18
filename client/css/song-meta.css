@@ -30,10 +30,12 @@ label {
 
 #song-metadata {
 	position: relative;
-	width: 25% !important;
+	width: 30% !important;
 	padding-top: .5em;
 	padding-left: 1em;
+	/*
 	height: 200px;
+	*/
 	overflow: auto;
 }
 
