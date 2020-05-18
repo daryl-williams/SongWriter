@@ -1,5 +1,5 @@
 /*
- * config file for node module pm2 process manager.
+ * Config file for node module pm2 process manager.
  */
 
 module.exports = {
