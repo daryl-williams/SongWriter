@@ -7,6 +7,9 @@ module.exports = {
     name: 'songwriter',
     script: 'songwriter.js',
     cwd: '/home/pansq212/projects/jsn/songwriter',
+		out_file: '/home/pansq212/projects/jsn/songwriter/log/acces.log',
+		error_file: '/home/pansq212/projects/jsn/songwriter/log/error.log',
+		time: true,
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     //args: 'one two',
