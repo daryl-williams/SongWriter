@@ -196,7 +196,18 @@ export function jsnFormat() {
 			meter_div.className += 'meter-beat bar' + bar_number + '-beat' + beat_number + '-meter';
 
 //			if (jsn.song.body[bar_ndx][beat_ndx] !== undefined) {
-				let sub_beats = jsn.song.header.beats_per_bar / 4;
+
+				let sub_beats = 1;
+				if (jsn.meta.doubleTime) {
+					if (jsn.song.header.beats_per_bar === 3) {
+						sub_beats *= 2;
+					}
+					else if (jsn.song.header.beats_per_bar === 4) {
+						sub_beats *= 2;
+					}
+				}
+
+//				let sub_beats = jsn.song.header.beats_per_bar / 4;
 				//let sub_beats = 1;
 //				let sub_beats = jsn.song.body[bar_ndx][beat_ndx].beat;
 				//console.log('lsf:/song.js:openPage(): sub_beats =', sub_beats);

@@ -60,6 +60,11 @@ export function setView(event) {
 		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, minmax(1in, 2in))';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, auto)';
 	}
+	else if (event.target.innerText.substring(0, 5) === '8 Col') {
+		jsn.controlPanel.view = '8-column';
+		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, minmax(1in, 2in))';
+		document.getElementById('song-grid').style.gridTemplateColumns='repeat(8, auto)';
+	}
 	else {
 		console.log('jsn:/client/js/events/select-view.js:setView(): ERROR: unknown action =', event.target.innerText);
 		alert('Unknown View action = ' + event.target.innerText);

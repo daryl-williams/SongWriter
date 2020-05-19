@@ -35,6 +35,7 @@ class jsnApp {
 		//console.log('jsn:/client/js/jsn/jsn.js:constructor() this =', this);
 
 		if (!jsnApp.instance) {
+			this.doubleTime = false;
 			this.openFile = openFile;
 			this.saveSong = saveSong;
 			this.toggleConsole = toggleConsole;
