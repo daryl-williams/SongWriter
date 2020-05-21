@@ -32,11 +32,16 @@ export function setView(event) {
 	event.preventDefault();
 	event.stopPropagation();
 
-	if (event.target.classList.contains('disabled')) {
+	if (event.target.innerText.substring(0, 7 )=== 'Preview') {
 		return;
 	}
 
-	if (event.target.innerText.substring(0, 4) === 'Hide' || event.target.innerText.substring(0, 4) === 'Show') {
+	if (event.target.innerText === 'JSN Format' || event.target.innerText === 'LMSS Format') {
+		console.log('jsn:/client/js/events/select-view.js:setView(): preview =', event.target.innerText);
+		jsn.meta.action = 'preview';
+		jsn.display.jsnFormat();
+	}
+	else if (event.target.innerText.substring(0, 4) === 'Hide' || event.target.innerText.substring(0, 4) === 'Show') {
 		jsn.toggleConsole();
 		return;
 	}

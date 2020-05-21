@@ -80,8 +80,9 @@ export function selectChordClickHandler(event) {
 
 			if (document.getElementById(div_id) !== null) {
 				chord_name = chord_name.substring(6);
+				chord_name = chord_name.replace(/(.*?)\sdominant7/, '$17'); // We'll remove "dominant" string from name of major chords.
 				chord_name = chord_name.replace(/(.*?)\smaj/, '$1'); // We'll remove "maj" string from name of major chords.
-				chord_name = chord_name.replace(/(\w)\smin/, '$1m'); // Standardize the chord names.
+				chord_name = chord_name.replace(/(\w)\smin/, '$1m'); // Standardize the minor chord name to just lowercase m.
 				document.getElementById(div_id).innerHTML = chord_name; 
 				document.getElementById(div_id).style.backgroundColor = "#fff";
 				jsn.meta.chord_target_div = '';

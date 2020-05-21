@@ -27,7 +27,7 @@ export function dropDownHover(event) {
 	/*
 	 * This method is called when a change event has occured on the select-action element with id=select-action.
 	 */
-	//console.log('jsn:/client/js/events/dropdown-hover.js:dropDownHover(): event =', event);
+	console.log('jsn:/client/js/events/dropdown-hover.js:dropDownHover(): event =', event.target);
 
 //	let str = event.target.children[1].children[2].textContent.trim().substring(0, 4);
 //	if (!str == 'Open') {

@@ -138,6 +138,7 @@ ul.dropdown ul > li:hover {
 .bar-container-CT {
 	display: flex;
 	flex-direction: row;
+	font-size: 10px;
 	height: 1.5in;
 	width:  2in;
 	padding: 0;

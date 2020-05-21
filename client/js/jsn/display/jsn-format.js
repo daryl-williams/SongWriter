@@ -24,51 +24,45 @@
 import { jsn } from '../../jsn/index.js';
 
 export function jsnFormat() {
-	/*
-	 * This method is called when a change event has occured on the select input with id=select-song.
-	 */
+	// This method is called to display the song in JSN Format.
 	console.log('jsn:/client/js/jsn/display/jsn-format.js:jsnFormat(): this =', this);
 
-	//let number_of_bars = jsn.song.header.number_of_bars;
+	let number_of_bars = 0;
 
-	jsn.addToChordsContainer();
+	if (jsn.meta.action === 'edit') {
+		// Set up for editing the song.
 
-/*
-	// Turn off the disabled flag on the View Menu items
-	// now that we have a file to work with in the editor.
-	if (document.querySelector('.view-menu-item') !== null) {
-		let viewmenu_items = document.querySelectorAll('.view-menu-item');
-		console.log('jsn:/client/js/jsn/display/jsn-format.js:jsnFormat(): viewmenu_items =', viewmenu_items);
-		for (let i=0, len=viewmenu_items.length; i<len; ++i) {
-			console.log('jsn:/client/js/jsn/display/jsn-format.js:jsnFormat(): viewmenu_items[' + i +'] =', viewmenu_items[i]);
-			let el = viewmenu_items[i];
-			if (el.classList.contains('disabled')) {
-				el.classList.remove('disabled');
+		jsn.addToChordsContainer();
+
+		if (document.querySelector('#app-console') !== null) {
+			if (document.querySelector('#app-console').classList.contains('hide')) {
+				document.querySelector('#app-console').classList.toggle('hide');
 			}
-			viewmenu_items[i].addEventListener('click', jsn.events.setView);
 		}
 	}
-*/
+	else if (jsn.meta.action === 'preview') {
+		// Display the song preview.
 
-//	if (document.querySelector('#viewmenu-toggle-console') !== null) {
-//		document.querySelector('#viewmenu-toggle-console').classList.toggle('disabled');
-//	}
+		// Hide the application toolbar.
+		//if (document.querySelector('.app-header') !== null) {
+		//	document.querySelector('.app-header').style.display = 'none';
+		//}
 
-//	if (document.querySelector('#button-toggle-console') !== null) {
-//		document.querySelector('#button-toggle-console').classList.toggle('disabled');
-//	}
-
-//	if (document.getElementById('song-metadata') !== null) {
-//		//document.getElementById('song-metadata').style.visibility = 'visible';
-//		//document.getElementById('song-metadata').classList.toggle('closed');
-//	}
-
-	let DOM_song_headers = document.querySelectorAll('[data-type=header]');
-	//console.log('lsf:/song.js:openPage(): DOM_song_headers =', DOM_song_headers);
-
-	if (document.querySelector('#app-console') !== null) {
-		if (document.querySelector('#app-console').classList.contains('hide')) {
+		// Close the console.
+		if (document.querySelector('#app-console') !== null) {
 			document.querySelector('#app-console').classList.toggle('hide');
+		}
+
+		if (document.getElementById('song-content') !== null) {
+			// Display the preview.
+			document.getElementById('song-content').innerHTML = `
+			<div style="padding:1em; text-align:center;">
+			  <b>Title:</b> ${jsn.song.header.title}<br>
+			  <b>Written by:</b> ${jsn.song.header.composer}<br>
+			</div>
+			<div id="song-grid"></div>
+			`;
+			document.getElementById('song-content').style.height = '100vh';
 		}
 	}
 
@@ -76,32 +70,7 @@ export function jsnFormat() {
 		document.getElementById('song-grid').innerHTML = '';
 	}
 
-	// Check if we should fill in the header data.
-	let number_of_bars = 0;
-	//if (jsn.meta.action === 'new song') 
-	if (true) {
-		// Yes fill in the song header form.
-		for (let i=0,len=DOM_song_headers.length; i<len; i++) {
-			//console.log('lsf:/song.js:openPage(): DOM_song_headers['+i+'] =', DOM_song_headers[i].name);
-			DOM_song_headers[i].value = jsn.song.header[DOM_song_headers[i].name];
-			if (DOM_song_headers[i].value === undefined) {
-				DOM_song_headers[i].value = '';
-			}
-			else if (DOM_song_headers[i].value === 'undefined') {
-				if (jsn.song.header.tags) {
-					DOM_song_headers[i].value = jsn.song.header.tags;
-				}
-				else {
-					DOM_song_headers[i].value = '';
-				}
-			}
-			//console.log('lsf:/song.js:openPage(): DOM_song_headers['+i+'] =', DOM_song_headers[i].value);
-		}
-		number_of_bars = jsn.song.header.number_of_bars;
-	}
-	else {
-		number_of_bars = jsn.song.body.length;;
-	}
+	number_of_bars = jsn.song.body.length;;
 
 	if (document.getElementById('song-grid') === null) {
 		console.log('jsn:/client/js/jsn/display/jsnFormat.js: ERROR: missing song-grid!');
@@ -158,15 +127,9 @@ export function jsnFormat() {
 			chord_div.className = 'chord-beat bar' + bar_number + '-beat' + beat_number + '-chord';
 
 			if (jsn.song.body[bar_ndx] === undefined) {
-				//jsn.song.body[bar_ndx] = {};
-//				jsn.song.body[bar_ndx] = []; // This a measure.
-
-				//jsn.song.body[bar_ndx].beat = new Array(jsn.song.header.beats_per_bar);
 				jsn.song.body[bar_ndx] = new Array(jsn.song.header.beats_per_bar - 1);
 				for (let i=0; i<jsn.song.header.beats_per_bar; i++) {
-					//jsn.song.body[bar_ndx].beat[i] = {};
 					jsn.song.body[bar_ndx][i] = {};
-					//jsn.song.body[bar_ndx][i] = "";
 				}
 			}
 
@@ -195,50 +158,43 @@ export function jsnFormat() {
 			meter_div.id += id;
 			meter_div.className += 'meter-beat bar' + bar_number + '-beat' + beat_number + '-meter';
 
-//			if (jsn.song.body[bar_ndx][beat_ndx] !== undefined) {
-
-				let sub_beats = 1;
-				if (jsn.meta.doubleTime) {
-					if (jsn.song.header.beats_per_bar === 3) {
-						sub_beats *= 2;
-					}
-					else if (jsn.song.header.beats_per_bar === 4) {
-						sub_beats *= 2;
-					}
+			let sub_beats = 1;
+			if (jsn.meta.doubleTime) {
+				if (jsn.song.header.beats_per_bar === 3) {
+					sub_beats *= 2;
 				}
-
-//				let sub_beats = jsn.song.header.beats_per_bar / 4;
-				//let sub_beats = 1;
-//				let sub_beats = jsn.song.body[bar_ndx][beat_ndx].beat;
-				//console.log('lsf:/song.js:openPage(): sub_beats =', sub_beats);
-
-				let paper = Raphael(meter_div, 50, 30); // This is the width / height of the svg element.
-
-				let metric_symbol_slash = true;
-				if (document.getElementById('metrics-button') !== null) {
-					if (document.getElementById('metrics-button').value === 'Metric Symbol @') {
-						metric_symbol_slash = false;
-					}
+				else if (jsn.song.header.beats_per_bar === 4) {
+					sub_beats *= 2;
 				}
+			}
 
-				for (let i=1; i<=sub_beats; i++) {
-					if (metric_symbol_slash) {
-						jsn.meta.pulseCurrent = 'slash';
-						//jsn.meta.pulseSymbol = paper.path('M0,40 L40,10').attr({stroke: '#000', 'stroke-width': 2});
-						jsn.meta.pulseSymbol = paper.path('M15,25 L30,5').attr({stroke: '#000', 'stroke-width': 2});
-					}
-					else {
-						jsn.meta.pulseCircle = paper.circle(20, 20, 10).attr({
-							fill: '#ccc',
-							stroke: '#00',
-							'stroke-width': 1
-						});
-						jsn.meta.pulseCurrent = 'circle';
-					}
+			let paper = Raphael(meter_div, 50, 30); // This is the width / height of the svg element.
+
+			let metric_symbol_slash = true;
+			if (document.getElementById('metrics-button') !== null) {
+				if (document.getElementById('metrics-button').value === 'Metric Symbol @') {
+					metric_symbol_slash = false;
 				}
+			}
+
+			for (let i=1; i<=sub_beats; i++) {
+				if (metric_symbol_slash) {
+					jsn.meta.pulseCurrent = 'slash';
+					//jsn.meta.pulseSymbol = paper.path('M0,40 L40,10').attr({stroke: '#000', 'stroke-width': 2});
+					jsn.meta.pulseSymbol = paper.path('M15,25 L30,5').attr({stroke: '#000', 'stroke-width': 2});
+				}
+				else {
+					jsn.meta.pulseCircle = paper.circle(20, 20, 10).attr({
+						fill: '#ccc',
+						stroke: '#00',
+						'stroke-width': 1
+					});
+					jsn.meta.pulseCurrent = 'circle';
+				}
+			}
 
 			jsn.song.body[bar_ndx][beat_ndx].beat = sub_beats;
-//			}
+
 			beat_div.appendChild(meter_div);
 			meter_div = null; // Free memory.
 
@@ -266,13 +222,6 @@ export function jsnFormat() {
 
 			jsn.song.body[bar_ndx][beat_ndx].lyric = text;
 
-//			paper = Raphael(lyrics_div, client_width, client_height);
-//			let lyric = paper.text(30, 25, text).attr({
-//				"font-size": 15,
-//				"font-family": "fontName, sans-serif",
-//				'text-anchor': 'middle'
-//			});
-
 			lyrics_div.innerHTML = text;
 
 			// Free memory.
@@ -292,14 +241,6 @@ export function jsnFormat() {
 
 		let height = (offset_height > song_grid_height) ? song_grid_height : offset_height;
 		height = height -100;
-
-		//document.getElementById('song-grid').parentNode.style.height = height + 'px';
-//		document.getElementById('song-grid').style.height = height + 'px';
-//		console.log('jsn:/client/js/jsn/display/jsnFormat.js: song grid height =', document.getElementById('song-grid').style.height);
-
-//		document.getElementById('song-body').style.height = offset_height + 'px';
-//		document.getElementById('song-grid').style.height = height + 'px';
-//		console.log('jsn:/client/js/jsn/display/jsnFormat.js: grid_height =', height);
 	}
 }
 

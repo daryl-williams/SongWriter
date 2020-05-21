@@ -203,6 +203,33 @@ li#recent-files-opened:hover ul.dropdown-submenu li:hover{
 	border: thin groove #000;
 }
 
+/**/
+
+li#preview-song:hover {
+	cursor: pointer;
+	/*
+	color: white;
+	background-color:purple;
+	background-color:salmon;
+	*/
+}
+
+li#preview-song:hover ul.dropdown-submenu {
+	cursor: pointer;
+	display: inline;
+	visibility: visible !important;
+	background-color: #a7d6ff;
+	/*
+	*/
+	width: 180px;
+	text-overflow: ellipsis;
+}
+
+li#preview-song:hover ul.dropdown-submenu li:hover{
+	background-color: #ddd;
+	border: thin groove #000;
+}
+
 ul.dropdown-menu .view-menu-item:hover {
 	background-color: #a7d6ff;
 }
@@ -210,6 +237,7 @@ ul.dropdown-menu .view-menu-item:hover {
 ul.dropdown-menu .help-menu-item:hover {
 	background-color: #a7d6ff;
 }
+
 
 /*
 .dropdown-menu-container {
