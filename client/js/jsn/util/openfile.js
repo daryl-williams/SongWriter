@@ -152,12 +152,17 @@ export function openFile(song_name) {
 
 		// Now that we have a song we can turn on the metronome.
 		if (document.getElementById('tools-metronome').classList.contains('disabled')) {
-			document.getElementById('tools-metronome').classList.remove('disabled');
+			//document.getElementById('tools-metronome').classList.remove('disabled');
+			if (document.querySelector('#tools-metronome').classList.contains('disabled')) {
+				document.getElementById('tools-metronome').classList.toggle('disabled');
+			}
 		}
 
 		// Now that we have a song we can turn on the save file option.
 		if (document.getElementById('save-menu-option') !== null) {
-			document.getElementById('save-menu-option').classList.toggle('disabled');
+			if (document.querySelector('#save-menu-option').classList.contains('disabled')) {
+				document.getElementById('save-menu-option').classList.toggle('disabled');
+			}
 		}
 
 		jsn.display.jsnFormat();

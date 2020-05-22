@@ -32,12 +32,28 @@ export function jsnFormat() {
 	if (jsn.meta.action === 'edit') {
 		// Set up for editing the song.
 
-		jsn.addToChordsContainer();
-
 		if (document.querySelector('#app-console') !== null) {
 			if (document.querySelector('#app-console').classList.contains('hide')) {
+				// Close the console.
 				document.querySelector('#app-console').classList.toggle('hide');
 			}
+		}
+
+		jsn.addToChordsContainer();
+
+		let DOM_song_headers = document.querySelectorAll('[data-type=header]');
+		//console.log('lsf:/song.js:openPage(): DOM_song_headers =', DOM_song_headers);
+
+		for (let i=0,len=DOM_song_headers.length; i<len; i++) {
+			//console.log('lsf:/song.js:openPage(): DOM_song_headers['+i+'] =', DOM_song_headers[i].name);
+			DOM_song_headers[i].value = jsn.song.header[DOM_song_headers[i].name];
+			if (DOM_song_headers[i].value === undefined) {
+				DOM_song_headers[i].value = '';
+			}
+			else if (DOM_song_headers[i].value === 'undefined') {
+				DOM_song_headers[i].value = '';
+			}
+			//console.log('lsf:/song.js:openPage(): DOM_song_headers['+i+'] =', DOM_song_headers[i].value);
 		}
 	}
 	else if (jsn.meta.action === 'preview') {
@@ -48,9 +64,11 @@ export function jsnFormat() {
 		//	document.querySelector('.app-header').style.display = 'none';
 		//}
 
-		// Close the console.
 		if (document.querySelector('#app-console') !== null) {
-			document.querySelector('#app-console').classList.toggle('hide');
+			// Close the console.
+			if (document.querySelector('#app-console').classList.contains('hide') === false) {
+				document.querySelector('#app-console').classList.toggle('hide');
+			}
 		}
 
 		if (document.getElementById('song-content') !== null) {
@@ -70,7 +88,7 @@ export function jsnFormat() {
 		document.getElementById('song-grid').innerHTML = '';
 	}
 
-	number_of_bars = jsn.song.body.length;;
+	number_of_bars = (jsn.song.body.length) ? jsn.song.body.length : jsn.song.header.number_of_bars;
 
 	if (document.getElementById('song-grid') === null) {
 		console.log('jsn:/client/js/jsn/display/jsnFormat.js: ERROR: missing song-grid!');

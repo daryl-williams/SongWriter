@@ -28,6 +28,15 @@ export function newSong() {
 	// metadata form so as to begin creating a new song.
 	//console.log('jsn:/client/js/jsn/display/newsong.js:newSong(): jsn.song =', jsn.song);
 
+	jsn.meta.action = 'edit';
+
+	// Now that we have a song we can turn on the save file option.
+	if (document.getElementById('save-menu-option') !== null) {
+		if (document.querySelector('#save-menu-option').classList.contains('disabled') === false) {
+			document.getElementById('save-menu-option').classList.toggle('disabled');
+		}
+	}
+
 	// Clear out any previous song header data.
 	for (let prop in jsn.song.header) {
 		if (jsn.song.header.hasOwnProperty(prop)) {
@@ -53,6 +62,10 @@ export function newSong() {
 
 	if (document.getElementById('app-console') !== null) {
 		document.getElementById('app-console').classList.replace('hide', 'visible');
+	}
+
+	if (document.getElementById('song-content') !== null) {
+		document.getElementById('song-content').innerHTML = '<div id="song-grid"></div>';
 	}
 
 	if (document.getElementById('song-grid') !== null) {

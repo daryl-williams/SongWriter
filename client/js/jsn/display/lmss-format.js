@@ -36,6 +36,7 @@ export function lmssFormat() {
 
 		if (document.querySelector('#app-console') !== null) {
 			if (document.querySelector('#app-console').classList.contains('hide')) {
+				// Close the console.
 				document.querySelector('#app-console').classList.toggle('hide');
 			}
 		}
@@ -48,9 +49,11 @@ export function lmssFormat() {
 		//	document.querySelector('.app-header').style.display = 'none';
 		//}
 
-		// Close the console.
 		if (document.querySelector('#app-console') !== null) {
-			document.querySelector('#app-console').classList.toggle('hide');
+			if (document.querySelector('#app-console').classList.contains('hide') === false) {
+				// Close the console.
+				document.querySelector('#app-console').classList.toggle('hide');
+			}
 		}
 
 		if (document.getElementById('song-content') !== null) {
