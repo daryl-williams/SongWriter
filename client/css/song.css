@@ -22,8 +22,16 @@ svg {
 	margin-left: 2em;
 */
 }
+
+/*
 #song-grid > div {
 	border: thin solid purple;
+	width: 2in;
+	height: 1in;
+}
+*/
+.measure {
+	border: thin solid blue;
 	width: 2in;
 	height: 1in;
 }
@@ -139,11 +147,16 @@ ul.dropdown ul > li:hover {
 	display: flex;
 	flex-direction: row;
 	font-size: 10px;
+	/*
 	height: 1.5in;
 	width:  2in;
+	*/
 	padding: 0;
 	margin: 0;
+	/*
 	border: thin solid #bbb;
+	border: thin solid #f00;
+	*/
 }
 
 /*

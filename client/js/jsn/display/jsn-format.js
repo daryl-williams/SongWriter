@@ -91,11 +91,12 @@ export function jsnFormat() {
 		// it a class name based on our song's timing.
 		var bar_container = document.createElement('div');
 		bar_container.id = 'bar-container' + bar_number;
+		bar_container.className = 'measure ';
 		if (jsn.song.header.beats_per_bar === 3) {
-			bar_container.className = 'bar-container-3QT';
+			bar_container.className += 'bar-container-3QT';
 		}
 		else if (jsn.song.header.beats_per_bar === 4) {
-			bar_container.className = 'bar-container-CT';
+			bar_container.className += 'bar-container-CT';
 		}
 		bar_container.id = 'bar-container' + bar_number;
 		bar_container.setAttribute('data-type', 'measure');
