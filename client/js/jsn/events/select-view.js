@@ -36,62 +36,67 @@ export function setView(event) {
 		return;
 	}
 
-	if (event.target.innerText === 'JSN Format' || event.target.innerText === 'LMSS Format') {
-		console.log('jsn:/client/js/events/select-view.js:setView(): preview =', event.target.innerText);
+	let innerText = event.target.innerText;
+
+console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.target.parentElement);
+
+	if (event.target.parentElement.classList.contains('dropdown-submenu')) {
+		console.log('jsn:/client/js/events/select-view.js:setView(): stop here to debug submenu =', innerText);
+	}
+
+	if (event.target.parentElement.classList.contains('show')) {
+		event.target.parentElement.classList.replace('show', 'hide');
+	}
+
+	if (innerText === 'JSN Format' || innerText === 'LMSS Format') {
+		console.log('jsn:/client/js/events/select-view.js:setView(): preview =', innerText);
 		jsn.meta.action = 'preview';
-		if (event.target.innerText === 'JSN Format') {
+		if (innerText === 'JSN Format') {
 			jsn.display.jsnFormat();
 		}
-		else if (event.target.innerText === 'LMSS Format') {
+		else if (innerText === 'LMSS Format') {
 			jsn.display.lmssFormat();
 		}
 		else {
-			console.log('jsn:/client/js/events/select-view.js:setView(): ERROR - Unknown display format: ' + event.target.innerText);
-			alert('Unknown display format: ' + event.target.innerText);
+			console.log('jsn:/client/js/events/select-view.js:setView(): ERROR - Unknown display format: ' + innerText);
+			alert('Unknown display format: ' + innerText);
 		}
 	}
-	else if (event.target.innerText.substring(0, 4) === 'Hide' || event.target.innerText.substring(0, 4) === 'Show') {
+	else if (innerText.substring(0, 4) === 'Hide' || innerText.substring(0, 4) === 'Show') {
 		jsn.toggleConsole();
-		return;
+		//return;
 	}
-	else if (event.target.innerText.substring(0, 4) === 'Auto') {
+	else if (innerText.substring(0, 4) === 'Auto') {
 		jsn.controlPanel.view = 'auto-layout';
 		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(auto-fill, minmax(1in, 2in))';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(auto-fit, minmax(2in, auto))';
 	}
-	else if (event.target.innerText.substring(0, 5) === '4 Col') {
+	else if (innerText.substring(0, 5) === '4 Col') {
 		jsn.controlPanel.view = '4-column';
 		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(4, minmax(1in, 2in))';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(4, auto)';
 	}
-	else if (event.target.innerText.substring(0, 5) === '5 Col') {
+	else if (innerText.substring(0, 5) === '5 Col') {
 		jsn.controlPanel.view = '5-column';
 		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(5, minmax(1in, 2in))';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(5, auto)';
 	}
-	else if (event.target.innerText.substring(0, 5) === '6 Col') {
+	else if (innerText.substring(0, 5) === '6 Col') {
 		jsn.controlPanel.view = '6-column';
 		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, minmax(1in, 2in))';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, auto)';
 	}
-	else if (event.target.innerText.substring(0, 5) === '8 Col') {
+	else if (innerText.substring(0, 5) === '8 Col') {
 		jsn.controlPanel.view = '8-column';
 		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, minmax(1in, 2in))';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(8, auto)';
 	}
 	else {
-		console.log('jsn:/client/js/events/select-view.js:setView(): ERROR: unknown action =', event.target.innerText);
-		alert('Unknown View action = ' + event.target.innerText);
+		console.log('jsn:/client/js/events/select-view.js:setView(): ERROR: unknown action =', innerText);
+		alert('Unknown View action = ' + innerText);
 		return;
 	}
 
 	console.log('jsn:/client/js/events/select-view.js:setView(): jsn.controlPanel.view =', jsn.controlPanel.view);
-
-	//event.target.parentElement.style.visibility = 'hidden';
-	if (event.target.parentElement.classList.contains('show')) {
-		event.target.parentElement.classList.replace('show', 'hide');
-	}
-
-	//jsn.launch(song_title);
 }
 

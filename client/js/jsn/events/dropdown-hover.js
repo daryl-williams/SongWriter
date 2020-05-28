@@ -27,23 +27,32 @@ export function dropDownHover(event) {
 	/*
 	 * This method is called when a change event has occured on the select-action element with id=select-action.
 	 */
-	console.log('jsn:/client/js/events/dropdown-hover.js:dropDownHover(): event =', event.target);
+	console.log('jsn:/client/js/events/dropdown-hover.js:dropDownHover(): event =', event.target.classList);
 
-//	let str = event.target.children[1].children[2].textContent.trim().substring(0, 4);
-//	if (!str == 'Open') {
-//		return;
-//	}
-
-	event.preventDefault();
-
-	if (event.type === 'mouseenter') {
-		event.target.children[1].classList.replace('hide', 'show');
+	let handleEvent = function(event_type, element, x, y) {
+		if (event_type === 'mouseenter') {
+			element.classList.replace('hide', 'show');
+			if (x && y) {
+				x += 'px';
+//				y = (y+20) + 'px';
+				y += 'px';
+//				element.style.top = x;
+//				element.style.left = y;
+			}
+		}
+		else if (event_type === 'mouseleave') {
+			element.classList.replace('show', 'hide');
+		}
 	}
-	else if (event.type === 'mouseleave') {
-		event.target.children[1].classList.replace('show', 'hide');
+
+	if (event.target.classList.contains('dropdown-menu-container')) {
+		// We are hovering over a top-level toolbar menu item, i.e. File, View, etc.
+		console.log('jsn:/client/js/events/dropdown-hover.js:dropDownHover(): stop here to debug child dropdown-menu =', event.target.children[1].classList);
+		handleEvent(event.type, event.target.children[1]);
 	}
-	else {
-		console.log('jsn:/client/js/events/dropdown-hover.js:dropDownHover(): ERROR: unknown mouse event =', event.type);
+	else if (event.target.classList.contains('submenu-parent')) {
+		console.log('jsn:/client/js/events/select-view.js:setView(): stop here to debug submenu-parent =', event.target.classList);
+		handleEvent(event.type, event.target.children[0], event.clientX, event.clientY);
 	}
 }
 

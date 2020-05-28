@@ -38,12 +38,12 @@
       <nav id="toolbar" class="site-navigation">
         <div class="toolbar-item dropdown-menu-container">
           <div onclick="" class="dropdown-label">File</div>
-          <ul class="dropdown-menu hide">
+          <ul class="dropdown-menu file-menu hide">
             <li class="file-menu-item">New ...</li>
             <li class="file-menu-item">Open ...</li>
-            <li id="recent-files-opened" class="file-menu-item disabled">
+            <li id="recent-files-opened" class="submenu-parent file-menu-item disabled">
               Open Recent
-              <ul class="dropdown-submenu"></ul>
+              <ul class="dropdown-submenu hide"></ul>
             </li>
             <li id="save-menu-option"class="file-menu-item disabled">Save ...</li>
             <li class="file-menu-item disabled">Export ...</li>
@@ -53,11 +53,11 @@
 
         <div class="toolbar-item dropdown-menu-container">
           <div onclick='' class="dropdown-label">View</div>
-          <ul class="dropdown-menu hide">
+          <ul class="dropdown-menu view-menu hide">
             <li class="view-menu-item disabled" id="viewmenu-toggle-console">Hide Console</li>
-            <li id="preview-song" class="view-menu-item disabled">
+            <li id="display-song" class="submenu-parent view-menu-item disabled">
               Display
-              <ul class="dropdown-submenu">
+              <ul class="dropdown-submenu hide">
                 <li class="view-menu-item disabled">Auto Layout</li>
                 <li class="view-menu-item disabled">4 Columns</li>
                 <li class="view-menu-item disabled">5 Columns</li>
@@ -65,9 +65,9 @@
                 <li class="view-menu-item disabled">8 Columns</li>
               </ul>
             </li>
-            <li id="preview-song" class="view-menu-item disabled">
+            <li id="preview-song" class="submenu-parent view-menu-item disabled">
               Preview
-              <ul class="dropdown-submenu">
+              <ul class="dropdown-submenu hide">
                 <li class="view-submenu-item">JSN Format</li>
                 <li class="view-submenu-item">LMSS Format</li>
               </ul>

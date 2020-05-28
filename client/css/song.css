@@ -31,9 +31,9 @@ svg {
 }
 */
 .measure {
-	border: thin solid blue;
 	width: 2in;
 	height: 1in;
+	border: thin solid powderblue;
 }
 
 #save-button {

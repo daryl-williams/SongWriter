@@ -26,7 +26,7 @@ import { dropdownMenu } from './jsn/util/dropdown-menu.js';
 
 window.onload = function() {
 
-	//console.log('JSN:/client/js/index.js:window.onload(): >>> jsn =', jsn);
+	console.log('JSN:/client/js/index.js:window.onload(): >>> jsn =', jsn);
 	
 	jsn.song.header.key = 'C';
 	jsn.addToChordsContainer();
@@ -118,14 +118,33 @@ window.onload = function() {
 		});
 	}
 
+/*
 	if (document.getElementById('button-toggle-console') !== null) {
 		document.getElementById('button-toggle-console').addEventListener('click', function(event) {
 			jsn.toggleConsole();
 		});
 	}
+*/
 
 	if (document.getElementsByClassName('dropdown-menu-container') !== null) {
+		// Setup event handler for top-level toolbar menus.
 		let elist = document.getElementsByClassName('dropdown-menu-container');
+		for (let i=0, len=elist.length; i<len; i++) {
+			elist[i].addEventListener("mouseenter", jsn.events.dropDownHover);
+			elist[i].addEventListener("mouseleave", jsn.events.dropDownHover);
+		}
+	}
+
+//	if (document.getElementsByClassName('dropdown-menu') !== null) {
+//		let elist = document.getElementsByClassName('dropdown-menu');
+//		for (let i=0, len=elist.length; i<len; i++) {
+//			elist[i].addEventListener("mouseenter", jsn.events.dropDownHover);
+//			elist[i].addEventListener("mouseleave", jsn.events.dropDownHover);
+//		}
+//	}
+
+	if (document.getElementsByClassName('submenu-parent') !== null) {
+		let elist = document.getElementsByClassName('submenu-parent');
 		for (let i=0, len=elist.length; i<len; i++) {
 			elist[i].addEventListener("mouseenter", jsn.events.dropDownHover);
 			elist[i].addEventListener("mouseleave", jsn.events.dropDownHover);
@@ -161,6 +180,8 @@ window.onload = function() {
 			else {
 				let recent_files_div = document.getElementById('recent-files-opened');
 				recent_files_div.classList.toggle('disabled');
+				recent_files_div.addEventListener("mouseenter", jsn.events.dropDownHover);
+				recent_files_div.addEventListener("mouseleave", jsn.events.dropDownHover);
 
 				recent_songs = JSON.parse(localStorage.getItem('songs')).sort();
 				//console.log('jsn:/client/js/jsn/events/openfile.js:openFile:getsong(): number of songs titles in local storage =', recent_songs.length);
@@ -175,7 +196,7 @@ window.onload = function() {
 					//li.removeEventListener('click', jsn.events.setAction);
 					//li.addEventListener('click', jsn.events.openFile);
 					li.addEventListener('click', jsn.events.selectSong);
-//					li.addEventListener('dblclick', jsn.events.selectSong);
+					//li.addEventListener('dblclick', jsn.events.selectSong);
 
 					if (document.querySelector('.dropdown-submenu') !== null) {
 						document.querySelector('.dropdown-submenu').appendChild(li);

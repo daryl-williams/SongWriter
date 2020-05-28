@@ -165,6 +165,22 @@ export function openFile(song_name) {
 			}
 		}
 
+		if (document.querySelector('.dropdown-submenu') !== null) {
+			if (document.querySelector('.dropdown-submenu').classList.contains('show')) {
+				document.querySelector('.dropdown-submenu').classList.remove('show');
+				document.querySelector('.dropdown-submenu').classList.add('hide');
+//				document.querySelector('.dropdown-submenu').classList.replace('hide', 'show');
+			}
+		}
+
+		if (document.querySelector('.dropdown-menu') !== null) {
+			if (document.querySelector('.dropdown-menu').classList.contains('show')) {
+				document.querySelector('.dropdown-menu').classList.remove('show');
+				document.querySelector('.dropdown-menu').classList.add('hide');
+//				document.querySelector('.dropdown-menu').classList.replace('hide', 'show');
+			}
+		}
+
 		jsn.display.jsnFormat();
 		console.log('jsn:/client/js/jsn/util/openfile.js:openFile:getsong(): >>> jsn.song =', jsn.song);
 	}

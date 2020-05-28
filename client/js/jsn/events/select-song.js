@@ -79,8 +79,10 @@ export function selectSong(event) {
 	// By now we should have our song_name.
 	console.log('jsn:/client/js/events/openfile.js:openFile(): song_name =', song_name);
 
-	//event.target.parentElement.classList.replace('show', 'hide');
-	event.target.parentElement.style.visibility = 'hidden';
+	// Hide the Opened Recent submenu.
+	//event.target.parentElement.style.visibility = 'hidden';
+	event.target.parentElement.classList.add('hide');
+	console.log('jsn:/client/js/events/openfile.js:openFile(): target.parentElement =', event.target.parentElement.classList);
 
 	jsn.openFile(song_name);
 }
