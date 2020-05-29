@@ -36,7 +36,7 @@ export function dropDownHover(event) {
 				x += 'px';
 //				y = (y+20) + 'px';
 				y += 'px';
-//				element.style.top = x;
+//				element.style.top = -10px;
 //				element.style.left = y;
 			}
 		}
@@ -52,7 +52,7 @@ export function dropDownHover(event) {
 	}
 	else if (event.target.classList.contains('submenu-parent')) {
 		console.log('jsn:/client/js/events/select-view.js:setView(): stop here to debug submenu-parent =', event.target.classList);
-		handleEvent(event.type, event.target.children[0], event.clientX, event.clientY);
+		handleEvent(event.type, event.target.children[0], event.pageX, event.pageY);
 	}
 }
 

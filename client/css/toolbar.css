@@ -53,6 +53,7 @@
 	overflow: hidden;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	opacity: .999;
+	border: thin solid darkgrey;
 }
 
 #toolbar .dropdown-menu-container:hover .dropdown-menu {
@@ -83,33 +84,23 @@ ul.dropdown-menu li:hover {
 	border: thin ridge #000;
 }
 
-/*
-ul.dropdown-menu li:hover .dropdown-submenu {
-	background-color: purple;
-}
-*/
-
 ul.dropdown-submenu {
 	position: absolute;
-	/*
-	top: 20px;
-	left:20px;
-	*/
+	min-width: 8em;
 	list-style: none;
 	padding: 0px;
-	width: 100px;
 	margin-left: 1em;
-	/*
-	background-color: purple;
-	*/
+	background-color: #d0e5ff;
+	border: thin solid darkgrey;
 }
 
-	/*
-ul.dropdown-menu li#recent-files-opened:hover {
-	 * background-color:salmon;
+ul.dropdown-submenu li:hover{
+	background-color: #ddd;
+	background-color: #aed2fe;
+	border: thin groove #000;
 }
-	 */
 
+/*
 li#recent-files-opened:hover {
 	cursor: pointer;
 	cursor: default;
@@ -118,12 +109,6 @@ li#recent-files-opened:hover {
 li#recent-files-opened:hover ul.dropdown-submenu {
 	cursor: pointer;
 	background-color: #a7d6ff;
-	/*
-	display: inline;
-	visibility: visible; /*!important;/*
-	z-index:2000;
-	background-color: aqua;
-	*/
 	width: 180px;
 	text-overflow: ellipsis;
 }
@@ -137,6 +122,11 @@ ul.dropdown-submenu {
 	background-color: #a7d6ff;
 }
 
+ul.dropdown-menu li:hover .dropdown-submenu {
+	background-color: purple;
+}
+*/
+
 /*
 ul.dropdown-submenu:hover {
 	background-color: salmon;
@@ -145,31 +135,34 @@ ul.dropdown-submenu:hover {
 
 /**/
 
+	/*
 li#preview-song:hover {
 	cursor: pointer;
-	/*
 	color: white;
 	background-color:purple;
 	background-color:salmon;
-	*/
 }
+	*/
 
+	/*
 li#preview-song:hover ul.dropdown-submenu {
 	cursor: pointer;
 	display: inline;
 	background-color: #a7d6ff;
-	/*
 	visibility: visible !important;
-	*/
 	width: 180px;
 	text-overflow: ellipsis;
 }
+	*/
 
+/*
 li#preview-song:hover ul.dropdown-submenu li:hover{
 	background-color: #ddd;
 	border: thin groove #000;
 }
+*/
 
+/*
 ul.dropdown-menu .view-menu-item:hover {
 	background-color: #a7d6ff;
 }
@@ -177,6 +170,7 @@ ul.dropdown-menu .view-menu-item:hover {
 ul.dropdown-menu .help-menu-item:hover {
 	background-color: #a7d6ff;
 }
+*/
 
 
 /*
