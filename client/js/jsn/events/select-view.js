@@ -63,7 +63,7 @@ console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.ta
 		}
 	}
 	else if (innerText.substring(0, 4) === 'Hide' || innerText.substring(0, 4) === 'Show') {
-		jsn.toggleConsole();
+		jsn.toggleConsole(event);
 		//return;
 	}
 	else if (innerText.substring(0, 4) === 'Auto') {
