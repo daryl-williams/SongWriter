@@ -21,7 +21,7 @@
 
 'use strict';
 
-export function toggleConsole() {
+export function toggleConsole(event) {
 	console.log('jsn:/client/js/util/toggle-console.jstoggleConsole(): TOGGLE!');
 
 	//if (event.target.id === 'button-toggle-console') 
