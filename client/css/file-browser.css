@@ -5,31 +5,33 @@
 	top: 40px;
 	left: 10px;
 	visibility: hidden;
+	/*
+	background-color: #fff;
+	background-color: darkgreen;
+	*/
 	display: grid;
-	grid-template-areas: "header header"
-	                     "song-tags song-files";
-	grid-template-rows: 1.5em auto;
+	grid-template-areas: "header    header    header       header        header      header"
+	                     "song-tags song-tags songs-files  song-files    song-files  song-files"
+	                     "footer    footer    footer       footer        footer      footer";
+
+	grid-template-rows: 1.5em auto 1.5em;
 	grid-template-columns: 25% auto;
 
 	width: 50%;
-	height: 310px;
 	padding: 0px;
 	margin: 0px;
 	border: thin solid #000;
 	box-sizing: border-box;
-	/*
-	 * If opacitiy doesn't equal .999 the dropdown menu will be see-through.
-	opacity: .999;
-	 */
-	background-color: #fff;
 }
 
 #file-browser-header {
 	grid-area: header;
+	/*
 	grid-column-start: 1;
 	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 1;
+	*/
 	position: relative;
 	display: flex;
 	flex-wrap: nowrap;
@@ -51,14 +53,23 @@
 	margin-right: 1em;
 }
 
+  /*
+#file-browser-body {
+	display: contents;
+	grid-area: body;
+}
+	*/
+
 #file-browser-tags-label {
 	padding: .5em;
 }
 
 #file-browser-tags-container {
-	grid-area: song-tags;
-	overflow: auto;
 	/*
+	grid-area: song-tags;
+	height: 90%;
+	height: 60%;
+	overflow: auto;
 	//height: 100%;
 	//padding: .5em;
 	//border: thin solid #ddd;
@@ -66,9 +77,19 @@
 	*/
 }
 
+#file-browser-tags-content {
+	height: 90%;
+	height: 60%;
+	height: 99%;
+	overflow: auto;
+	border: thin solid #ddd;
+}
+
+/*
 label {
 	width: unset;
 }
+*/
 
 #file-browser-files-container {
 	grid-area: song-files;
@@ -76,9 +97,18 @@ label {
 	flex-direction: column;
 	justify-content: flex-start;
 	/*
-//	height: 100%;
-//	border: thin solid #ddd;
-*/
+	height: 90%;
+	height: 60%;
+	overflow: auto;
+	*/
+}
+
+#file-browser-files {
+	height: 90%;
+	height: 60%;
+	height: 99%;
+	overflow: auto;
+	border: thin solid #ddd;
 }
 
 ul#song-tags-list li.song-tag-item:hover {
@@ -87,6 +117,12 @@ ul#song-tags-list li.song-tag-item:hover {
 
 ul#song-list li.song-list-item:hover {
 	cursor: pointer;
+}
+
+#footer {
+	grid-area: footer;
+	text-align: center;
+	background-color: #d4e4fd;
 }
 
 #file-browser-open-file-button {
