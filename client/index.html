@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta  name = "viewport" content = "width=device-width, initial-scale=1" />
   <meta  name="description" content="A JSON song notation prototype" />
 
@@ -34,7 +34,7 @@
 
 <body>
   <div class="page">
-    <header class="app-header">
+    <header id="app-header">
       <nav id="toolbar" class="site-navigation">
         <div class="toolbar-item dropdown-menu-container">
           <div onclick="" class="dropdown-label">File</div>
@@ -47,7 +47,7 @@
             </li>
             <li id="save-menu-option"class="file-menu-item disabled">Save ...</li>
             <li class="file-menu-item disabled">Export ...</li>
-            <li class="file-menu-item disabled">Print ...</li>
+            <li id="print-menu-option" class="file-menu-item disabled">Print ...</li>
           </ul>
         </div>
 
@@ -157,19 +157,19 @@
         Song Header
         <form id="song-metadata-form">
           <div>
-            <label for="song[title]"><span class="required" id="song[title].error">*</span> Song Title</label>
+            <label for="song[title]" class="metadata-label"><span class="required" id="song[title].error">*</span> Song Title</label>
             <div class="header-values-div"><input data-type="header" required name="title" id="song[title]"></div>
             <span class="error-reason" id="song[title].error-reason"/>
           </div>
 
           <div>
-            <label for="song[composer]"><span class="required" id="song[composer].error">*</span> Written by</label>
+            <label for="song[composer]" class="metadata-label"><span class="required" id="song[composer].error">*</span> Written by</label>
             <div class="header-values-div"><input data-type="header" required name="composer" id="song[composer]"></div>
             <span class="error-reason" id="song[composer].error-reason" />
           </div>
 
           <div>
-            <label for="song[key]"><span class="required" id="song[key].error">*</span> Song Key</label>
+            <label for="song[key]" class="metadata-label" ><span class="required" id="song[key].error">*</span> Song Key</label>
             <div class="header-values-div">
               <select data-type="header" required name="key" id="song[key]">
                 <option value=""></option>
@@ -192,7 +192,7 @@
           </div>
 
           <div>
-            <label for="song[time-signature]"><span class="required" id="song[time-signature].error">*</span> Beats Per Measure</label>
+            <label for="song[time-signature]" class="metadata-label"><span class="required" id="song[time-signature].error">*</span> Beats Per Measure</label>
             <div class="header-values-div">
               <select data-type="header" required name="time_signature" id="song[time-signature]">
                 <option value=""></option>
@@ -205,7 +205,7 @@
           </div>
 
           <div>
-            <label for="song[number-of-bars]"><span class="required" id="song[number-of-bars].error">*</span> Number of Measures</label>
+            <label for="song[number-of-bars]" class="metadata-label"><span class="required" id="song[number-of-bars].error">*</span> Number of Measures</label>
             <div class="header-values-div">
               <input data-type="header" required name="number_of_bars" id="song[number-of-bars]">
             </div>
@@ -213,7 +213,7 @@
           </div>
 
           <div>
-            <label for="song[capo-at-fret]">Capo at Fret</label>
+            <label for="song[capo-at-fret]" class="metadata-label">Capo at Fret</label>
             <div class="header-values-div">
               <select data-type="header" name="capo_at_fret" id="song[capo-at-fret]">
                 <option>none</option>
@@ -233,7 +233,7 @@
           </div>
 
           <div>
-            <label for="song[tags]">Tags</label>
+            <label for="song[tags]" class="metadata-label">Tags</label>
             <div class="header-values-div"><input data-type="header" name="tags" id="song[tags]"></div>
             <span class="error-reason" id="song[tags].error-reason" />
           </div>
@@ -259,7 +259,8 @@
     </div> <!-- end of id=app-console -->
 
     <div id="song-content">
-      <div id="song-grid"><!-- Song Content --></div>
+      <div id="preview-header"></div>
+      <div id="song-grid"></div>
     </div>
 
     <footer class="app-footer"><!-- App Footer --></footer>

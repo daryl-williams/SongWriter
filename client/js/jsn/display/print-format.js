@@ -40,7 +40,7 @@ export function printFormat(json) {
 
 		this.metronome = lsf.metronome;
 		this.songAction = lsf.songAction;
-		this.songFormat = lsf.songFormat;
+		this.displayFormat = lsf.displayFormat;
 		this.beatSymbol = lsf.beatSymbol;
 
 		if (document.getElementById('app-content') !== null) {

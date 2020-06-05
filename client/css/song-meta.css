@@ -22,15 +22,21 @@ input {
 	width: 10em;
 }
 
+/*
 label {
-	width: 10em !important;
 	display: inline-block;
+}
+*/
+
+.metadata-label {
+	display: inline-block;
+	width: 10em;
 	text-align: right;
 }
 
 #song-metadata {
 	position: relative;
-	width: 30% !important;
+	width: 40%;
 	padding-top: .5em;
 	padding-left: 1em;
 	/*

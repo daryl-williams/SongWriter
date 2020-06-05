@@ -32,7 +32,7 @@ export function setView(event) {
 	event.preventDefault();
 	event.stopPropagation();
 
-	if (event.target.innerText.substring(0, 7 )=== 'Preview') {
+	if (event.target.innerText.substring(0, 7 )=== 'Display' || event.target.innerText.substring(0, 7 )=== 'Preview') {
 		return;
 	}
 
@@ -45,16 +45,22 @@ console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.ta
 	}
 
 	if (event.target.parentElement.classList.contains('show')) {
+		// Close the submenu parent.
 		event.target.parentElement.classList.replace('show', 'hide');
 	}
 
 	if (innerText === 'JSN Format' || innerText === 'LMSS Format') {
 		console.log('jsn:/client/js/events/select-view.js:setView(): preview =', innerText);
+
+		jsn.meta.previous_action = jsn.meta.action;
 		jsn.meta.action = 'preview';
+
 		if (innerText === 'JSN Format') {
+			jsn.meta.displayFormat = 'jsn';
 			jsn.display.jsnFormat();
 		}
 		else if (innerText === 'LMSS Format') {
+			jsn.meta.displayFormat = 'lmss';
 			jsn.display.lmssFormat();
 		}
 		else {
@@ -63,35 +69,47 @@ console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.ta
 		}
 	}
 	else if (innerText.substring(0, 4) === 'Hide' || innerText.substring(0, 4) === 'Show') {
+		jsn.meta.previous_action = jsn.meta.action;
+		jsn.meta.action = innerText.toLowerCase();
 		jsn.toggleConsole(event);
-		//return;
 	}
 	else if (innerText.substring(0, 4) === 'Auto') {
+		jsn.meta.previous_action = jsn.meta.action;
+		jsn.meta.action = 'display';
 		jsn.controlPanel.view = 'auto-layout';
-		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(auto-fill, minmax(1in, 2in))';
+		jsn.meta.displayLayout = 'auto-layout';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(auto-fit, minmax(2in, auto))';
 	}
-	else if (innerText.substring(0, 5) === '4 Col') {
+	else if (innerText === '4 Columns') {
+		jsn.meta.previous_action = jsn.meta.action;
+		jsn.meta.action = 'display';
 		jsn.controlPanel.view = '4-column';
-		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(4, minmax(1in, 2in))';
+		jsn.meta.displayLayout = '4-column';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(4, auto)';
 	}
-	else if (innerText.substring(0, 5) === '5 Col') {
+	else if (innerText === '5 Columns') {
+		jsn.meta.previous_action = jsn.meta.action;
+		jsn.meta.action = 'display';
 		jsn.controlPanel.view = '5-column';
-		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(5, minmax(1in, 2in))';
+		jsn.meta.displayLayout = '5-column';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(5, auto)';
 	}
-	else if (innerText.substring(0, 5) === '6 Col') {
+	else if (innerText === '6 Columns') {
+		jsn.meta.previous_action = jsn.meta.action;
+		jsn.meta.action = 'display';
 		jsn.controlPanel.view = '6-column';
-		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, minmax(1in, 2in))';
+		jsn.meta.displayLayout = '6-column';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, auto)';
 	}
-	else if (innerText.substring(0, 5) === '8 Col') {
+	else if (innerText === '8 Columns') {
+		jsn.meta.previous_action = jsn.meta.action;
+		jsn.meta.action = 'display';
 		jsn.controlPanel.view = '8-column';
-		//document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, minmax(1in, 2in))';
+		jsn.meta.displayLayout = '8-column';
 		document.getElementById('song-grid').style.gridTemplateColumns='repeat(8, auto)';
 	}
 	else {
+		jsn.meta.previous_action = jsn.meta.action;
 		console.log('jsn:/client/js/events/select-view.js:setView(): ERROR: unknown action =', innerText);
 		alert('Unknown View action = ' + innerText);
 		return;

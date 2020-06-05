@@ -3,6 +3,22 @@ svg {
 	border: none; /* solid 1px #000; */
 }
 
+#preview-header {
+	padding: 1em;
+	text-align: center;
+}
+
+#close-preview {
+	float: right;
+	cursor: pointer;
+	/*
+	background-color: green;
+	border-radius: 50%;
+	border: thin solid blue;
+	*/
+	padding: .25em;
+}
+
 #song-body {
 	overflow: auto;
 	padding: 0px;

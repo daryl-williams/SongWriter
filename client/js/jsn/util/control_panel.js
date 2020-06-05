@@ -33,7 +33,7 @@ class ControlPanel {
 		if (!ControlPanel.instance) {
 			this.metronome = {};
 			this.action = 'Edit Song';
-			this.songFormat = 'jsn';
+			this.displayFormat = 'jsn';
 			this.pulseSymbol = '/';
 			this.songName = '';
 			ControlPanel.instance = this;

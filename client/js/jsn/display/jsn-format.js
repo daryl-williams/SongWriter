@@ -29,16 +29,37 @@ export function jsnFormat() {
 
 	let number_of_bars = 0;
 
-	if (jsn.meta.action === 'edit') {
-		// Set up for editing the song.
 
+	let toggle_console = function() {
 		if (document.querySelector('#app-console') !== null) {
-			if (document.querySelector('#app-console').classList.contains('hide')) {
+			if (document.querySelector('#app-console').classList.contains('show')) {
 				// Close the console.
-				document.querySelector('#app-console').classList.toggle('hide');
+				document.querySelector('#app-console').classList.replace('show', 'hide');
+			}
+			else if (document.querySelector('#app-console').classList.contains('hide')) {
+				// Close the console.
+				document.querySelector('#app-console').classList.replace('hide', 'show');
 			}
 		}
+	}
 
+	let display_preview_header = function() {
+		if (jsn.meta.previous_action !== 'preview') {
+			toggle_console();
+		}
+		if (document.getElementById('preview-header') !== null) {
+			document.getElementById('preview-header').innerHTML = `
+			  <div id="close-preview-div"><i id="close-preview" class="fa fa-window-close" aria-hidden="true"></i></div>
+			  <b>Title:</b> ${jsn.song.header.title}<br>
+			  <b>Written by:</b> ${jsn.song.header.composer}<br>
+			`;
+		}
+	}
+
+	document.getElementById('song-content').style.height = '100vh';
+
+	if (jsn.meta.action === 'edit') {
+		// Set up for editing the song.
 		jsn.addToChordsContainer();
 
 		let DOM_song_headers = document.querySelectorAll('[data-type=header]');
@@ -55,33 +76,89 @@ export function jsnFormat() {
 			}
 			//console.log('lsf:/song.js:openPage(): DOM_song_headers['+i+'] =', DOM_song_headers[i].value);
 		}
+
+		// Show the application console.
+		if (document.querySelector('#app-console').classList.contains('hide')) {
+			document.querySelector('#app-console').classList.replace('hide', 'show');
+		}
 	}
-	else if (jsn.meta.action === 'preview') {
-		// Display the song preview.
+	else if (jsn.meta.action === 'print' || jsn.meta.action === 'preview') {
+		// Print or display the song Preview.
 
-		// Hide the application toolbar.
-		//if (document.querySelector('.app-header') !== null) {
-		//	document.querySelector('.app-header').style.display = 'none';
-		//}
-
-		if (document.querySelector('#app-console') !== null) {
-			// Close the console.
-			if (document.querySelector('#app-console').classList.contains('hide') === false) {
-				document.querySelector('#app-console').classList.toggle('hide');
+		if (jsn.meta.action === 'preview') {
+			// Setup the click event handler for song preview close control.
+			if (document.getElementById('preview-header') !== null) {
+				document.getElementById('preview-header').addEventListener('click', function(event) {
+					// To close the preview we need to redisplay the song.
+					console.log('lsf:/song.js:openPage(): close-preview event =', event.target.id);
+					if (event.target.id === 'close-preview') {
+						toggle_console();
+						document.getElementById('preview-header').innerHTML = '';
+					}
+				});
 			}
 		}
+		else if (jsn.meta.action === 'print') {
+			// Hide the application toolbar if we're previewing or printing.
+			if (document.querySelector('#app-header') !== null) {
+				document.querySelector('#app-header').style.display = 'none';
+			}
 
-		if (document.getElementById('song-content') !== null) {
-			// Display the preview.
-			document.getElementById('song-content').innerHTML = `
-			<div style="padding:1em; text-align:center;">
+			// Close the application console.
+			toggle_console();
+
+			// Display the Preview header.
+			display_preview_header();
+
+			// This is a synchronous call to print so it blocks until done.
+			window.print();
+
+			jsn.meta.action = jsn.meta.previous_action;
+
+			// Show the application toolbar.
+			if (document.querySelector('#app-header') !== null) {
+				document.querySelector('#app-header').style.display = 'block';
+			}
+
+			if (jsn.meta.previous_action === 'edit' || jsn.meta.previous_action === 'display') {
+				// Show the application console.
+				if (document.querySelector('#app-console').classList.contains('hide')) {
+					document.querySelector('#app-console').classList.replace('hide', 'show');
+				}
+				// Remove the Preview/Print header.
+				if (document.getElementById('preview-header') !== null) {
+					document.getElementById('preview-header').innerHTML = '';
+				}
+			}
+
+			return;
+		}
+
+		// Clode the application console.
+		//toggle_console();
+
+		// Display the Preview header.
+		display_preview_header();
+
+/*
+		// Hide the application console if we're previewing or printing.
+		if (document.querySelector('#app-console') !== null && document.querySelector('#app-console').classList.contains('show')) {
+			document.querySelector('#app-console').classList.replace('show', 'hide');
+		}
+
+		// Hide the application console if we're previewing or printing.
+		if (document.querySelector('#app-console') !== null && document.querySelector('#app-console').classList.contains('show')) {
+			document.querySelector('#app-console').classList.replace('show', 'hide');
+		}
+
+		if (document.getElementById('song-preview-header') !== null) {
+			// Display the Preview header.
+			document.getElementById('song-preview-header').innerHTML = `
 			  <b>Title:</b> ${jsn.song.header.title}<br>
 			  <b>Written by:</b> ${jsn.song.header.composer}<br>
-			</div>
-			<div id="song-grid"></div>
 			`;
-			document.getElementById('song-content').style.height = '100vh';
 		}
+*/
 	}
 
 	if (document.getElementById('song-grid') !== null) {

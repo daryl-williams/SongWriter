@@ -143,7 +143,12 @@ export function openFile(song_name) {
 //			}
 //		}
 
-		// Now that we have a song we can turn on the view menu options.
+		// Now that we have a song we can turn the Print file menu option.
+		if (document.getElementById('print-menu-option') !== null) {
+			document.getElementById('print-menu-option').classList.toggle('disabled');
+		}
+
+		// And the view menu options.
 		const view_menu_items = document.querySelectorAll('.view-menu-item');
 		for (let i=0, len=view_menu_items.length; i<len; ++i) {
 			view_menu_items[i].classList.toggle('disabled');

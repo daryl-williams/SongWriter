@@ -58,7 +58,7 @@ nav {
 	*/
 }
 
-.app-header {
+#app-header {
 	position: relative;
 	z-index: 3;
 	/*

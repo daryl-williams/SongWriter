@@ -46,6 +46,8 @@ class jsnApp {
 			this.player = {};
 			this.metronome = {};
 			this.meta = {
+				action: null,
+				previous_action: null,
 				// Implementation specific.
 				paper : '',
 				outputFormat  : '',
@@ -53,14 +55,13 @@ class jsnApp {
 				pulseSlash   : '',
 				pulseCircle  : '',
 				pulseCurrent : '',
-				action: null,
-				songFormat: 'jsn',
 				pulseSymbol: '/',
 				chord_target_div: '',
 				tagList: {},
 				songList: {},
 				formData: [],
 				formDataIsReady: false,
+				displayFormat: 'jsn',
 			};
 			this.song = {
 				header: {

@@ -51,15 +51,28 @@ export function setAction(event) {
 		jsn.display.newSong();
 	}
 	else if (event.target.textContent.substring(0, 4) === 'Open') {
+		jsn.meta.action = 'edit';
 		jsn.controlPanel.action = 'edit';
 		jsn.display.fileBrowser();
 	}
 	else if (event.target.textContent.substring(0, 4) === 'Save') {
+		jsn.meta.action = 'save';
 		jsn.controlPanel.action = 'save';
 		jsn.saveSong();
 	}
 	else if (event.target.textContent.substring(0, 5) === 'Print') {
+		jsn.meta.action = 'print';
 		jsn.controlPanel.action = 'print';
+
+		if (jsn.meta.displayFormat === 'jsn') {
+			jsn.display.jsnFormat();
+		}
+		else if (jsn.meta.displayFormat === 'lmss') {
+			jsn.display.lmssFormat();
+		}
+		else {
+			console.log('jsn:/client/js/events/select-action.js:setAction(): print ERROR: displat format =', event.meta.displayFormat);
+		}
 	}
 	else {
 		if (event.target.id == 'recent-files-opened') {

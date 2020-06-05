@@ -41,13 +41,38 @@ export function lmssFormat() {
 			}
 		}
 	}
-	else if (jsn.meta.action === 'preview') {
-		// Display the song preview.
+	else if (jsn.meta.action === 'print' || jsn.meta.action === 'preview') {
+		// Print or display the song Preview.
 
-		// Hide the application toolbar.
-		//if (document.querySelector('.app-header') !== null) {
-		//	document.querySelector('.app-header').style.display = 'none';
-		//}
+		// Hide the application toolbar if we're printing.
+		if (jsn.meta.action === 'print') {
+			if (document.querySelector('#app-header') !== null) {
+				document.querySelector('#app-header').style.display = 'none';
+			}
+
+			// This is a synchronous call to print so it blocks until done.
+			window.print();
+
+			// Show the application toolbar.
+			if (document.querySelector('#app-header') !== null) {
+				document.querySelector('#app-header').style.display = 'block';
+			}
+
+			if (jsn.meta.previous_action === 'edit' || jsn.meta.previous_action === 'display') {
+				// Show the application console.
+				if (document.getElementById('app-console').classList.contains('hide')) {
+					document.getElementById('app-console').classList.replace('hide', 'show');
+				}
+				// Remove the Preview/Print header.
+				if (document.getElementById('preview-header') !== null) {
+					document.getElementById('preview-header').innerHTML = '';
+				}
+			}
+
+			jsn.meta.action = jsn.meta.previous_action;
+
+			return;
+		}
 
 		if (document.querySelector('#app-console') !== null) {
 			if (document.querySelector('#app-console').classList.contains('hide') === false) {
@@ -59,7 +84,7 @@ export function lmssFormat() {
 		if (document.getElementById('song-content') !== null) {
 			// Display the preview.
 			document.getElementById('song-content').innerHTML = `
-			<div style="padding:1em; text-align:center;">
+			<div id="preview-header" style="padding:1em; text-align:center;">
 			  <b>Title:</b> ${jsn.song.header.title}<br>
 			  <b>Written by:</b> ${jsn.song.header.composer}<br>
 			</div>
@@ -79,6 +104,22 @@ export function lmssFormat() {
 		console.log('jsn:/client/js/jsn/display/jsnFormat.js: ERROR: missing song-grid!');
 		alert('Missing song-grid! Exiting...');
 		return;
+	}
+
+	if (jsn.meta.displayLayout === 'auto') {
+		document.getElementById('song-grid').style.gridTemplateColumns='repeat(auto-fit, auto)';
+	}
+	else if (jsn.meta.displayLayout === '4-column') {
+		document.getElementById('song-grid').style.gridTemplateColumns='repeat(4, auto)';
+	}
+	else if (jsn.meta.displayLayout === '5-column') {
+		document.getElementById('song-grid').style.gridTemplateColumns='repeat(5, auto)';
+	}
+	else if (jsn.meta.displayLayout === '6-column') {
+		document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, auto)';
+	}
+	else if (jsn.meta.displayLayout === '8-column') {
+		document.getElementById('song-grid').style.gridTemplateColumns='repeat(8, auto)';
 	}
 
 	let song_grid = document.getElementById('song-grid');
