@@ -10,13 +10,12 @@ html, body {
 	min-height: 100vh;
 	height: 100vh;
 	font-family: 'Open Sans', 'sans-serif';
-	font-size: 14px;
+	font-size: 12pt;
 	color: #444;
 	background-color: #fff;
 	padding: 0px;
 	margin: 0px;
 	box-sizing: border-box;
-
 	overflow: hidden;
 
 	/*
@@ -243,6 +242,7 @@ i { vertical-align: middle; }
 
 #song-content {
 	position: relative;
+	font-size: 10pt;
 	padding: .25em;
 	z-index: 2;
 	height: 61vh;

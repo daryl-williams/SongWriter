@@ -6,9 +6,9 @@
 	left: 10px;
 	visibility: hidden;
 	/*
-	background-color: #fff;
 	background-color: darkgreen;
 	*/
+	background-color: #fff;
 	display: grid;
 	grid-template-areas: "header    header    header       header        header      header"
 	                     "song-tags song-tags songs-files  song-files    song-files  song-files"

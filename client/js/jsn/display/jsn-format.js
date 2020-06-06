@@ -94,6 +94,10 @@ export function jsnFormat() {
 					if (event.target.id === 'close-preview') {
 						toggle_console();
 						document.getElementById('preview-header').innerHTML = '';
+						if (document.getElementById('song-content') !== null) {
+							document.getElementById('song-content').style.width = '100vw';
+							document.getElementById('song-content').style.height = '100vh';
+						}
 					}
 				});
 			}

@@ -47,8 +47,10 @@ svg {
 }
 */
 .measure {
+	/*
 	width: 2in;
 	height: 1in;
+	*/
 	border: thin solid powderblue;
 }
 
@@ -162,8 +164,9 @@ ul.dropdown ul > li:hover {
 .bar-container-CT {
 	display: flex;
 	flex-direction: row;
-	font-size: 10px;
 	/*
+	font-size: 12pt;
+	font-size: 10px;
 	height: 1.5in;
 	width:  2in;
 	*/
@@ -212,7 +215,7 @@ ul.dropdown ul > li:hover {
 }
 
 .chord-beat {
-	height: 33%;
+	height: .33in;
 	width: 100%;
 	line-height: 3em;
 	cursor: pointer;

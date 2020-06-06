@@ -55,6 +55,11 @@ console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.ta
 		jsn.meta.previous_action = jsn.meta.action;
 		jsn.meta.action = 'preview';
 
+		if (document.getElementById('song-content') !== null) {
+			document.getElementById('song-content').style.width = '8.5in';
+			document.getElementById('song-content').style.height = '11in';
+		}
+
 		if (innerText === 'JSN Format') {
 			jsn.meta.displayFormat = 'jsn';
 			jsn.display.jsnFormat();
