@@ -33,8 +33,6 @@ export function toggleConsole(event) {
 			if (/Hide Console/.test(el.innerHTML)) {
 				// Hide the console.
 				document.querySelector('#app-console').classList.toggle('hide');
-//				document.querySelector('#song-metadata').classList.toggle('closed');
-
 				// Change the labels of the toggle items.
 				document.getElementById('button-toggle-console').innerHTML = '<i class="fa fa-toggle-on"></i> Show Console';
 				document.getElementById('viewmenu-toggle-console').innerHTML = 'Show Console';
@@ -43,7 +41,6 @@ export function toggleConsole(event) {
 				// Show the console.
 				//document.querySelector('.app-console').style.display = 'flex';
 				document.querySelector('#app-console').classList.toggle('hide');
-//				document.querySelector('#song-metadata').classList.toggle('closed');
 				// Change the labels of the toggle items.
 				document.getElementById('button-toggle-console').innerHTML = '<i class="fa fa-toggle-off"></i> Hide Console';
 				document.getElementById('viewmenu-toggle-console').innerHTML = 'Hide Console';
@@ -57,22 +54,15 @@ export function toggleConsole(event) {
 			console.log('jsn:/client/js/util/toggle-console.jstoggleConsole(): el.innerHTML =', el.innerHTML);
 			if (/Hide Console/.test(el.innerHTML)) {
 				// Hide the console.
-				//document.querySelector('.app-console').style.display = 'none';
-				document.querySelector('#app-console').classList.toggle('hide');
+				document.getElementById('app-console').style.display = 'none';
 				// Change the labels of the toggle items.
 				document.getElementById('viewmenu-toggle-console').innerHTML = 'Show Console';
-//				document.getElementById('button-toggle-console').value = 'Show Console';
-//				document.getElementById('button-toggle-console').innerHTML = '<i class="fa fa-toggle-on"></i> Show Console';
 			}
 			else if (/Show Console/.test(el.innerHTML)) {
 				// Hide the console.
-				//document.querySelector('.app-console').style.display = 'flex';
+				document.getElementById('app-console').style.display = 'flex';
 				// Change the labels of the toggle items.
 				document.getElementById('viewmenu-toggle-console').innerHTML = 'Hide Console';
-//				document.getElementById('button-toggle-console').value = 'Hide Console';
-//				document.getElementById('button-toggle-console').innerHTML = '<i class="fa fa-toggle-off"></i> Hide Console';
-				//document.querySelector('.app-console').style.display = 'flex';
-				document.querySelector('#app-console').classList.toggle('hide');
 			}
 		}
 	}
