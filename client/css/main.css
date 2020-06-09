@@ -48,6 +48,10 @@ nav {
 	width: 100%;
 }
 
+i {
+	vertical-align: middle;
+}
+
 	/*
 .page {
 	min-height: 100vh;
@@ -141,6 +145,7 @@ nav {
 }
 */
 
+/*
 .preferences-header {
 	grid-area: preferences-header;
 }
@@ -155,7 +160,6 @@ nav {
 
 .splitter {
 	position: relative;
-//	z-index: 200;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -166,10 +170,6 @@ nav {
 	color: #000;
 	height: 100%;
 	border: thin solid #aaa;
-}
-
-i {
-	vertical-align: middle;
 }
 
 .fa-hand-o-left,
@@ -208,6 +208,7 @@ i {
 	display: grid;
 	grid-template-columns: repeat(7, 80px);
 }
+*/
 
 #song-content {
 	position: relative;
