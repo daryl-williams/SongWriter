@@ -33,6 +33,14 @@ class jsnApp {
 
 	constructor() {
 		//console.log('jsn:/client/js/jsn/jsn.js:constructor() this =', this);
+		
+		window.addEventListener("afterprint", function(event) {
+			console.log('jsn:/client/js/jsn/jsn.js:constructor() afterprint event =', event);
+		}, false);
+		
+		window.addEventListener("beforeprint", function(event) {
+			console.log('jsn:/client/js/jsn/jsn.js:constructor() beforeprint event =', event);
+		}, false);
 
 		if (!jsnApp.instance) {
 			this.doubleTime = false;

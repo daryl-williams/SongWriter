@@ -29,30 +29,47 @@ export function jsnFormat() {
 
 	let number_of_bars = 0;
 
-
 	let toggle_console = function() {
 		if (document.querySelector('#app-console') !== null) {
 			if (document.querySelector('#app-console').classList.contains('show')) {
-				// Close the console.
-				document.querySelector('#app-console').classList.replace('show', 'hide');
+				// Hide the console.
+				//document.querySelector('#app-console').classList.replace('show', 'hide');
+				document.querySelector('#app-console').style.display = 'none';
 			}
 			else if (document.querySelector('#app-console').classList.contains('hide')) {
-				// Close the console.
-				document.querySelector('#app-console').classList.replace('hide', 'show');
+				// Show the console.
+				//document.querySelector('#app-console').classList.replace('hide', 'show');
+				document.querySelector('#app-console').style.display = 'flex';
 			}
 		}
 	}
 
 	let display_preview_header = function() {
-		if (jsn.meta.previous_action !== 'preview') {
-			toggle_console();
-		}
+//		if (jsn.meta.previous_action !== 'preview') {
+//			toggle_console();
+//		}
 		if (document.getElementById('preview-header') !== null) {
 			document.getElementById('preview-header').innerHTML = `
 			  <div id="close-preview-div"><i id="close-preview" class="fa fa-window-close" aria-hidden="true"></i></div>
 			  <b>Title:</b> ${jsn.song.header.title}<br>
 			  <b>Written by:</b> ${jsn.song.header.composer}<br>
 			`;
+
+			// Setup the click event handler for song preview close control.
+			if (document.getElementById('close-preview') !== null) {
+				document.getElementById('close-preview').addEventListener('click', function(event) {
+					// To close the preview we need to redisplay the song.
+					console.log('lsf:/song.js:openPage(): close-preview event =', event.target.id);
+					if (event.target.id === 'close-preview') {
+						toggle_console();
+						document.getElementById('preview-header').innerHTML = '';
+						if (document.getElementById('song-content') !== null) {
+							document.getElementById('song-content').style.width = '100vw';
+							document.getElementById('song-content').style.height = '100vh';
+						}
+					}
+				});
+			}
 		}
 	}
 
@@ -86,21 +103,7 @@ export function jsnFormat() {
 		// Print or display the song Preview.
 
 		if (jsn.meta.action === 'preview') {
-			// Setup the click event handler for song preview close control.
-			if (document.getElementById('preview-header') !== null) {
-				document.getElementById('preview-header').addEventListener('click', function(event) {
-					// To close the preview we need to redisplay the song.
-					console.log('lsf:/song.js:openPage(): close-preview event =', event.target.id);
-					if (event.target.id === 'close-preview') {
-						toggle_console();
-						document.getElementById('preview-header').innerHTML = '';
-						if (document.getElementById('song-content') !== null) {
-							document.getElementById('song-content').style.width = '100vw';
-							document.getElementById('song-content').style.height = '100vh';
-						}
-					}
-				});
-			}
+			toggle_console();
 		}
 		else if (jsn.meta.action === 'print') {
 			// Hide the application toolbar if we're previewing or printing.
@@ -111,6 +114,14 @@ export function jsnFormat() {
 			// Close the application console.
 			toggle_console();
 
+			if (document.getElementById('song-content') !== null) {
+				//document.getElementById('song-content').style.width = '8.5in';
+				//document.getElementById('song-content').style.height = '11in';
+				//document.getElementById('song-content').style.marginLeft = 'auto';
+				//document.getElementById('song-content').style.marginRight = 'auto';
+//				document.getElementById('song-content').style.boxShadow = '10px 10px 21px -2px rgba(0,0,0,0.61)';
+			}
+
 			// Display the Preview header.
 			display_preview_header();
 
@@ -118,6 +129,7 @@ export function jsnFormat() {
 			window.print();
 
 			jsn.meta.action = jsn.meta.previous_action;
+/*
 
 			// Show the application toolbar.
 			if (document.querySelector('#app-header') !== null) {
@@ -134,6 +146,7 @@ export function jsnFormat() {
 					document.getElementById('preview-header').innerHTML = '';
 				}
 			}
+*/
 
 			return;
 		}

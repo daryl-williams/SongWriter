@@ -2,6 +2,17 @@
  * main.css
  */
 
+/*
+ * print styles
+*/
+@media print {
+  body {
+    margin: 0;
+    color: #f00;
+    background-color: green;
+  }
+}
+
 *, *:before, *:after {
 	box-sizing: border-box;
 }
@@ -37,8 +48,8 @@ nav {
 	width: 100%;
 }
 
-.page {
 	/*
+.page {
 	min-height: 100vh;
 	height: 100vh;
 	display: block;
@@ -54,26 +65,15 @@ nav {
 
 	grid-template-rows: auto auto 1fr auto;
 	grid-template-rows: auto; // auto 1fr auto;
-	*/
 }
+	*/
 
 #app-header {
 	position: relative;
 	z-index: 3;
-	/*
-	grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row-start: 1;
-	grid-row-end: 1;
-	*/
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	//align-items: stretch;
-	/*
-	height:28px;
-	height: 5vh;
-	*/
 	color: #000;
 	background-color: #d0e5ff;
 }
@@ -81,16 +81,6 @@ nav {
 #app-console {
 	position: relative;
 	z-index: 1;
-	/*
-	grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row-start: 2;
-	grid-row-end: 2;
-	*/
-	/*
-	height: 200px;
-	height: 34vh;
-	*/
 	/* Set display to flexbox */
 	display: flex;
 	flex-direction: row;
@@ -99,25 +89,16 @@ nav {
 	border: thin groove #ddd;
 	background-color: #eee;
 	background-color: aliceblue;
-
-	/* TODO: fix transition so
-	 * it inlcudes the song-metadara
-	 * form, which currerntly wont
-	 * transform!
-	 *
-	transition: height .75s ease-out
-	 */
-}
-
-#app-console.hide {
-	/*
-	 flex: 0;
-	height: 0px;
-	*/
-	display: none;
 }
 
 /*
+#app-console.hide {
+	display: none;
+}
+#app-console.show {
+	display: flex;
+}
+
 #song-metadata {
  * The css for this element is
  * now being defined in song-meta.css.
@@ -126,13 +107,6 @@ nav {
 
 .app-multiuse {
 	position: relative;
-	/*
-	z-index: 10;
-	flex: 2;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	*/
 	align-items: center;
 	width: 80%;
 	width: 100%;
@@ -143,10 +117,6 @@ nav {
 #preferences-container {
 	position: relative;
 	z-index: -10;
-/*
-	padding: 0px;
-	padding: .5em;
-*/
 	margin: 0px;
 	height: 200px;
 	width: 40%;
@@ -160,9 +130,6 @@ nav {
 		"preferences-content preferences-content";
 
 	transition: width .75s ease;
-	/*
-	visibility: hidden;
-	*/
 	display: none;
 }
 
@@ -201,7 +168,9 @@ nav {
 	border: thin solid #aaa;
 }
 
-i { vertical-align: middle; }
+i {
+	vertical-align: middle;
+}
 
 .fa-hand-o-left,
 .fa-hand-o-right {
@@ -221,7 +190,6 @@ i { vertical-align: middle; }
 #chords-container {
 	position: relative;
 	z-index: 5;
-	//z-index: 200;
 	cursor: pointer;
 	flex: 2;
 	flex-wrap: nowrap;
@@ -229,6 +197,7 @@ i { vertical-align: middle; }
 	padding: .5em;
 	overflow-y: scroll;
 }
+
 #chords-container.closed {
 	width: 0px;
 	padding: 0px;
@@ -290,7 +259,6 @@ i { vertical-align: middle; }
 	background-color: #d0e5ff;
 	/* Reverse of the toolbar background. */
 	background: linear-gradient(to left top, rgba(2,0,36,1) 0%, rgba(208,229,255,1) 0%, rgba(0,212,255,1) 100%);
-
 }
 
 .hidden {

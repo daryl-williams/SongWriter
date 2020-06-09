@@ -46,21 +46,25 @@ export function setAction(event) {
 	el.classList.replace('show', 'hide');
 
 	if (event.target.textContent.substring(0, 3) === 'New') {
+		jsn.meta.previous_action = jsn.meta.action;
 		jsn.meta.action = 'new song'
 		jsn.controlPanel.action = 'new';
 		jsn.display.newSong();
 	}
 	else if (event.target.textContent.substring(0, 4) === 'Open') {
+		jsn.meta.previous_action = jsn.meta.action;
 		jsn.meta.action = 'edit';
 		jsn.controlPanel.action = 'edit';
 		jsn.display.fileBrowser();
 	}
 	else if (event.target.textContent.substring(0, 4) === 'Save') {
+		jsn.meta.previous_action = jsn.meta.action;
 		jsn.meta.action = 'save';
 		jsn.controlPanel.action = 'save';
 		jsn.saveSong();
 	}
 	else if (event.target.textContent.substring(0, 5) === 'Print') {
+		jsn.meta.previous_action = jsn.meta.action;
 		jsn.meta.action = 'print';
 		jsn.controlPanel.action = 'print';
 
