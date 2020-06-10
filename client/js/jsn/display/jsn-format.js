@@ -64,8 +64,8 @@ export function jsnFormat() {
 						toggle_console();
 						document.getElementById('preview-header').innerHTML = '';
 						if (document.getElementById('song-content') !== null) {
-							document.getElementById('song-content').style.width = '100vw';
-							document.getElementById('song-content').style.height = '100vh';
+							//document.getElementById('song-content').style.width = '100vw';
+							document.getElementById('song-content').style.height = '60vh';
 						}
 					}
 				});
@@ -73,7 +73,7 @@ export function jsnFormat() {
 		}
 	}
 
-	document.getElementById('song-content').style.height = '100vh';
+//	document.getElementById('song-content').style.height = '100vh';
 
 	if (jsn.meta.action === 'edit') {
 		// Set up for editing the song.

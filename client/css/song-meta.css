@@ -2,6 +2,7 @@
  * song-meta sylesheet
  */
 
+/*
 @media (max-width: 684px) {
 	body {
 		font-size: 1.53rem;
@@ -21,6 +22,7 @@ select {
 input {
 	width: 12em;
 }
+*/
 
 /*
 label {
@@ -39,9 +41,7 @@ label {
 	width: 40%;
 	padding-top: .5em;
 	padding-left: 1em;
-	/*
-	height: 200px;
-	*/
+	height: 220px;
 	overflow: auto;
 }
 

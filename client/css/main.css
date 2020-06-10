@@ -80,6 +80,9 @@ i {
 	flex-wrap: nowrap;
 	color: #000;
 	background-color: #d0e5ff;
+	/*
+	height: 4.5vh;
+	*/
 }
 
 #app-console {
@@ -93,6 +96,9 @@ i {
 	border: thin groove #ddd;
 	background-color: #eee;
 	background-color: aliceblue;
+	/*
+	height: 35.5vh;
+	*/
 }
 
 /*
@@ -193,7 +199,7 @@ i {
 	cursor: pointer;
 	flex: 2;
 	flex-wrap: nowrap;
-	height: 200px;
+	height: 220px;
 	padding: .5em;
 	overflow-y: scroll;
 }
@@ -203,38 +209,20 @@ i {
 	padding: 0px;
 	visibility: hidden;
 }
+*/
 
 #chords-additional {
 	display: grid;
 	grid-template-columns: repeat(7, 80px);
 }
-*/
 
 #song-content {
 	position: relative;
 	font-size: 10pt;
 	padding: .25em;
 	z-index: 2;
-	height: 61vh;
+	height: 60vh;
 	overflow: auto;
-	/*
-	background-color: aqua;
-	grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row-start: 3;
-	grid-row-end: 3;
-	margin-top: 1em;
-	*/
-	/*
-	postion: relative !important;
-	z-index: 10;
-	border: thin solid #ddd;
-	background-color: #ddd;
-	min-height: 100px;
-	justify-self: center;
-	align-self: center;
-	overflow: auto;
-	*/
 }
 
 .app-footer {
