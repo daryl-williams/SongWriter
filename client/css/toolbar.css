@@ -63,7 +63,7 @@
 }
 
 #toolbar .dropdown-menu-container:hover .dropdown-label {
-	pointer: cursor;
+	cursor: pointer;
 	background-color: fuscia;
 	/*
 	 display: block;
