@@ -32,10 +32,10 @@ html, body {
 	/*
 	 * The following non-standard attributes
 	 * turn off the select highlighting effect.
-	 */
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
+	 */
 	/*
 	 * Introduced in Internet Explorer 10.
 	 * See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
