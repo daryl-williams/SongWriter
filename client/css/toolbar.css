@@ -64,7 +64,7 @@
 
 #toolbar .dropdown-menu-container:hover .dropdown-label {
 	cursor: pointer;
-	background-color: fuscia;
+	background-color: pink;
 	/*
 	 display: block;
 	 */
@@ -196,9 +196,6 @@ ul.dropdown-menu .help-menu-item:hover {
 }
 
 .disabled {
-	/*
-	color: #aaa !important;
-	*/
 	color: var(--disabled-color) !important;
 	cursor: not-allowed !important;
 }
