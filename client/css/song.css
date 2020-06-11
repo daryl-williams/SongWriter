@@ -280,7 +280,7 @@ ul.dropdown ul > li:hover {
   width: 20px;
 	height: 20px;
 	background: url('bg.png');
-	background-repeat: none;
+	background-repeat: no-repeat;
 }
 */
 
