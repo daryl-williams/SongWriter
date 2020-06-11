@@ -269,13 +269,12 @@ ul.dropdown ul > li:hover {
 	-webkit-border-radius: 20px; 
 	border-radius: 20px;
 	-webkit-background-clip: padding-box; 
-	/*
 	-moz-border-radius: 20px; 
 	-moz-background-clip:    padding; 
-	*/
 	background-clip:         padding-box;
 	border: thin solid #ccc;
 }
+*/
 
 #bpm-input {
   width: 20px;
