@@ -72,6 +72,14 @@ i {
 }
 	*/
 
+.hide {
+	visibility: hidden;
+}
+
+.show {
+	visibility: visible;
+}
+
 #app-header {
 	position: relative;
 	z-index: 3;
@@ -101,14 +109,15 @@ i {
 	*/
 }
 
-/*
 #app-console.hide {
 	display: none;
 }
+
 #app-console.show {
 	display: flex;
 }
 
+/*
 #song-metadata {
  * The css for this element is
  * now being defined in song-meta.css.
@@ -303,14 +312,8 @@ i {
 	margin-bottom: 10px;
 }
 */
-
-.hide {
-	visibility: hidden;
-}
-
-.show {
-	visibility: visible;
-}
+/*
+*/
 
 /*
 We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps.
