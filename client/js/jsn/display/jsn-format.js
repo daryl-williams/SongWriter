@@ -129,7 +129,7 @@ export function jsnFormat() {
 			window.print();
 
 			jsn.meta.action = jsn.meta.previous_action;
-/*
+
 
 			// Show the application toolbar.
 			if (document.querySelector('#app-header') !== null) {
@@ -146,7 +146,6 @@ export function jsnFormat() {
 					document.getElementById('preview-header').innerHTML = '';
 				}
 			}
-*/
 
 			return;
 		}

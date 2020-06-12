@@ -26,15 +26,10 @@ svg {
 	grid-template-columns: repeat(auto-fill, minmax(1in, 2in));
 	grid-gap: 0px;
 	justify-content: center;
-	height: 60vh;
 	margin-bottom: 2em;
 }
 
 .measure {
-	/*
-	width: 2in;
-	height: 1in;
-	*/
 	border: thin solid powderblue;
 }
 
@@ -42,55 +37,10 @@ svg {
 	width: 4em;
 }
 
-/*
-#print-button {
-	display: none;
-}
-*/
-
 #song-filename {
 	padding-top: 5px;
 	width: 30em;
 }
-
-/*
-#song-page {
-}
-
-nav {
-}
-*/
-
-/*
-#toolbar {
-	height: 28px;
-	width: 100%;
-	display: flex;
-	font-weight: normal;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-start;
-	align-items: stretch;
-  background-color: #d0e5ff;
-	border: thin solid #000;
-}
-*/
-
-/*
-#toolbar ul.console-item {
-	list-style: none;
-	padding-left: 1em;
-	margin-top: .4em;
-}
-
-ul.console-item:first-child  li:hover {
-	font-weight: bold;
-}
-
-ul.console-item:hover {
-  font-weight: bold;
-}
-*/
 
 ul.dropdown > ul {
 	list-style: none;
@@ -101,23 +51,6 @@ ul.dropdown ul > li {
 	padding: .3em;
   background-color: #d0e5ff;
 }
-
-/*
-ul.dropdown ul > li:hover {
-	background-color: #b7dffe;
-	visibility: visible;
-}
-*/
-
-/*
-.console-item {
-	cursor: pointer;
-	width: 100px;
-	margin-top: .05em;
-	margin-left: 1em;
-	margin-right: 1em;
-}
-*/
 
 .right-side {
 	float: right;
@@ -258,30 +191,8 @@ ul.dropdown ul > li:hover {
 	margin-right: 1em;
 }
 
-/*
-#chord-popup {
-	display: none;
-	position: absolute;
-	width: 50%;
-	height: 500px;
-	background-color: white;
-	background-color: rgba(0,0,0,0.4)
-	-webkit-border-radius: 20px; 
-	border-radius: 20px;
-	-webkit-background-clip: padding-box; 
-	-moz-border-radius: 20px; 
-	-moz-background-clip:    padding; 
-	background-clip:         padding-box;
-	border: thin solid #ccc;
-}
-*/
-
 #bpm-input {
   width: 20px;
 	height: 20px;
-	/*
-	background: url('bg.png');
-	background-repeat: no-repeat;
-	 */
 }
 

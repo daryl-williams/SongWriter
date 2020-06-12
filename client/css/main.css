@@ -4,7 +4,6 @@
 
 /*
  * print styles
-*/
 @media print {
   body {
     margin: 0;
@@ -12,6 +11,7 @@
     background-color: green;
   }
 }
+*/
 
 *, *:before, *:after {
 	box-sizing: border-box;
@@ -52,26 +52,6 @@ i {
 	vertical-align: middle;
 }
 
-	/*
-.page {
-	min-height: 100vh;
-	height: 100vh;
-	display: block;
-	*/
-
-	/*
-	grid-gap: 1px;
-	grid-template-areas:
-		"app-header"
-		"app-console"
-		"song-content"
-		"app-footer";
-
-	grid-template-rows: auto auto 1fr auto;
-	grid-template-rows: auto; // auto 1fr auto;
-}
-	*/
-
 .hide {
 	visibility: hidden;
 }
@@ -88,9 +68,6 @@ i {
 	flex-wrap: nowrap;
 	color: #000;
 	background-color: #d0e5ff;
-	/*
-	height: 4.5vh;
-	*/
 }
 
 #app-console {
@@ -104,9 +81,6 @@ i {
 	border: thin groove #ddd;
 	background-color: #eee;
 	background-color: aliceblue;
-	/*
-	height: 35.5vh;
-	*/
 }
 
 #app-console.hide {
@@ -116,13 +90,6 @@ i {
 #app-console.show {
 	display: flex;
 }
-
-/*
-#song-metadata {
- * The css for this element is
- * now being defined in song-meta.css.
-}
- */
 
 .app-multiuse {
 	position: relative;
@@ -232,6 +199,7 @@ i {
 	z-index: 2;
 	height: 60vh;
 	overflow: auto;
+	padding-bottom: 1em;
 }
 
 .app-footer {
