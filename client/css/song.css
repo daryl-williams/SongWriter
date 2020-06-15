@@ -24,13 +24,14 @@ svg {
 #song-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(1in, 2in));
-	grid-gap: 0px;
+	grid-gap: 1px;
 	justify-content: center;
 	margin-bottom: 2em;
 }
 
 .measure {
 	border: thin solid powderblue;
+	border: thin solid darkgrey;
 }
 
 #save-button {

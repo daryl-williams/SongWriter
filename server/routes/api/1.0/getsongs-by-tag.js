@@ -42,56 +42,68 @@ router.get('/', function(req, res)
 			let taglist = ['All Songs'];
 			let filelist = [];
 			let unclassified = [];
+
+			// This for loop is used to build a list of all song tags, help in taglist.
 			for (let i=0; i<files.length; i++){
-				console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: >>> files['+i+'] =', files[i]);
+				//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: >>> files['+i+'] =', files[i]);
 				let ndx = files[i].lastIndexOf('/');
+
 				let title = files[i].substring(ndx+1).replace(/'/, '');
-				console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: TITLE =', title);
+				//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: TITLE =', title);
 
 				filelist.push(files[i].substring(ndx+1));
 
 				try {
 					let song_file = fs.readFileSync(files[i], 'utf8');
-					//console.log('jsn:/server/routes/api/1.0/getsongs.js: >>> SONG_FILE:', song_file);
+					//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: >>> SONG_FILE:', song_file);
 
 					let json = JSON.parse(song_file);
-					console.log('jsn:/server/routes/api/1.0/getsongs.js: >>> JSON.header:', json.header);
+					//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: >>> JSON.header:', json.header);
 
 					let tags = json.header.tags.split(',');
-					//console.log('jsn:/server/routes/api/1.0/getsongs.js: SONG_TAGS = >' + tags + '<');
-					//console.log('jsn:/server/routes/api/1.0/getsongs.js: SONG_TAGS LENGTH ', tags.length);
+					//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: SONG_TAGS = >' + tags + '<');
+					//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: SONG_TAGS LENGTH ', tags.length);
 
 					if (tags.length === 1 && tags[0] === '') {
-						//console.log('jsn:/server/routes/api/1.0/getsongs.js: ###>>> TAGS =', tags);
+						//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: ###>>> TAGS =', tags);
 						tags = ['Unclassified'];
 						unclassified.push(title);
 					}
 //					else {
-//						console.log('jsn:/server/routes/api/1.0/getsongs.js: CATCH ME IF YOU CAN ###>>> TAGS =', tags);
+//						console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: CATCH ME IF YOU CAN ###>>> TAGS =', tags);
 //					}
 
 					for (let j=0, jlen=tags.length; j<jlen; ++j) {
-						//console.log('jsn:/server/routes/api/1.0/getsongs.js: PROCESSING TAG =', tags[j]);
-						if (!taglist.includes(tags[j])) {
-							let tag = tags[j].trim();
+						//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: TAGLIST =', taglist);
+
+						let tag = tags[j].trim();
+						//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: PROCESSING TAG[' + j + '] = >', tag + '<');
+
+						if (taglist.includes(tag) === false) {
+//							let tag = tags[j].trim();
 							taglist.push(tag);
+							//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: TAGLIST DOES NOT INCLUDE = >', tags[j] + '<');
+							//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: PUSHED to TAGLIST =', tags[j] + "\n");
+						}
+						else {
+							//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: ALREADY in TAGLIST =', tags[j] + "\n");
 						}
 					}
 				}
 				catch(e) {
-					console.log('jsn:/server/routes/api/1.0/getsongs.js: >>> readFileSync ERROR:', e);
+					console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: >>> readFileSync ERROR:', e);
 					return;
 				}
 			}
-//			console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: filelist =', filelist);
-//			console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: taglist =', taglist);
+			//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: filelist =', filelist);
+			//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: taglist =', taglist);
 
 			let song_list = [];
 			let song_index = {};
 
 			for (let tag_ndx=0; tag_ndx<taglist.length; ++tag_ndx) {
 				let current_tag = taglist[tag_ndx];
-				//console.log('jsn:/server/routes/api/1.0/getsongs.js: CURRENT_TAG: >' + current_tag + '<');
+				//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: CURRENT_TAG: >' + current_tag + '<');
 
 				let tag_obj = {
 					id: current_tag,
@@ -103,27 +115,27 @@ router.get('/', function(req, res)
 
 				for (let file_ndx=0; file_ndx<files.length; ++file_ndx) {
 					let filename = files[file_ndx];
-					//console.log('jsn:/server/routes/api/1.0/getsongs.js: FILENAME:', filename);
+					//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: FILENAME:', filename);
 
 					// Read the song into song_file.
 					let song_file = fs.readFileSync(filename, 'utf8');
 					let json = JSON.parse(song_file);
 					let song_tags = json.header.tags;
-					//console.log('jsn:/server/routes/api/1.0/getsongs.js: <<<>>> SONG_TAGS:', song_tags);
+					//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: <<<>>> SONG_TAGS:', song_tags);
 					if (song_tags === '') {
 						song_tags = 'Unclassified';
 					}
 
 					if (song_tags.indexOf(current_tag) >= 0 || current_tag === 'All Songs') {
-						//console.log('jsn:/server/routes/api/1.0/getsongs.js: <<<>>> BINGO:', filename);
+						//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: <<<>>> BINGO:', filename);
 						song_index[current_tag].files.push(filename);
 						tag_obj.filelist.push(filename);
 					}
 				}
 				song_list.push(tag_obj);
 			}
-			//console.log('jsn:/server/routes/api/1.0/getsongs.js: song_index=', song_index);
-			//console.log('jsn:/server/routes/api/1.0/getsongs.js: song_list=', song_list);
+			//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: song_index=', song_index);
+			console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: song_list=', song_list);
 
 			let json = {'status': 'ok', 'route': '/api/1.0/getsongs-by-tag', 'result': song_list};
 			//console.log('jsn:/server/routes/api/1.0/getsongs-by-tag.js: returning json =', json);

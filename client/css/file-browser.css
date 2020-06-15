@@ -1,50 +1,48 @@
 
 #file-browser {
 	position: absolute;
-	z-index: 100;
-	top: 40px;
-	left: 10px;
+	top: -1000px;
+	left: 1000px;
 	visibility: hidden;
-	/*
-	background-color: darkgreen;
-	*/
+	z-index: 100;
+	box-sizing: border-box;
 	background-color: #fff;
 	display: grid;
-	grid-template-areas: "header    header    header       header        header      header"
-	                     "song-tags song-tags songs-files  song-files    song-files  song-files"
-	                     "footer    footer    footer       footer        footer      footer";
+	grid-template-areas: "header  header"
+	                     "tags    songs"
+	                     "footer  footer";
 
-	grid-template-rows: 1.5em auto 1.5em;
-	grid-template-columns: 25% auto;
+	grid-template-rows: 1.5em 50vh 1.5em;
+	grid-template-columns: 30% 70%;
 
-	width: 50%;
+	width: 50vw;
+	height: fit-content;
+
 	padding: 0px;
 	margin: 0px;
 	border: thin solid #000;
-	box-sizing: border-box;
+	box-shadow: 10px 10px 8px #888888;
 }
 
-#file-browser-header {
+#file-browser > header {
 	grid-area: header;
-	/*
-	grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 1;
-	grid-row-end: 1;
-	*/
-	position: relative;
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: space-between;
-	/*
-	//height: 1.5em;
-	//width: 100%;
-	//border: thin solid #ddd;
-	*/
 	cursor: move;
 	text-align: center;
 	background-color: #d3e3fe;
+	border-bottom: thin solid #000;
 }
+
+/*
+#file-browser-content {
+	grid-area: content;
+	display: flex;
+	background-color: purple;
+	padding:1em;
+}
+*/
 
 #file-browser-close-controls {
 	float: right;
@@ -53,50 +51,46 @@
 	margin-right: 1em;
 }
 
-  /*
-#file-browser-body {
-	display: contents;
-	grid-area: body;
+/*
+#file-browser > nav {
+	grid-area: tags;
 }
-	*/
+*/
+
+#file-browser > main {
+	grid-area: songs;
+}
 
 #file-browser-tags-label {
 	padding: .5em;
 }
 
+/*
+label {
+	width: unset;
+	background-color: purple;
+}
+*/
+
 #file-browser-tags-container {
-	/*
-	grid-area: song-tags;
-	height: 90%;
-	height: 60%;
-	overflow: auto;
-	//height: 100%;
-	//padding: .5em;
-	//border: thin solid #ddd;
-	//border: thin solid green;
-	*/
 }
 
 #file-browser-tags-content {
 	height: 90%;
-	height: 60%;
-	height: 99%;
+	display: flex;
+	flex-direction: column;
+	padding: 0px;
 	overflow: auto;
-	border: thin solid #ddd;
 }
-
-/*
-label {
-	width: unset;
-}
-*/
 
 #file-browser-files-container {
-	grid-area: song-files;
+	grid-area: tags;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	/*
+	grid-area: song-files;
+	position: relative;
 	height: 90%;
 	height: 60%;
 	overflow: auto;
@@ -104,9 +98,11 @@ label {
 }
 
 #file-browser-files {
+/*
 	height: 90%;
 	height: 60%;
 	height: 99%;
+*/
 	overflow: auto;
 	border: thin solid #ddd;
 }
@@ -123,6 +119,7 @@ ul#song-list li.song-list-item:hover {
 	grid-area: footer;
 	text-align: center;
 	background-color: #d4e4fd;
+	border-top: thin solid #000;
 }
 
 #file-browser-open-file-button {
@@ -147,7 +144,7 @@ ul#song-tags-list {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
+	overflow: auto;
 	background-color: #c6deff;
 }
 

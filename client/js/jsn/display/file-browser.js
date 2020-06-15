@@ -66,8 +66,19 @@ console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): added cli
 			taglist.sort(compare);
 
 			if (document.getElementById('file-browser-tags-container') !== null) {
+				// Fill the tag names side display.
 				for (let tag_ndx=0; tag_ndx<taglist.length; ++tag_ndx) {
-					console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songtags[' + tag_ndx + '].id =', taglist[tag_ndx].id);
+
+					let tagname = taglist[tag_ndx].id;
+					//console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songtags[' + tag_ndx + '].id =', taglist[tag_ndx].id);
+					console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songtags[' + tag_ndx + '].id =', tagname);
+
+//					Object.values(taglist).includes(tagname);
+
+//					if (Object.values(taglist[tag_ndx]).includes(tagname) === true) {
+//						// The tag name is already in the list.
+//						console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songtags[' + tag_ndx + '] = is already in the list.');
+//					}
 					if (tag_ndx === 0) {
 						html += '<li class="selected-tag song-tag-item" >' + taglist[tag_ndx].id + '</li>\n';
 					}
