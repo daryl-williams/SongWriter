@@ -143,21 +143,25 @@ export function openFile(song_name) {
 //			}
 //		}
 
-		// Now that we have a song we can turn the Print file menu option.
+		// Now that we have a song we can turn on the Print file menu option.
 		if (document.getElementById('print-menu-option') !== null) {
-			document.getElementById('print-menu-option').classList.toggle('disabled');
+			if (document.getElementById('print-menu-option').classList.contains('disabled')) {
+				document.getElementById('print-menu-option').classList.toggle('disabled');
+			}
 		}
 
 		// And the view menu options.
 		const view_menu_items = document.querySelectorAll('.view-menu-item');
 		for (let i=0, len=view_menu_items.length; i<len; ++i) {
 			view_menu_items[i].classList.toggle('disabled');
+			if (view_menu_items[i].classList.contains('disabled')) {
+				view_menu_items[i].classList.toggle('disabled');
+			}
 			view_menu_items[i].addEventListener('click', jsn.events.setView);
 		}
 
 		// Now that we have a song we can turn on the metronome.
-		if (document.getElementById('tools-metronome').classList.contains('disabled')) {
-			//document.getElementById('tools-metronome').classList.remove('disabled');
+		if (document.getElementById('tools-metronome') !== null) {
 			if (document.querySelector('#tools-metronome').classList.contains('disabled')) {
 				document.getElementById('tools-metronome').classList.toggle('disabled');
 			}
@@ -165,26 +169,27 @@ export function openFile(song_name) {
 
 		// Now that we have a song we can turn on the save file option.
 		if (document.getElementById('save-menu-option') !== null) {
-			if (document.querySelector('#save-menu-option').classList.contains('disabled')) {
+			if (document.getElementById('save-menu-option').classList.contains('disabled')) {
 				document.getElementById('save-menu-option').classList.toggle('disabled');
 			}
 		}
 
+		// This to close the menu.
 		if (document.querySelector('.dropdown-submenu') !== null) {
 			if (document.querySelector('.dropdown-submenu').classList.contains('show')) {
 				document.querySelector('.dropdown-submenu').classList.remove('show');
 				document.querySelector('.dropdown-submenu').classList.add('hide');
-//				document.querySelector('.dropdown-submenu').classList.replace('hide', 'show');
 			}
 		}
 
+/*
 		if (document.querySelector('.dropdown-menu') !== null) {
 			if (document.querySelector('.dropdown-menu').classList.contains('show')) {
 				document.querySelector('.dropdown-menu').classList.remove('show');
 				document.querySelector('.dropdown-menu').classList.add('hide');
-//				document.querySelector('.dropdown-menu').classList.replace('hide', 'show');
 			}
 		}
+*/
 
 		jsn.display.jsnFormat();
 		console.log('jsn:/client/js/jsn/util/openfile.js:openFile:getsong(): >>> jsn.song =', jsn.song);
