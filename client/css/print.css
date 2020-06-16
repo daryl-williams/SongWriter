@@ -1,0 +1,23 @@
+
+#app-header {
+	display: none;
+}
+
+#app-console {
+	display: none;
+}
+
+#song-content {
+	width: 8.3in;
+	height: 11in;
+	margin: auto;
+	color: #000;
+	color: red;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+#close-preview {
+	visibility: hidden;
+}
+
