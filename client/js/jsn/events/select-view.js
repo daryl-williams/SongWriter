@@ -48,6 +48,7 @@ console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.ta
 		// Close the submenu parent.
 		event.target.parentElement.classList.replace('show', 'hide');
 	}
+	// Close the menu????....
 
 	if (innerText === 'JSN Format' || innerText === 'LMSS Format') {
 		console.log('jsn:/client/js/events/select-view.js:setView(): preview =', innerText);

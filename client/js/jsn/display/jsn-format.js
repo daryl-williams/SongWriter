@@ -33,12 +33,12 @@ export function jsnFormat() {
 		if (document.querySelector('#app-console') !== null) {
 			if (document.querySelector('#app-console').classList.contains('show')) {
 				// Hide the console.
-				//document.querySelector('#app-console').classList.replace('show', 'hide');
+				document.querySelector('#app-console').classList.replace('show', 'hide');
 				document.querySelector('#app-console').style.display = 'none';
 			}
 			else if (document.querySelector('#app-console').classList.contains('hide')) {
 				// Show the console.
-				//document.querySelector('#app-console').classList.replace('hide', 'show');
+				document.querySelector('#app-console').classList.replace('hide', 'show');
 				document.querySelector('#app-console').style.display = 'flex';
 			}
 		}
@@ -59,12 +59,22 @@ export function jsnFormat() {
 			if (document.getElementById('close-preview') !== null) {
 				document.getElementById('close-preview').addEventListener('click', function(event) {
 					// To close the preview we need to redisplay the song.
-					console.log('lsf:/song.js:openPage(): close-preview event =', event.target.id);
+					console.log('jsn:/s/client/js/jsn/display/jsn-format.js:jsnFormat(): close-preview event =', event.target.id);
 					if (event.target.id === 'close-preview') {
+						// Open the console back up.
 						toggle_console();
-						document.getElementById('preview-header').innerHTML = '';
+
+						if (document.querySelector('.page') !== null) {
+							document.querySelector('.page').style.overflow = 'hidden';
+						}
+
+						if (document.getElementById('preview-header') !== null) {
+							document.getElementById('preview-header').innerHTML = '';
+						}
+
 						if (document.getElementById('song-content') !== null) {
-							//document.getElementById('song-content').style.width = '100vw';
+							//document.getElementById('song-content').style.height = '60vh';
+							document.getElementById('song-content').style.width = '100vw';
 							document.getElementById('song-content').style.height = '60vh';
 						}
 					}
@@ -104,6 +114,9 @@ export function jsnFormat() {
 
 		if (jsn.meta.action === 'preview') {
 			toggle_console();
+			if (document.querySelector('.page') !== null) {
+				document.querySelector('.page').style.overflow = 'auto';
+			}
 		}
 		else if (jsn.meta.action === 'print') {
 			// Hide the application toolbar if we're previewing or printing.
