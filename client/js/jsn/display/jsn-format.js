@@ -49,6 +49,7 @@ export function jsnFormat() {
 //			toggle_console();
 //		}
 		if (document.getElementById('preview-header') !== null) {
+			document.getElementById('preview-header').style.marginBottom = '1em';
 			document.getElementById('preview-header').innerHTML = `
 			  <div id="close-preview-div"><i id="close-preview" class="fa fa-window-close" aria-hidden="true"></i></div>
 			  <b>Title:</b> ${jsn.song.header.title}<br>
@@ -119,6 +120,10 @@ export function jsnFormat() {
 			}
 		}
 		else if (jsn.meta.action === 'print') {
+
+			//jsn.meta.previous_action = jsn.meta.previous_action;
+			jsn.meta.previous_action = jsn.meta.previous_action;
+
 			// Hide the application toolbar if we're previewing or printing.
 			if (document.querySelector('#app-header') !== null) {
 				document.querySelector('#app-header').style.display = 'none';
@@ -128,8 +133,10 @@ export function jsnFormat() {
 			toggle_console();
 
 			if (document.getElementById('song-content') !== null) {
-				//document.getElementById('song-content').style.width = '8.5in';
-				//document.getElementById('song-content').style.height = '11in';
+				document.getElementById('song-content').style.width = '8.5in';
+				document.getElementById('song-content').style.height = '11in';
+				document.getElementById('song-content').style.padding  = '0 px';
+				document.getElementById('song-grid').style.gridGap = '0px'
 				//document.getElementById('song-content').style.marginLeft = 'auto';
 				//document.getElementById('song-content').style.marginRight = 'auto';
 //				document.getElementById('song-content').style.boxShadow = '10px 10px 21px -2px rgba(0,0,0,0.61)';
@@ -143,22 +150,29 @@ export function jsnFormat() {
 
 			jsn.meta.action = jsn.meta.previous_action;
 
-
 			// Show the application toolbar.
 			if (document.querySelector('#app-header') !== null) {
-				document.querySelector('#app-header').style.display = 'block';
+				document.querySelector('#app-header').style.display = 'flex';
 			}
 
 			if (jsn.meta.previous_action === 'edit' || jsn.meta.previous_action === 'display') {
 				// Show the application console.
 				if (document.querySelector('#app-console').classList.contains('hide')) {
 					document.querySelector('#app-console').classList.replace('hide', 'show');
+					document.querySelector('#app-console').style.display = 'flex';
 				}
 				// Remove the Preview/Print header.
 				if (document.getElementById('preview-header') !== null) {
 					document.getElementById('preview-header').innerHTML = '';
+					document.getElementById('preview-header').style.marginBottom = '0px';
 				}
 			}
+
+			document.getElementById('song-grid').style.gridGap = '1px'
+			document.getElementById('song-content').style.padding  = '.25em';
+//			document.getElementById('song-content').style.width = '100vh';
+			document.getElementById('song-content').style.width = '';
+//			document.getElementById('song-content').style.height = '60em';
 
 			return;
 		}

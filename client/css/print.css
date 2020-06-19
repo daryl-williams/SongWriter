@@ -4,15 +4,14 @@
 }
 
 #app-console {
-	display: none;
+	display: none !important;
 }
 
 #song-content {
-	width: 8.3in;
+	width:  8.3in;
 	height: 11in;
-	margin: auto;
+	margin: 0px;
 	color: #000;
-	color: red;
 	overflow: hidden;
 	background-color: #fff;
 }
