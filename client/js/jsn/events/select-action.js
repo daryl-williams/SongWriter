@@ -63,6 +63,9 @@ export function setAction(event) {
     jsn.controlPanel.action = 'save';
     jsn.saveSong();
   }
+  else if (event.target.textContent.substring(0, 6) === 'Export') {
+    console.log('jsn:/client/js/events/select-action.js:setAction(): EXPORT ACTION =', event.target.textContent);
+  }
   else if (event.target.textContent.substring(0, 5) === 'Print') {
     jsn.meta.previous_action = jsn.meta.action;
     jsn.meta.action = 'print';

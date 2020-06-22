@@ -177,6 +177,10 @@ export function jsnFormat() {
       return;
     }
 
+    document.getElementById('song-grid').style.gridGap = '1px'
+    document.getElementById('song-content').style.padding  = '.25em';
+    document.getElementById('song-content').style.width = '';
+
     // Clode the application console.
     //toggle_console();
 
