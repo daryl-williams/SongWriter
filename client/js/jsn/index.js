@@ -21,8 +21,9 @@
 
 'use strict';
 
+import { exportFile }   from './util/export-file.js';
 import { openFile }     from './util/openfile.js';
-import { saveSong }      from './util/save-song.js';
+import { saveSong }     from './util/save-song.js';
 import { display }      from './display/index.js';
 import { events }       from './events/index.js';
 import { dispatch }     from './util/dispatch.js';
@@ -44,6 +45,7 @@ class jsnApp {
 
     if (!jsnApp.instance) {
       this.doubleTime = false;
+      this.exportFile = exportFile;
       this.openFile = openFile;
       this.saveSong = saveSong;
       this.toggleConsole = toggleConsole;

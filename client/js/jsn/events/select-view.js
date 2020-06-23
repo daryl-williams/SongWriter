@@ -24,106 +24,108 @@
 import { jsn } from '../index.js';
 
 export function setView(event) {
-	/*
-	 * This method is called when a change event has occured on the select-action element with id=select-action.
-	 */
-	console.log('jsn:/client/js/events/select-view.js:setView(): event =', event);
+  /*
+   * This method is called when a change event has occured on the select-action element with id=select-action.
+   */
+  console.log('jsn:/client/js/events/select-view.js:setView(): event =', event);
 
-	event.preventDefault();
-	event.stopPropagation();
+  event.preventDefault();
+  event.stopPropagation();
 
-	if (event.target.innerText.substring(0, 7 )=== 'Display' || event.target.innerText.substring(0, 7 )=== 'Preview') {
-		return;
-	}
+  if (event.target.innerText.substring(0, 7 )=== 'Display' || event.target.innerText.substring(0, 7 )=== 'Preview') {
+    return;
+  }
 
-	let innerText = event.target.innerText;
+  let innerText = event.target.innerText;
 
 console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.target.parentElement);
 
-	if (event.target.parentElement.classList.contains('dropdown-submenu')) {
-		console.log('jsn:/client/js/events/select-view.js:setView(): stop here to debug submenu =', innerText);
-	}
+  if (event.target.parentElement.classList.contains('dropdown-submenu')) {
+    console.log('jsn:/client/js/events/select-view.js:setView(): stop here to debug submenu =', innerText);
+  }
 
-	if (event.target.parentElement.classList.contains('show')) {
-		// Close the submenu parent.
-		event.target.parentElement.classList.replace('show', 'hide');
-	}
-	// Close the menu????....
+  if (event.target.parentElement.classList.contains('show')) {
+    // Close the submenu parent.
+    event.target.parentElement.classList.replace('show', 'hide');
+  }
+  // Close the menu????....
 
-	if (innerText === 'JSN Format' || innerText === 'LMSS Format') {
-		console.log('jsn:/client/js/events/select-view.js:setView(): preview =', innerText);
+  if (innerText === 'JSN Format' || innerText === 'LMSS Format') {
+    console.log('jsn:/client/js/events/select-view.js:setView(): preview =', innerText);
 
-		jsn.meta.previous_action = jsn.meta.action;
-		jsn.meta.action = 'preview';
+    jsn.meta.previous_action = jsn.meta.action;
+    jsn.meta.action = 'preview';
 
-		if (document.getElementById('song-content') !== null) {
-			document.getElementById('song-content').style.width = '8.5in';
-			document.getElementById('song-content').style.height = '11in';
-			document.getElementById('song-content').style.marginLeft = 'auto';
-			document.getElementById('song-content').style.marginRight = 'auto';
-			document.getElementById('song-content').style.boxShadow = '10px 10px 21px -2px rgba(0,0,0,0.61)';
-		}
+    if (document.getElementById('song-content') !== null) {
+      document.getElementById('song-content').style.width = '8.5in';
+      document.getElementById('song-content').style.height = '11in';
+      document.getElementById('song-content').style.marginLeft = 'auto';
+      document.getElementById('song-content').style.marginRight = 'auto';
+      document.getElementById('song-content').style.boxShadow = '10px 10px 21px -2px rgba(0,0,0,0.61)';
+    }
 
-		if (innerText === 'JSN Format') {
-			jsn.meta.displayFormat = 'jsn';
-			jsn.display.jsnFormat();
-		}
-		else if (innerText === 'LMSS Format') {
-			jsn.meta.displayFormat = 'lmss';
-			jsn.display.lmssFormat();
-		}
-		else {
-			console.log('jsn:/client/js/events/select-view.js:setView(): ERROR - Unknown display format: ' + innerText);
-			alert('Unknown display format: ' + innerText);
-		}
-	}
-	else if (innerText.substring(0, 4) === 'Hide' || innerText.substring(0, 4) === 'Show') {
-		jsn.meta.previous_action = jsn.meta.action;
-		jsn.meta.action = innerText.toLowerCase();
-		jsn.toggleConsole(event);
-	}
-	else if (innerText.substring(0, 4) === 'Auto') {
-		jsn.meta.previous_action = jsn.meta.action;
-		jsn.meta.action = 'display';
-		jsn.controlPanel.view = 'auto-layout';
-		jsn.meta.displayLayout = 'auto-layout';
-		document.getElementById('song-grid').style.gridTemplateColumns='repeat(auto-fit, minmax(2in, auto))';
-	}
-	else if (innerText === '4 Columns') {
-		jsn.meta.previous_action = jsn.meta.action;
-		jsn.meta.action = 'display';
-		jsn.controlPanel.view = '4-column';
-		jsn.meta.displayLayout = '4-column';
-		document.getElementById('song-grid').style.gridTemplateColumns='repeat(4, auto)';
-	}
-	else if (innerText === '5 Columns') {
-		jsn.meta.previous_action = jsn.meta.action;
-		jsn.meta.action = 'display';
-		jsn.controlPanel.view = '5-column';
-		jsn.meta.displayLayout = '5-column';
-		document.getElementById('song-grid').style.gridTemplateColumns='repeat(5, auto)';
-	}
-	else if (innerText === '6 Columns') {
-		jsn.meta.previous_action = jsn.meta.action;
-		jsn.meta.action = 'display';
-		jsn.controlPanel.view = '6-column';
-		jsn.meta.displayLayout = '6-column';
-		document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, auto)';
-	}
-	else if (innerText === '8 Columns') {
-		jsn.meta.previous_action = jsn.meta.action;
-		jsn.meta.action = 'display';
-		jsn.controlPanel.view = '8-column';
-		jsn.meta.displayLayout = '8-column';
-		document.getElementById('song-grid').style.gridTemplateColumns='repeat(8, auto)';
-	}
-	else {
-		jsn.meta.previous_action = jsn.meta.action;
-		console.log('jsn:/client/js/events/select-view.js:setView(): ERROR: unknown action =', innerText);
-		alert('Unknown View action = ' + innerText);
-		return;
-	}
+    if (innerText === 'JSN Format') {
+      jsn.meta.displayFormat = 'jsn';
+      jsn.controlPanel.displayFormat = 'jsn';
+      jsn.display.jsnFormat();
+    }
+    else if (innerText === 'LMSS Format') {
+      jsn.meta.displayFormat = 'lmss';
+      jsn.controlPanel.displayFormat = 'lmss';
+      jsn.display.lmssFormat();
+    }
+    else {
+      console.log('jsn:/client/js/events/select-view.js:setView(): ERROR - Unknown display format: ' + innerText);
+      alert('Unknown display format: ' + innerText);
+    }
+  }
+  else if (innerText.substring(0, 4) === 'Hide' || innerText.substring(0, 4) === 'Show') {
+    jsn.meta.previous_action = jsn.meta.action;
+    jsn.meta.action = innerText.toLowerCase();
+    jsn.toggleConsole(event);
+  }
+  else if (innerText.substring(0, 4) === 'Auto') {
+    jsn.meta.previous_action = jsn.meta.action;
+    jsn.meta.action = 'display';
+    jsn.controlPanel.view = 'auto-layout';
+    jsn.meta.displayLayout = 'auto-layout';
+    document.getElementById('song-grid').style.gridTemplateColumns='repeat(auto-fit, minmax(2in, auto))';
+  }
+  else if (innerText === '4 Columns') {
+    jsn.meta.previous_action = jsn.meta.action;
+    jsn.meta.action = 'display';
+    jsn.controlPanel.view = '4-column';
+    jsn.meta.displayLayout = '4-column';
+    document.getElementById('song-grid').style.gridTemplateColumns='repeat(4, auto)';
+  }
+  else if (innerText === '5 Columns') {
+    jsn.meta.previous_action = jsn.meta.action;
+    jsn.meta.action = 'display';
+    jsn.controlPanel.view = '5-column';
+    jsn.meta.displayLayout = '5-column';
+    document.getElementById('song-grid').style.gridTemplateColumns='repeat(5, auto)';
+  }
+  else if (innerText === '6 Columns') {
+    jsn.meta.previous_action = jsn.meta.action;
+    jsn.meta.action = 'display';
+    jsn.controlPanel.view = '6-column';
+    jsn.meta.displayLayout = '6-column';
+    document.getElementById('song-grid').style.gridTemplateColumns='repeat(6, auto)';
+  }
+  else if (innerText === '8 Columns') {
+    jsn.meta.previous_action = jsn.meta.action;
+    jsn.meta.action = 'display';
+    jsn.controlPanel.view = '8-column';
+    jsn.meta.displayLayout = '8-column';
+    document.getElementById('song-grid').style.gridTemplateColumns='repeat(8, auto)';
+  }
+  else {
+    jsn.meta.previous_action = jsn.meta.action;
+    console.log('jsn:/client/js/events/select-view.js:setView(): ERROR: unknown action =', innerText);
+    alert('Unknown View action = ' + innerText);
+    return;
+  }
 
-	console.log('jsn:/client/js/events/select-view.js:setView(): jsn.controlPanel.view =', jsn.controlPanel.view);
+  console.log('jsn:/client/js/events/select-view.js:setView(): jsn.controlPanel.view =', jsn.controlPanel.view);
 }
 

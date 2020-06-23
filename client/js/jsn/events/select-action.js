@@ -45,14 +45,14 @@ export function setAction(event) {
   let el = event.target.parentElement;
   el.classList.replace('show', 'hide');
 
+  jsn.meta.previous_action = jsn.meta.action;
+
   if (event.target.textContent.substring(0, 3) === 'New') {
-    jsn.meta.previous_action = jsn.meta.action;
     jsn.meta.action = 'new song'
     jsn.controlPanel.action = 'new';
     jsn.display.newSong();
   }
   else if (event.target.textContent.substring(0, 4) === 'Open') {
-    jsn.meta.previous_action = jsn.meta.action;
     jsn.meta.action = 'edit';
     jsn.controlPanel.action = 'edit';
     jsn.display.fileBrowser();
@@ -65,6 +65,12 @@ export function setAction(event) {
   }
   else if (event.target.textContent.substring(0, 6) === 'Export') {
     console.log('jsn:/client/js/events/select-action.js:setAction(): EXPORT ACTION =', event.target.textContent);
+    return;
+  }
+  else if (event.target.textContent.substring(0, 6) === 'PDF') {
+    console.log('jsn:/client/js/events/select-action.js:setAction(): EXPORT TYPE =', event.target.textContent);
+    jsn.meta.action = 'export-pdf';
+    jsn.exportFile();
   }
   else if (event.target.textContent.substring(0, 5) === 'Print') {
     jsn.meta.previous_action = jsn.meta.action;
@@ -82,7 +88,7 @@ export function setAction(event) {
     }
   }
   else {
-    if (event.target.id == 'recent-files-opened') {
+    if (event.target.id == 'recent-files-opened' || event.target.id == 'export-menu-option') {
       // No harm, no foul. The recent open files event
       // is handled by the select-song event handler.
       return;

@@ -69,7 +69,10 @@ window.onload = function() {
     }
   });
 */
-  document.getElementById('chord-delete-button').addEventListener('click', jsn.events.selectChordClickHandler);
+
+  if (document.getElementById('chord-delete-button') !== null) {
+    document.getElementById('chord-delete-button').addEventListener('click', jsn.events.selectChordClickHandler);
+  }
 
   if (document.getElementById('song[number-of-bars]') !== null) {
     document.getElementById('song[number-of-bars]').addEventListener('blur', function(event) {

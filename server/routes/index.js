@@ -27,22 +27,51 @@ const router = require('express').Router({mergeParams: true});
 
 router.get('/', function (req, res) {
   console.log('JSN:/server/routes/index.js: document_root =', req.document_root);
-	let filename = 'index.html';
+  let filename = 'index.html';
   console.log('JSN:/server/routes/index.js: filename =', filename);
- 	res.sendFile(filename, {'root': req.document_root}, function(err, next) {
-		if (err) {
-  		console.log('JSN:/server/routes/index.js:router.get("/"): >>> sendFile ERROR =', err);
-			res.status(404).send('not found');
-			next;
-		}
-		else {
-  		console.log('JSN:/server/routes/index.js:router.get("/"): sendFile OK.');
-		}
-	});
+  res.sendFile(filename, {'root': req.document_root}, function(err, next) {
+    if (err) {
+      console.log('JSN:/server/routes/index.js:router.get("/"): >>> sendFile ERROR =', err);
+      res.status(404).send('not found');
+      next;
+    }
+    else {
+      console.log('JSN:/server/routes/index.js:router.get("/"): sendFile OK.');
+    }
+  });
+});
+
+router.get('/export/:song/:cols/:format', function (req, res) {
+  console.log('JSN:/server/routes/index.js:router.get("/export"): req.params =', req.params);
+
+  const puppeteer = require("puppeteer");
+
+  (async () => {
+    console.log('JSN:/server/routes/index.js:router.get("/export"): PUPPETTER');
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    //await page.goto("http://weblane.com:3000/export/Rita\ Ballew.jsn/4/jsn");
+    //await page.goto("http://localhost:3000");
+
+    //await page.goto("https://google.com");
+    //await page.goto("https://unform.com");
+    await page.goto("http://weblane.com:3000");
+    await page.pdf({ path: "./TEST.pdf", format: "Letter" });
+    await browser.close();
+  })();
+
+  let json = {
+    status: 'ok',
+    song: req.params.song,
+    cols: req.params.cols,
+    format: req.params.format,
+    route: '/export/'
+  };
+  res.send(json);
 });
 
 router.get('/about', function (req, res) {
-	res.send('About time!');
+  res.send('About time!');
   console.log('JSN:/server/routes/index.js:router.get("/about"): this =', this);
 });
 
@@ -52,9 +81,9 @@ router.use('/api/1.0', require('./api/1.0/index.js'));
 //router.use('/view', require('./view/index.js'));
 
 router.get('*', function(req, res, next) {
-	console.log('JSN:/server/routes/index.js: >>> NOTICE: no such route! requested url =', req.url);
-	//res.send('routes/index: No such resource', 404);
-	res.status(404).send('routes/index: No such resource');
+  console.log('JSN:/server/routes/index.js: >>> NOTICE: no such route! requested url =', req.url);
+  //res.send('routes/index: No such resource', 404);
+  res.status(404).send('routes/index: No such resource');
 });
 
 /*
