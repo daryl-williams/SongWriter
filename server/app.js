@@ -38,43 +38,43 @@ const path = require("path");
 
 module.exports = function(app, express) {
 
-	// Set our static path. Note: this has to come before
-	// we declare our routes if we want it to work.
-	app.use(express.static(path.join(path.dirname(__dirname), "client")));
+  // Set our static path. Note: this has to come before
+  // we declare our routes if we want it to work.
+  app.use(express.static(path.join(path.dirname(__dirname), "client")));
 
-	app.locals.document_root = path.dirname(__dirname) + '/client';
-	console.log('launchpad:/server/app.js: document_root =', app.locals.document_root);
+  app.locals.document_root = path.dirname(__dirname) + '/client';
+  console.log('launchpad:/server/app.js: document_root =', app.locals.document_root);
 
-	app.use(function (req, res, next) {
- 	 req.document_root = app.locals.document_root;
-		next();
-	});
+  app.use(function (req, res, next) {
+    req.document_root = app.locals.document_root;
+    next();
+  });
 
-	// adding Helmet to enhance your API's security
-	app.use(helmet());
+  // adding Helmet to enhance your API's security
+  app.use(helmet());
 
-	// using bodyParser to parse JSON bodies into JS objects
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({
-		extended: true
-	}));
+  // using bodyParser to parse JSON bodies into JS objects
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
-	//enabling CORS for all requests
-	app.use(cors());
+  //enabling CORS for all requests
+  app.use(cors());
 
-	// adding morgan to log HTTP requests
-	app.use(morgan('combined'));
+  // adding morgan to log HTTP requests
+  app.use(morgan('combined'));
 
-	// Routes
-	app.use("/", require('./routes/index.js'));
-//	app.use("/", function(req, res) {
-//		console.log('sdsi:/server/app.js: GET / =', req);
-//		res.send('Hello world!');
-//	});
-	app.use("/api", require('./routes/api/1.0/index.js'));
+  // Routes
+  app.use("/", require('./routes/index.js'));
+//  app.use("/", function(req, res) {
+//    console.log('sdsi:/server/app.js: GET / =', req);
+//    res.send('Hello world!');
+//  });
+  app.use("/api", require('./routes/api/1.0/index.js'));
 
-	//const app = require('./server/app.js')(app);
+  //const app = require('./server/app.js')(app);
 
-	return module;
+  return module;
 }
 

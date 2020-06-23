@@ -41,33 +41,107 @@ router.get('/', function (req, res) {
   });
 });
 
-router.get('/export/:song/:cols/:format', function (req, res) {
-  console.log('JSN:/server/routes/index.js:router.get("/export"): req.params =', req.params);
+router.post('/export', function (req, res) {
+
+  console.log('JSN:/server/routes/index.js:router.post("/export"): req.body.song =', req.body.song);
+
+  let encoded_song_str = encodeURI(JSON.stringify(req.body.song));
+
+  // Write the song structure to storage.
+  const fs = require('fs');
+
+  let file_store_root = './client/export';
+  let export_file = 'testing-pdf-export.html';
+
+  let song_file = file_store_root + '/' + export_file;
+  console.log('JSN:/server/routes/api/1.0/export-file.js: song_file =', song_file);
+
+  const htmldoc = `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta  name = "viewport" content = "width=device-width, initial-scale=1" />
+  <meta  name="description" content="A JSON song notation prototype" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  <!--
+  <link rel="manifest" href="/site.webmanifest">
+  -->
+
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="/css/toolbar.css" />
+  <link rel="stylesheet" type="text/css" href="/css/button.css" />
+<!--
+  <link rel="stylesheet" type="text/css" href="/css/console-switch.css" />
+-->
+  <link rel="stylesheet"  type="text/css" href="/vendors/font-awesome/font-awesome-4.7.0/css/font-awesome.css" />
+
+  <link rel="stylesheet" type="text/css" href="/css/song-meta.css" />
+  <link rel="stylesheet" type="text/css" href="/css/file-browser.css" />
+  <link rel="stylesheet" type="text/css" href="/css/song.css" />
+  <link rel="stylesheet" type="text/css" href="/css/chords-container.css" />
+  <link rel="stylesheet" type="text/css" href="/css/split.css" />
+  <link rel="stylesheet" type="text/css" href="/css/help-window.css" />
+  <link rel="stylesheet" media="print" href="/css/print.css" />
+
+  <title>
+    Song Writer
+  </title>
+</head>
+<body>
+  <div class="page">
+    <div id="song-content" style="width: 8.5in; height: 11in;">
+      SONG_CONTENT
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const song_title = `<b>Title:</b> ${req.body.title}<br><b>Written by:</b> ${req.body.composer}<br>`;
+
+  let song_wip = req.body.song.replace('<div id="preview-header"></div>', '<div id="preview-header">' + song_title + '</div>'); 
+  let song_html = htmldoc.replace('SONG_CONTENT', song_wip); 
 
   const puppeteer = require("puppeteer");
 
-  (async () => {
-    console.log('JSN:/server/routes/index.js:router.get("/export"): PUPPETTER');
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    //await page.goto("http://weblane.com:3000/export/Rita\ Ballew.jsn/4/jsn");
-    //await page.goto("http://localhost:3000");
+  try {
+    //fs.writeFileSync(song_file, JSON.stringify(req.body.song));
+    fs.writeFile(song_file, song_html, 'ascii', () => {
+      (async () => {
+        console.log('JSN:/server/routes/index.js:router.get("/export"): PUPPETTER');
+        const browser = await puppeteer.launch({ headless: true });
+        const page = await browser.newPage();
 
-    //await page.goto("https://google.com");
-    //await page.goto("https://unform.com");
-    await page.goto("http://weblane.com:3000");
-    await page.pdf({ path: "./TEST.pdf", format: "Letter" });
-    await browser.close();
-  })();
+        //await page.goto("http://weblane.com:3000/export/Rita\ Ballew.jsn/4/jsn");
+        //await page.goto("http://localhost:3000");
+        //await page.goto("https://google.com");
+        //await page.goto("https://unform.com");
 
-  let json = {
-    status: 'ok',
-    song: req.params.song,
-    cols: req.params.cols,
-    format: req.params.format,
-    route: '/export/'
-  };
-  res.send(json);
+        await page.goto("http://localhost:3000/export/testing-pdf-export.html");
+        await page.pdf({ path: "./TEST.pdf", format: "Letter" });
+        await browser.close();
+
+        let json = {
+          status: 'ok',
+          song: req.params.song,
+          cols: req.params.cols,
+          format: req.params.format,
+          route: '/export/'
+        };
+        res.send(json);
+      })();
+    });
+  }
+  catch (err) {
+    request_status = 'error';
+    console.error('JSN:/server/routes/api/1.0/export-file.js: ERROR: writing file:', song_file, ', error =', err);
+  }
 });
 
 router.get('/about', function (req, res) {

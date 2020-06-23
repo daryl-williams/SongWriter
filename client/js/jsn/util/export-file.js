@@ -23,7 +23,7 @@
 
 import { jsn } from '../index.js';
 
-export async function exportFile(song_name) {
+export async function exportFile() {
   /*
    * This method is called when the File Export menu option has been selected.
    */
@@ -35,23 +35,49 @@ export async function exportFile(song_name) {
 
   if (document.getElementById('song-content') !== null) {
     song_html = document.getElementById('song-content').innerHTML;
-    console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): song =', html);
+    console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): song_html =', song_html);
   }
 
-  let url = '/export/' + songname + '/' + num_cols + '/' + display_format;
+  //let url = '/export/' + songname + '/' + num_cols + '/' + display_format;
+  let url = '/export';
+
+  song_html = song_html.replace(/\n/g, "");
+  song_html = song_html.replace(/^\\"/g, '"');
+
+//  if (song_html[0] === '"') {
+ //   song_html = song_html.substring(1);
+  //}
+  song_html = song_html.replace(/^\"/, "");
+
+  let payload = {
+    song: song_html,
+    title: jsn.song.header.title,
+    composer: jsn.song.header.composer,
+  };
+
+  let options = {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  let retval = await jsn.dispatch.post(url, 'html', options);
+  console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): retval =', retval);
 
   //let pdf = await jsn.dispatch.get(url, content_type);
   //let pdf = await jsn.dispatch.get(url);
 
-//  const puppeteer = require("puppeteer");
-//
-//  (async () => {
-//    const browser = await puppeteer.launch();
-//    const page = await browser.newPage();
-//    await page.goto(url);
-//    await page.pdf({ path: "./TEST.pdf", format: "Letter" });
-//    await browser.close();
-//  })();
+/*
+  const puppeteer = require("puppeteer");
+  (async () => {
+    const browser = await puppeteer.launch({ headless: false });
+    const page = await browser.newPage();
+    await page.goto(url);
+    await page.pdf({ path: "./TEST.pdf", format: "Letter" });
+    await browser.close();
+  })();
 
   // The export_file function executes an ajax request for the song.
   const exportSong = async function(url, content_type) {
@@ -75,5 +101,6 @@ export async function exportFile(song_name) {
     }
   }
   exportSong(url, 'json');
+*/
 }
 

@@ -22,52 +22,52 @@
 'use strict';
 
 export function saveSong() {
-	console.log('jsn:/client/js/util/save-song.js:saveSong(): this.song =', this.song);
+  console.log('jsn:/client/js/util/save-song.js:saveSong(): this.song =', this.song);
 
-//	if (document.querySelector('.dropdown-menu') !== null) {
-//		console.log('jsn:/client/js/util/save-song.js:saveSong(): dropdown-menu =', document.querySelector('.dropdown-menu'));
-//		document.querySelector('.dropdown-menu').classList.toggle('hidden');
-//		document.querySelector('.dropdown-menu').classList.replace('hidden', 'visible');
-//	}
+//  if (document.querySelector('.dropdown-menu') !== null) {
+//    console.log('jsn:/client/js/util/save-song.js:saveSong(): dropdown-menu =', document.querySelector('.dropdown-menu'));
+//    document.querySelector('.dropdown-menu').classList.toggle('hidden');
+//    document.querySelector('.dropdown-menu').classList.replace('hidden', 'visible');
+//  }
 
-	let measures = document.querySelectorAll('[data-type=measure]');
+  let measures = document.querySelectorAll('[data-type=measure]');
 
-	for (let i=0, len=measures.length; i<len; ++i) {
-		let beats = measures[i].querySelectorAll('[data-type=beat]');
-		for (let j=0, jlen=beats.length; j<jlen; ++j) {
-			console.log('jsn:/client/js/util/save-song.js:saveSong(): this.song['+i+']['+j+'] =', this.song.body[i][j]);
-			console.log('jsn:/client/js/util/save-song.js:saveSong(): measure['+i+']['+j+'] =', beats[j]);
-		}
-	}
+  for (let i=0, len=measures.length; i<len; ++i) {
+    let beats = measures[i].querySelectorAll('[data-type=beat]');
+    for (let j=0, jlen=beats.length; j<jlen; ++j) {
+      console.log('jsn:/client/js/util/save-song.js:saveSong(): this.song['+i+']['+j+'] =', this.song.body[i][j]);
+      console.log('jsn:/client/js/util/save-song.js:saveSong(): measure['+i+']['+j+'] =', beats[j]);
+    }
+  }
 
 
-	//let song_str = 'song=' + JSON.stringify(this.song);
-	//let encoded_song_str = encodeURI('song=' + JSON.stringify(this.song));
-	//console.log('lsf:/lachlan.js:saveSong(): encoded_song_str =', encoded_song_str);
-	let encoded_song_str = encodeURI(JSON.stringify(this.song));
-	let song_str = JSON.stringify(this.song);
-	
-	let json = {
-		"song": song_str
-	};
+  //let song_str = 'song=' + JSON.stringify(this.song);
+  //let encoded_song_str = encodeURI('song=' + JSON.stringify(this.song));
+  //console.log('lsf:/lachlan.js:saveSong(): encoded_song_str =', encoded_song_str);
+  let encoded_song_str = encodeURI(JSON.stringify(this.song));
+  let song_str = JSON.stringify(this.song);
+  
+  let json = {
+    "song": song_str
+  };
 
-	let self = this;
+  let self = this;
 
-	const saveSong = async function(url, json) {
+  const saveSong = async function(url, json) {
 
-		let options = {
-			method: "POST",
-			body: song_str,
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		};
+    let options = {
+      method: "POST",
+      body: song_str,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
 
-		let retval = await self.dispatch.post(url, 'json', options);
-		console.log('jsn:/client/js/jsn/util/save-song.js:saveSong(): RETVAL =', retval);
-	}
+    let retval = await self.dispatch.post(url, 'json', options);
+    console.log('jsn:/client/js/jsn/util/save-song.js:saveSong(): RETVAL =', retval);
+  }
 
-	let url = '/api/1.0/save/';
-	saveSong(url, json);
+  let url = '/api/1.0/save/';
+  saveSong(url, json);
 }
 

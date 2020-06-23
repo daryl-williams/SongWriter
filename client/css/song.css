@@ -1,199 +1,200 @@
 
 svg {
-	border: none; /* solid 1px #000; */
+  border: none; /* solid 1px #000; */
 }
 
 #preview-header {
-	padding: 0em;
-	text-align: center;
+  padding: 0em;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 #close-preview {
-	float: right;
-	cursor: pointer;
-	padding: .25em;
+  float: right;
+  cursor: pointer;
+  padding: .25em;
 }
 
 #song-body {
-	overflow: auto;
-	padding: 0px;
-	margin: 0px;
-	margin-left: 1em;
+  overflow: auto;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 1em;
 }
 
 #song-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(1in, 2in));
-	grid-gap: 1px;
-	justify-content: center;
-	margin-bottom: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(1in, 2in));
+  grid-gap: 1px;
+  justify-content: center;
+  margin-bottom: 2em;
 }
 
 .measure {
-	border: thin solid powderblue;
-	border: thin solid darkgrey;
+  border: thin solid powderblue;
+  border: thin solid darkgrey;
 }
 
 #save-button {
-	width: 4em;
+  width: 4em;
 }
 
 #song-filename {
-	padding-top: 5px;
-	width: 30em;
+  padding-top: 5px;
+  width: 30em;
 }
 
 ul.dropdown > ul {
-	list-style: none;
-	visibility: hidden;
+  list-style: none;
+  visibility: hidden;
 }
 
 ul.dropdown ul > li {
-	padding: .3em;
+  padding: .3em;
   background-color: #d0e5ff;
 }
 
 .right-side {
-	float: right;
-	width: 22%;
-	margin-right: 1em;
+  float: right;
+  width: 22%;
+  margin-right: 1em;
 }
 
 #song-filename {
-	width: 10em;
+  width: 10em;
 }
 
 .chord-div {
-	width: 100px;
-	cursor: pointer;
-	margin: 1em;
+  width: 100px;
+  cursor: pointer;
+  margin: 1em;
 }
 
 #chord-family {
-	margin-top: 1em;
+  margin-top: 1em;
 }
 
 .chord-family {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .tooltip {
-	display: none;
-	width: 1in;
-	height: .5in;
-	background-color: pink;
+  display: none;
+  width: 1in;
+  height: .5in;
+  background-color: pink;
 }
 
 .bar-container-CT {
-	display: flex;
-	flex-direction: row;
-	padding: 0;
-	margin: 0;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
 }
 
 .bar-container-3QT {
-	display: flex;
-	flex-direction: row;
-	height: 1.5in;
-	width:  2in;
-	padding: 0;
-	margin: 0;
-	border: thin solid #bbb;
+  display: flex;
+  flex-direction: row;
+  height: 1.5in;
+  width:  2in;
+  padding: 0;
+  margin: 0;
+  border: thin solid #bbb;
 }
 
 .beat-3QT {
-	display: block;
-	width:  33%;
-	padding: 0px;
-	margin: 0px;
+  display: block;
+  width:  33%;
+  padding: 0px;
+  margin: 0px;
 }
 
 .beat-CT {
-	display: block;
-	width:  25%;
-	padding: 0px;
-	margin: 0px;
+  display: block;
+  width:  25%;
+  padding: 0px;
+  margin: 0px;
 }
 
 .bar-row {
-	height: 33%;
-	cursor: pointer;
-	border-bottom: thin solid #ddd;
+  height: 33%;
+  cursor: pointer;
+  border-bottom: thin solid #ddd;
 }
 
 .chord-beat {
-	height: .33in;
-	width: 100%;
-	line-height: 3em;
-	cursor: pointer;
-	text-align: center;
-	vertical-align: middle;
-	border-bottom: thin solid #ddd;
-	border: thin solid #ddd;
+  height: .33in;
+  width: 100%;
+  line-height: 3em;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: thin solid #ddd;
+  border: thin solid #ddd;
 }
 
 .meter-beat {
-	height: 33%;
-	background-color: #fff;
+  height: 33%;
+  background-color: #fff;
 }
 
 .lyrics-beat {
-	height: 33%;
-	cursor: pointer;
-	vertical-align: middle;
-	padding-top: 15px;
-	padding-left: 2px;
-	border-top: thin solid #ddd;
+  height: 33%;
+  cursor: pointer;
+  vertical-align: middle;
+  padding-top: 15px;
+  padding-left: 2px;
+  border-top: thin solid #ddd;
 }
 
 #chord-family-title {
-	margin: 1em;
+  margin: 1em;
 }
 
 #chord-more-title {
-	margin: 1em;
+  margin: 1em;
 }
 
 #chord-more {
-	height: 200px;
+  height: 200px;
 }
 
 #song-header {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	height: 200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 200px;
 }
 
 #form-container {
-	display: inline-block;
-	flex: 1 0 auto;
+  display: inline-block;
+  flex: 1 0 auto;
 }
 
 #tags-container {
-	padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 #popup-controls {
-	text-align: center;
-	height: 1.5em;
-	width: 100%;
-	margin-top: 1em;
-	margin-right: .5em;
-	background-color: #eee;
-	border: thin solid #ddd;
+  text-align: center;
+  height: 1.5em;
+  width: 100%;
+  margin-top: 1em;
+  margin-right: .5em;
+  background-color: #eee;
+  border: thin solid #ddd;
 }
 
 #popup-close-control {
-	float: right;
-	cursor: pointer;
-	margin-right: 1em;
+  float: right;
+  cursor: pointer;
+  margin-right: 1em;
 }
 
 #bpm-input {
   width: 20px;
-	height: 20px;
+  height: 20px;
 }
 
