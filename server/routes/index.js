@@ -27,6 +27,7 @@ const router = require('express').Router({mergeParams: true});
 
 router.get('/', function (req, res) {
   console.log('JSN:/server/routes/index.js: document_root =', req.document_root);
+
   let filename = 'index.html';
   console.log('JSN:/server/routes/index.js: filename =', filename);
   res.sendFile(filename, {'root': req.document_root}, function(err, next) {
@@ -41,20 +42,13 @@ router.get('/', function (req, res) {
   });
 });
 
-router.post('/export', function (req, res) {
+router.get('/export/:songfile', function (req, res) {
+  console.log('JSN:/server/routes/index.js:router.post("/export/:songfile"): req.params =', req.params);
+});
 
-  console.log('JSN:/server/routes/index.js:router.post("/export"): req.body.song =', req.body.song);
-
-  let encoded_song_str = encodeURI(JSON.stringify(req.body.song));
-
-  // Write the song structure to storage.
-  const fs = require('fs');
-
-  let file_store_root = './client/export';
-  let export_file = 'testing-pdf-export.html';
-
-  let song_file = file_store_root + '/' + export_file;
-  console.log('JSN:/server/routes/api/1.0/export-file.js: song_file =', song_file);
+router.post('/export-setup', function (req, res) {
+  const document_root = req.document_root;
+  //console.log('JSN:/server/routes/index.js:post(/export-setup):  document_root =', document_root);
 
   const htmldoc = `<!DOCTYPE html>
 <html lang="en">
@@ -69,16 +63,9 @@ router.post('/export', function (req, res) {
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
-  <!--
-  <link rel="manifest" href="/site.webmanifest">
-  -->
-
   <link rel="stylesheet" type="text/css" href="/css/main.css" />
   <link rel="stylesheet" type="text/css" href="/css/toolbar.css" />
   <link rel="stylesheet" type="text/css" href="/css/button.css" />
-<!--
-  <link rel="stylesheet" type="text/css" href="/css/console-switch.css" />
--->
   <link rel="stylesheet"  type="text/css" href="/vendors/font-awesome/font-awesome-4.7.0/css/font-awesome.css" />
 
   <link rel="stylesheet" type="text/css" href="/css/song-meta.css" />
@@ -103,44 +90,85 @@ router.post('/export', function (req, res) {
 </html>
 `;
 
-  const song_title = `<b>Title:</b> ${req.body.title}<br><b>Written by:</b> ${req.body.composer}<br>`;
+  const crypto = require('crypto');
+  const obfstr = crypto.randomBytes(32).toString('hex');
+  console.log('JSN:/server/routes/index.js:post(/export-setup):  obfstr =', obfstr);
 
-  let song_wip = req.body.song.replace('<div id="preview-header"></div>', '<div id="preview-header">' + song_title + '</div>'); 
+  const song_title = req.body.title;
+  const export_dir = document_root + '/export';
+
+  const html_srcfile = obfstr + ':' + song_title.replace(/[\s]+/g, '_') + '.html';
+  const html_songfile = export_dir + '/' + html_srcfile;
+
+  console.log('JSN:/server/routes/index.js:post(/export-setup):  html_srcfile =', html_srcfile);
+  console.log('JSN:/server/routes/index.js:post(/export-setup):  html_songfile =', html_songfile);
+
+  const export_outputfile = export_dir + '/' + obfstr + ':' + song_title + '.pdf';;
+  console.log('JSN:/server/routes/index.js:post(/export-setup):  export_outputfile =', export_outputfile);
+
+  const page_header = `<b>Title:</b> ${req.body.title}<br><b>Written by:</b> ${req.body.composer}<br>`;
+  let song_wip = req.body.song.replace('<div id="preview-header"></div>', '<div id="preview-header">' + page_header + '</div>'); 
   let song_html = htmldoc.replace('SONG_CONTENT', song_wip); 
+  console.log('JSN:/server/routes/index.js:post(/export-setup):  SONG_HTML =', song_html);
 
   const puppeteer = require("puppeteer");
 
+  // Write the song structure to storage.
+  const fs = require('fs');
+
   try {
-    //fs.writeFileSync(song_file, JSON.stringify(req.body.song));
-    fs.writeFile(song_file, song_html, 'ascii', () => {
+    fs.writeFile(html_songfile, song_html, 'ascii', () => {
       (async () => {
-        console.log('JSN:/server/routes/index.js:router.get("/export"): PUPPETTER');
+        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
+
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
 
-        //await page.goto("http://weblane.com:3000/export/Rita\ Ballew.jsn/4/jsn");
-        //await page.goto("http://localhost:3000");
-        //await page.goto("https://google.com");
-        //await page.goto("https://unform.com");
+        const uri = 'http://localhost:3000/export/' + html_srcfile;
+        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): URI =', uri);
+        await page.goto(uri);
 
-        await page.goto("http://localhost:3000/export/testing-pdf-export.html");
-        await page.pdf({ path: "./TEST.pdf", format: "Letter" });
+        const export_file = export_dir + '/' + obfstr + ':' + song_title.replace(/[\s]+/g, '_') + '.pdf';
+        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): export_file =', export_file);
+        await page.pdf({ path: export_file, format: "Letter" });
         await browser.close();
 
-        let json = {
-          status: 'ok',
-          song: req.params.song,
-          cols: req.params.cols,
-          format: req.params.format,
-          route: '/export/'
-        };
-        res.send(json);
+        res.download(export_file, song_title + '.pdf', function (err) {
+          if (err) {
+            console.error('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): ERROR exporting song, error =', err);
+          }
+          else {
+            console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): exported song successfully.');
+            try {
+              fs.unlink(html_songfile, (err) => { 
+                if (err) {
+                  console.error('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): ERROR unkinking file: ' + html_songfile + ', error =', err);
+                }
+                else {
+                  console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): unkinked file: ' + html_songfile);
+                }
+              });
+              //fs.unlink(export_dir + '/' + song_title.replace(/[\s]+/g, '_') + ".pdf");
+              fs.unlink(export_file, (err) => { 
+                if (err) {
+                  console.error('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): ERROR unkinking file: ' + export_file + ', error =', err);
+                }
+                else {
+                  console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): unkinked file: ' + export_file);
+                }
+              });
+            }
+            catch(err) {
+             console.log(err);
+           }
+          }
+        });
       })();
     });
   }
   catch (err) {
     request_status = 'error';
-    console.error('JSN:/server/routes/api/1.0/export-file.js: ERROR: writing file:', song_file, ', error =', err);
+    console.error('JSN:/server/routes/api/1.0/export-file.js: ERROR: writing file:', html_songfile, ', error =', err);
   }
 });
 

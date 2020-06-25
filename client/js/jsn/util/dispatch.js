@@ -62,6 +62,27 @@ class Dispatch {
       //console.log('/client/js/util/dispatch.js:dispatchRequest(): >>> 1. returning JSON =', json);
       return html;
     }
+    else if (content_type === 'blob') {
+      let filename = '';
+      if (response.headers.get('content-type') === 'application/pdf') {
+        filename = response.headers.get('content-disposition')
+          .split(';')
+          .find(n => n.includes('filename='))
+          .replace('filename=', '')
+          .replace(/\"/g, '')
+          .trim();
+        console.log('/client/js/util/dispatch.js:dispatchRequest(): >>> FILENAME =', filename);
+      }
+
+      const blob = await response.blob();
+      //console.log('/client/js/util/dispatch.js:dispatchRequest(): >>> 1. returning JSON =', blob);
+      //return blob;
+      let json = {
+        data: blob,
+        filename: filename,
+      };
+      return json;
+    }
     else {
       console.log('/client/js/util/dispatch.js:dispatchRequest(): ERROR: unknow content-type', content_type);
       return null;

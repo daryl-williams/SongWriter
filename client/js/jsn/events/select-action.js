@@ -30,6 +30,7 @@ export function setAction(event) {
   //console.log('jsn:/client/js/events/select-action.js:setAction(): event =', event);
 
   event.preventDefault();
+  event.stopPropagation();
 
   if (event.target.classList.contains('disabled')) {
     return;
