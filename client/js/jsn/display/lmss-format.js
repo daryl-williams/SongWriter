@@ -44,10 +44,7 @@ export function lmssFormat() {
     }
   }
 
-  let display_preview_header = function() {
-//    if (jsn.meta.previous_action !== 'preview') {
-//      toggle_console();
-//    }
+  let display_print_header = function() {
     if (document.getElementById('preview-header') !== null) {
       document.getElementById('preview-header').style.marginBottom = '1em';
       document.getElementById('preview-header').innerHTML = `
@@ -113,10 +110,17 @@ export function lmssFormat() {
   else if (jsn.meta.action === 'print' || jsn.meta.action === 'preview') {
     // Print or display the song Preview.
 
+//    if (document.querySelectorAll('.lyrics-beat') !== null) {
+//      document.querySelectorAll('.lyrics-beat').forEach(element => {
+//        element.style.paddingTop = '5px';
+//        element.style.marginBottom = '.5em';
+//      });
+//    }
+
     if (jsn.meta.action === 'preview') {
-      toggle_console();
+//      toggle_console();
       if (document.querySelector('.page') !== null) {
-        document.querySelector('.page').style.overflow = 'auto';
+        //document.querySelector('.page').style.overflow = 'auto';
       }
     }
     else if (jsn.meta.action === 'print') {
@@ -143,7 +147,7 @@ export function lmssFormat() {
       }
 
       // Display the Preview header.
-      display_preview_header();
+      display_print_header();
 
       // This is a synchronous call to print so it blocks until done.
       window.print();
@@ -185,7 +189,7 @@ export function lmssFormat() {
     //toggle_console();
 
     // Display the Preview header.
-    display_preview_header();
+//    display_preview_header();
 
 /*
     // Hide the application console if we're previewing or printing.
@@ -366,6 +370,8 @@ export function lmssFormat() {
       //lyrics_div.addEventListener("click", jsn.events.lyricsClickHandler); 
       lyrics_div.addEventListener("keyup", jsn.events.lyricsClickHandler); 
 
+      lyrics_div.style.paddingTop = '5px';
+      lyrics_div.style.marginBottom = '.5em';
       lyrics_div.style.border = 'none';
       beat_div.appendChild(lyrics_div);
 

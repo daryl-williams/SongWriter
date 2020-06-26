@@ -32,7 +32,7 @@ export function setView(event) {
   event.preventDefault();
   event.stopPropagation();
 
-  if (event.target.innerText.substring(0, 7 )=== 'Display' || event.target.innerText.substring(0, 7 )=== 'Preview') {
+  if (event.target.innerText.substring(0, 7 )=== 'Column Layout' || event.target.innerText.substring(0, 7 )=== 'Display Format') {
     return;
   }
 
@@ -56,6 +56,7 @@ console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.ta
     jsn.meta.previous_action = jsn.meta.action;
     jsn.meta.action = 'preview';
 
+    /*
     if (document.getElementById('song-content') !== null) {
       document.getElementById('song-content').style.width = '8.5in';
       document.getElementById('song-content').style.height = '11in';
@@ -63,6 +64,7 @@ console.log('jsn:/client/js/events/select-view.js:setView(): FOOBAR =', event.ta
       document.getElementById('song-content').style.marginRight = 'auto';
       document.getElementById('song-content').style.boxShadow = '10px 10px 21px -2px rgba(0,0,0,0.61)';
     }
+    */
 
     if (innerText === 'JSN Format') {
       jsn.meta.displayFormat = 'jsn';

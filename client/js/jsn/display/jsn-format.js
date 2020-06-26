@@ -44,10 +44,7 @@ export function jsnFormat() {
     }
   }
 
-  let display_preview_header = function() {
-//    if (jsn.meta.previous_action !== 'preview') {
-//      toggle_console();
-//    }
+  let display_print_header = function() {
     if (document.getElementById('preview-header') !== null) {
       document.getElementById('preview-header').style.marginBottom = '1em';
       document.getElementById('preview-header').innerHTML = `
@@ -114,10 +111,10 @@ export function jsnFormat() {
     // Print or display the song Preview.
 
     if (jsn.meta.action === 'preview') {
-      toggle_console();
-      if (document.querySelector('.page') !== null) {
-        document.querySelector('.page').style.overflow = 'auto';
-      }
+//      toggle_console();
+//      if (document.querySelector('.page') !== null) {
+//        document.querySelector('.page').style.overflow = 'auto';
+//      }
     }
     else if (jsn.meta.action === 'print') {
 
@@ -143,7 +140,7 @@ export function jsnFormat() {
       }
 
       // Display the Preview header.
-      display_preview_header();
+      display_print_header();
 
       // This is a synchronous call to print so it blocks until done.
       window.print();
@@ -185,7 +182,7 @@ export function jsnFormat() {
     //toggle_console();
 
     // Display the Preview header.
-    display_preview_header();
+//    display_preview_header();
 
 /*
     // Hide the application console if we're previewing or printing.
