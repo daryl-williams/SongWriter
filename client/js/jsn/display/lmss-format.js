@@ -48,12 +48,13 @@ export function lmssFormat() {
     if (document.getElementById('preview-header') !== null) {
       document.getElementById('preview-header').style.marginBottom = '1em';
       document.getElementById('preview-header').innerHTML = `
-        <div id="close-preview-div"><i id="close-preview" class="fa fa-window-close" aria-hidden="true"></i></div>
         <b>Title:</b> ${jsn.song.header.title}<br>
         <b>Written by:</b> ${jsn.song.header.composer}<br>
       `;
 
       // Setup the click event handler for song preview close control.
+/*
+<div id="close-preview-div"><i id="close-preview" class="fa fa-window-close" aria-hidden="true"></i></div>
       if (document.getElementById('close-preview') !== null) {
         document.getElementById('close-preview').addEventListener('click', function(event) {
           // To close the preview we need to redisplay the song.
@@ -78,6 +79,7 @@ export function lmssFormat() {
           }
         });
       }
+*/
     }
   }
 
@@ -117,13 +119,13 @@ export function lmssFormat() {
 //      });
 //    }
 
-    if (jsn.meta.action === 'preview') {
+ //   if (jsn.meta.action === 'preview') {
 //      toggle_console();
-      if (document.querySelector('.page') !== null) {
-        //document.querySelector('.page').style.overflow = 'auto';
-      }
-    }
-    else if (jsn.meta.action === 'print') {
+//      if (document.querySelector('.page') !== null) {
+ //       //document.querySelector('.page').style.overflow = 'auto';
+  //    }
+//    }
+    if (jsn.meta.action === 'print') {
 
       //jsn.meta.previous_action = jsn.meta.previous_action;
       jsn.meta.previous_action = jsn.meta.previous_action;
@@ -141,9 +143,6 @@ export function lmssFormat() {
         document.getElementById('song-content').style.height = '11in';
         document.getElementById('song-content').style.padding  = '0 px';
         document.getElementById('song-grid').style.gridGap = '0px'
-        //document.getElementById('song-content').style.marginLeft = 'auto';
-        //document.getElementById('song-content').style.marginRight = 'auto';
-//        document.getElementById('song-content').style.boxShadow = '10px 10px 21px -2px rgba(0,0,0,0.61)';
       }
 
       // Display the Preview header.
@@ -172,11 +171,11 @@ export function lmssFormat() {
         }
       }
 
-      document.getElementById('song-grid').style.gridGap = '1px'
       document.getElementById('song-content').style.padding  = '.25em';
-//      document.getElementById('song-content').style.width = '100vh';
-      document.getElementById('song-content').style.width = '';
-//      document.getElementById('song-content').style.height = '60em';
+      document.getElementById('song-content').style.width = '100%';
+      document.getElementById('song-content').style.height = '';
+      document.getElementById('song-content').style.overflow = 'auto';
+      document.getElementById('song-grid').style.gridGap = '1px'
 
       return;
     }
@@ -184,32 +183,7 @@ export function lmssFormat() {
     document.getElementById('song-grid').style.gridGap = '1px'
     document.getElementById('song-content').style.padding  = '.25em';
     document.getElementById('song-content').style.width = '';
-
-    // Clode the application console.
-    //toggle_console();
-
-    // Display the Preview header.
-//    display_preview_header();
-
-/*
-    // Hide the application console if we're previewing or printing.
-    if (document.querySelector('#app-console') !== null && document.querySelector('#app-console').classList.contains('show')) {
-      document.querySelector('#app-console').classList.replace('show', 'hide');
-    }
-
-    // Hide the application console if we're previewing or printing.
-    if (document.querySelector('#app-console') !== null && document.querySelector('#app-console').classList.contains('show')) {
-      document.querySelector('#app-console').classList.replace('show', 'hide');
-    }
-
-    if (document.getElementById('song-preview-header') !== null) {
-      // Display the Preview header.
-      document.getElementById('song-preview-header').innerHTML = `
-        <b>Title:</b> ${jsn.song.header.title}<br>
-        <b>Written by:</b> ${jsn.song.header.composer}<br>
-      `;
-    }
-*/
+    document.getElementById('song-content').style.overflow = 'auto';
   }
 
   if (document.getElementById('song-grid') !== null) {
