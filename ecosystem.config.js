@@ -23,6 +23,7 @@ module.exports = {
     },
     env_production: {
       NODE_ENV: 'development'
+      LD_LIBRARY_PATH="/opt/glibc-2.14/lib/"
     }
   }],
 
