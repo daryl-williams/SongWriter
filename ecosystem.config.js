@@ -19,6 +19,7 @@ module.exports = {
     max_memory_restart: '500M',
     env: {
       NODE_ENV: 'production'
+      LD_LIBRARY_PATH="/opt/glibc-2.14/lib/"
     },
     env_production: {
       NODE_ENV: 'development'
