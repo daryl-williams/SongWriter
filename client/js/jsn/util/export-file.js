@@ -38,6 +38,8 @@ export function exportFile() {
     console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): song_html =', song_html);
   }
 
+  //let url = '/export-setup';
+  //let url = 'http://launchpad.sdsi.cloud:4040/html2pdf';
   let url = '/export-setup';
 
   song_html = song_html.replace(/\n/g, "");
@@ -49,19 +51,46 @@ export function exportFile() {
     title: jsn.song.header.title,
     composer: jsn.song.header.composer,
   };
+  console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): payload =', payload);
+
+  let jsonstr = JSON.stringify(payload);
+  console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): jsonstr =', jsonstr);
 
   let options = {
     method: "POST",
-    body: JSON.stringify(payload),
+    body: jsonstr,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     responseType: 'blob',
   };
 
+/*
+  let options = {
+    method: "POST",
+//    mode: 'cors',
+//    cache: 'no-cache',
+    body: JSON.stringify(payload),
+    headers: {
+      //'Content-Type': 'application/json'
+//      'Access-Control-Request-Method': 'POST',
+//      'Access-Control-Request-Headers': 'Content-Type, Accept',
+//      'Content-Type': 'application/x-www-form-urlencoded',
+//      'Origin': 'http://c-24-23-50-226.hsd1.ca.comcast.net'
+    },
+    responseType: 'blob',
+  };
+*/
+
   async function getpdf() {
     let response = await jsn.dispatch.post(url, 'blob', options);
     console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): response =', response);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+      return;
+    }
+    //return response.blob();
 
     let filename = response.filename;
 

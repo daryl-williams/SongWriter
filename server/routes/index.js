@@ -19,6 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+const fetch = require('node-fetch')
 const path = require("path");
 //const express = require("express");
 const router = require('express').Router({mergeParams: true});
@@ -28,6 +29,8 @@ const router = require('express').Router({mergeParams: true});
 router.get('/', function (req, res) {
   console.log('JSN:/server/routes/index.js: document_root =', req.document_root);
 
+/*
+  // FUCKING CACHE.
   let filename = 'index.html';
   console.log('JSN:/server/routes/index.js: filename =', filename);
   res.sendFile(filename, {'root': req.document_root}, function(err, next) {
@@ -40,6 +43,7 @@ router.get('/', function (req, res) {
       console.log('JSN:/server/routes/index.js:router.get("/"): sendFile OK.');
     }
   });
+*/
 });
 
 router.get('/export/:songfile', function (req, res) {
@@ -49,6 +53,7 @@ router.get('/export/:songfile', function (req, res) {
 router.post('/export-setup', function (req, res) {
   const document_root = req.document_root;
   //console.log('JSN:/server/routes/index.js:post(/export-setup):  document_root =', document_root);
+  console.log('JSN:/server/routes/index.js: req.body string =', req.body);
 
   const htmldoc = `<!DOCTYPE html>
 <html lang="en">
@@ -111,27 +116,44 @@ router.post('/export-setup', function (req, res) {
   let song_html = htmldoc.replace('SONG_CONTENT', song_wip); 
   console.log('JSN:/server/routes/index.js:post(/export-setup):  SONG_HTML =', song_html);
 
-  const puppeteer = require("puppeteer");
+//  const puppeteer = require("puppeteer");
 
   // Write the song structure to storage.
   const fs = require('fs');
 
   try {
     fs.writeFile(html_songfile, song_html, 'ascii', () => {
-      (async () => {
-        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
 
-        const browser = await puppeteer.launch({ headless: true });
-        const page = await browser.newPage();
+      (async () => {
+//        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
+//        const browser = await puppeteer.launch({ headless: true });
+//        const page = await browser.newPage();
 
         const uri = 'http://localhost:3000/export/' + html_srcfile;
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): URI =', uri);
-        await page.goto(uri);
+//        await page.goto(uri);
 
         const export_file = export_dir + '/' + obfstr + ':' + song_title.replace(/[\s]+/g, '_') + '.pdf';
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): export_file =', export_file);
-        await page.pdf({ path: export_file, format: "Letter" });
-        await browser.close();
+//        await page.pdf({ path: export_file, format: "Letter" });
+//        await browser.close();
+
+/*
+const HTMLToPdf = require('html-to-pdf');
+const getPDF = async () => {
+  const htmlToPDF = new HTMLToPDF(song_html);
+  try {
+    const pdf = await htmlToPDF.convert();
+    // do something with the PDF file buffer
+    console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): PDF =', pdf);
+  }
+  catch (err) {
+    // do something on error
+    console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): HTMLToPDF ERROR =', err);
+  }
+};
+getPDF();
+*/
 
         res.download(export_file, song_title + '.pdf', function (err) {
           if (err) {
