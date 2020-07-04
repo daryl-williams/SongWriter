@@ -52,8 +52,8 @@ router.get('/export/:songfile', function (req, res) {
 
 router.post('/export-setup', function (req, res) {
   const document_root = req.document_root;
-  //console.log('JSN:/server/routes/index.js:post(/export-setup):  document_root =', document_root);
-  console.log('JSN:/server/routes/index.js: req.body =', req.body);
+  console.log('JSN:/server/routes/index.js:post(/export-setup):  document_root =', document_root);
+  //console.log('JSN:/server/routes/index.js: req.body =', req.body);
 
   const htmldoc = `<!DOCTYPE html>
 <html lang="en">
@@ -118,10 +118,10 @@ router.post('/export-setup', function (req, res) {
   let song_json = {
     song: song_html
   }
-  console.log('JSN:/server/routes/index.js:post(/export-setup):  SONG_JSON =', song_json);
+  //console.log('JSN:/server/routes/index.js:post(/export-setup):  SONG_JSON =', song_json);
 
   let jsonstr = JSON.stringify(song_json);
-  console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): jsonstr =', jsonstr);
+  //console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): jsonstr =', jsonstr);
 
   const puppeteer = require("puppeteer");
 
