@@ -34,7 +34,8 @@ export function exportFile() {
   let display_format = jsn.controlPanel.displayFormat;
 
   if (document.getElementById('song-content') !== null) {
-    song_html = document.getElementById('song-content').innerHTML;
+    song_html = document.getElementById('song-content').innerHTML.trim();
+
     console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): song_html =', song_html);
   }
 
@@ -62,7 +63,7 @@ export function exportFile() {
     headers: {
       'Content-Type': 'application/json',
     },
-    responseType: 'blob',
+    //responseType: 'blob',
   };
 
 /*

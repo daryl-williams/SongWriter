@@ -53,7 +53,7 @@ router.get('/export/:songfile', function (req, res) {
 router.post('/export-setup', function (req, res) {
   const document_root = req.document_root;
   //console.log('JSN:/server/routes/index.js:post(/export-setup):  document_root =', document_root);
-  console.log('JSN:/server/routes/index.js: req.body string =', req.body);
+  console.log('JSN:/server/routes/index.js: req.body =', req.body);
 
   const htmldoc = `<!DOCTYPE html>
 <html lang="en">
@@ -112,9 +112,19 @@ router.post('/export-setup', function (req, res) {
   console.log('JSN:/server/routes/index.js:post(/export-setup):  export_outputfile =', export_outputfile);
 
   const page_header = `<b>Title:</b> ${req.body.title}<br><b>Written by:</b> ${req.body.composer}<br>`;
+
   let song_wip = req.body.song.replace('<div id="preview-header"></div>', '<div id="preview-header">' + page_header + '</div>'); 
   let song_html = htmldoc.replace('SONG_CONTENT', song_wip); 
-  console.log('JSN:/server/routes/index.js:post(/export-setup):  SONG_HTML =', song_html);
+  let song_json = {
+    song: song_html
+  }
+  console.log('JSN:/server/routes/index.js:post(/export-setup):  SONG_JSON =', song_json);
+
+  let jsonstr = JSON.stringify(song_json);
+  console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): jsonstr =', jsonstr);
+
+//  res.send('ok');
+//  return;
 
 //  const puppeteer = require("puppeteer");
 
@@ -123,6 +133,7 @@ router.post('/export-setup', function (req, res) {
 
   try {
     fs.writeFile(html_songfile, song_html, 'ascii', () => {
+      console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): succesfully wrote file ', html_songfile);
 
       (async () => {
 //        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
@@ -138,23 +149,29 @@ router.post('/export-setup', function (req, res) {
 //        await page.pdf({ path: export_file, format: "Letter" });
 //        await browser.close();
 
-/*
-const HTMLToPdf = require('html-to-pdf');
-const getPDF = async () => {
-  const htmlToPDF = new HTMLToPDF(song_html);
-  try {
-    const pdf = await htmlToPDF.convert();
-    // do something with the PDF file buffer
-    console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): PDF =', pdf);
-  }
-  catch (err) {
-    // do something on error
-    console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): HTMLToPDF ERROR =', err);
-  }
-};
-getPDF();
-*/
+        const url = 'http://launchpad.sdsi.cloud:4040/html2pdf';
+//        const song_data = JSON.stringify(req.body.song);
 
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            "Accept": "application/json",
+            "Accept-Charset": "utf-8",
+          },
+          body: jsonstr,
+        });
+        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): REMOTE PUPPETEER RESPONSE = ', response);
+
+        const data = await response.text();
+        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): REMOTE PUPPETEER DATA = ', data);
+
+        const pdf_file = 'TEST.pdf';
+        fs.writeFile(pdf_file, data, 'utf8', () => {
+          console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): WROTE PUPPETEER DATA to ', pdf_file);
+        });
+
+/*
         res.download(export_file, song_title + '.pdf', function (err) {
           if (err) {
             console.error('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): ERROR exporting song, error =', err);
@@ -185,6 +202,7 @@ getPDF();
            }
           }
         });
+*/
       })();
     });
   }
