@@ -27,7 +27,7 @@ class Dispatch {
   }
 
   async dispatchRequest(url, request_type, content_type, options) {
-    //console.log('/client/js/jsn/util/dispatch.js:dispatchRequest(): REQUEST url =', url);
+    console.log('/client/js/jsn/util/dispatch.js:dispatchRequest(): REQUEST options =', options);
 
     let response = null;
 
@@ -51,6 +51,11 @@ class Dispatch {
       }
       return json;
     }
+
+//if (request_type === 'POST') {
+//const txt = await response.text();
+//console.log('/client/js/util/dispatch.js:dispatchRequest(): >>> 0. returning TXT =', txt);
+//}
 
     if (content_type === 'json') {
       const json = await response.json();

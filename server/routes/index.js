@@ -123,10 +123,7 @@ router.post('/export-setup', function (req, res) {
   let jsonstr = JSON.stringify(song_json);
   console.log('jsn:/client/js/jsn/util/export-file.js:exportFile(): jsonstr =', jsonstr);
 
-//  res.send('ok');
-//  return;
-
-//  const puppeteer = require("puppeteer");
+  const puppeteer = require("puppeteer");
 
   // Write the song structure to storage.
   const fs = require('fs');
@@ -136,42 +133,20 @@ router.post('/export-setup', function (req, res) {
       console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): succesfully wrote file ', html_songfile);
 
       (async () => {
-//        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
-//        const browser = await puppeteer.launch({ headless: true });
-//        const page = await browser.newPage();
+        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
+        const browser = await puppeteer.launch({ headless: true });
+        const page = await browser.newPage();
 
         const uri = 'http://localhost:3000/export/' + html_srcfile;
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): URI =', uri);
-//        await page.goto(uri);
+        await page.goto(uri);
 
         const export_file = export_dir + '/' + obfstr + ':' + song_title.replace(/[\s]+/g, '_') + '.pdf';
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): export_file =', export_file);
-//        await page.pdf({ path: export_file, format: "Letter" });
-//        await browser.close();
 
-        const url = 'http://launchpad.sdsi.cloud:4040/html2pdf';
-//        const song_data = JSON.stringify(req.body.song);
+        await page.pdf({ path: export_file, format: "Letter" });
+        await browser.close();
 
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            "Accept": "application/json",
-            "Accept-Charset": "utf-8",
-          },
-          body: jsonstr,
-        });
-        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): REMOTE PUPPETEER RESPONSE = ', response);
-
-        const data = await response.text();
-        console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): REMOTE PUPPETEER DATA = ', data);
-
-        const pdf_file = 'TEST.pdf';
-        fs.writeFile(pdf_file, data, 'utf8', () => {
-          console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): WROTE PUPPETEER DATA to ', pdf_file);
-        });
-
-/*
         res.download(export_file, song_title + '.pdf', function (err) {
           if (err) {
             console.error('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): ERROR exporting song, error =', err);
@@ -202,7 +177,6 @@ router.post('/export-setup', function (req, res) {
            }
           }
         });
-*/
       })();
     });
   }
