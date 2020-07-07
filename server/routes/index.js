@@ -139,17 +139,17 @@ router.post('/export-setup', function (req, res) {
       (async () => {
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
         const browser = await puppeteer.launch({ headless: true });
-        //const page = await browser.newPage();
+        const page = await browser.newPage();
 
         const uri = 'http://localhost:3000/export/' + html_srcfile;
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): URI =', uri);
-        //await page.goto(uri);
+        await page.goto(uri);
 
         const export_file = export_dir + '/' + obfstr + ':' + song_title.replace(/[\s]+/g, '_') + '.pdf';
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): export_file =', export_file);
 
-        //await page.pdf({ path: export_file, format: "Letter" });
-        //await browser.close();
+        await page.pdf({ path: export_file, format: "Letter" });
+        await browser.close();
 
 /*
 html2canvas(
@@ -162,8 +162,8 @@ html2canvas(
 });
 */
 
-const pdf = require('html-pdf');
-const options = { format: 'Letter'};
+//const pdf = require('html-pdf');
+//const options = { format: 'Letter'};
 
 pdf.create(song_html, options).toFile(export_file, function(err, res) {
   if (err) {
