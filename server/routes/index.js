@@ -21,7 +21,7 @@
 
 //const html2canvas = require('html2canvas');
 //const jsPDF = require('jsPDF');
-var pdf = require('html-pdf');
+//var pdf = require('html-pdf');
 
 const fetch = require('node-fetch')
 const path = require("path");
