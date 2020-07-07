@@ -311,10 +311,12 @@
   </div>
 
     <!-- Javascript dependencies libraries -->
-    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
     <!--
+    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
     -->
+    <!--
+    <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io.connect('http://weblane.com:3000');
       socket.on('news', function (data) {
@@ -322,7 +324,7 @@
         socket.emit('my other event', { 'hello': 'goodbye' });
       });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
+    -->
     <script src="/js/lib/Tone.js"></script>
     <script src="/js/lib/teoria.js"></script>
     <script src="/js/lib/raphael.js"></script>
