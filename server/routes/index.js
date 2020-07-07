@@ -19,6 +19,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+//const html2canvas = require('html2canvas');
+//const jsPDF = require('jsPDF');
+var pdf = require('html-pdf');
+
 const fetch = require('node-fetch')
 const path = require("path");
 //const express = require("express");
@@ -135,17 +139,38 @@ router.post('/export-setup', function (req, res) {
       (async () => {
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
         const browser = await puppeteer.launch({ headless: true });
-        const page = await browser.newPage();
+        //const page = await browser.newPage();
 
         const uri = 'http://localhost:3000/export/' + html_srcfile;
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): URI =', uri);
-        await page.goto(uri);
+        //await page.goto(uri);
 
         const export_file = export_dir + '/' + obfstr + ':' + song_title.replace(/[\s]+/g, '_') + '.pdf';
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): export_file =', export_file);
 
-        await page.pdf({ path: export_file, format: "Letter" });
-        await browser.close();
+        //await page.pdf({ path: export_file, format: "Letter" });
+        //await browser.close();
+
+/*
+html2canvas(
+  song_html,
+  {scale: 2}
+).then(canvas => {
+  let pdf = new jsPDF('p', 'mm', 'a4');
+  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+  pdf.save(export_file);
+});
+*/
+
+const pdf = require('html-pdf');
+const options = { format: 'Letter'};
+
+pdf.create(song_html, options).toFile(export_file, function(err, res) {
+  if (err) {
+    return console.log('ERROR =', err);
+  }
+  else  {
+    console.log('OK: ', res); // { filename: '/app/businesscard.pdf' }
 
         res.download(export_file, song_title + '.pdf', function (err) {
           if (err) {
@@ -177,6 +202,10 @@ router.post('/export-setup', function (req, res) {
            }
           }
         });
+// here
+  }
+});
+// there
       })();
     });
   }
