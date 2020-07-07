@@ -104,7 +104,8 @@ router.post('/export-setup', function (req, res) {
   console.log('JSN:/server/routes/index.js:post(/export-setup):  obfstr =', obfstr);
 
   const song_title = req.body.title;
-  const export_dir = document_root + '/export';
+  //const export_dir = document_root + '/export';
+  const export_dir = document_root + '/';
 
   const html_srcfile = obfstr + ':' + song_title.replace(/[\s]+/g, '_') + '.html';
   const html_songfile = export_dir + '/' + html_srcfile;
