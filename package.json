@@ -1,6 +1,6 @@
 {
   "name": "songwriter",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "A proof of concept/reference implementation of building an app around the JSON Song Notation format.",
   "main": "songwriter.js",
   "scripts": {
