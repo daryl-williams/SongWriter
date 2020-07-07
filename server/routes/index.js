@@ -145,8 +145,15 @@ router.post('/export-setup', function (req, res) {
         const page = await browser.newPage();
 
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): EXPORT_URL =', process.env.EXPORT_URL);
-        //const uri = 'http://localhost:3000/export/' + html_srcfile;
-        const uri = '/export/' + html_srcfile;
+
+        //const uri = '/export/' + html_srcfile;
+        const uri;
+        if (process.env.EXPORT_URL !== undefined && process.env.EXPORT_URL !== '') {
+          uri = process.env.EXPORT_URL + html_srcfile;
+        }
+        else {
+          uri = 'http://localhost:3000/export/' + html_srcfile;
+        }
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): URI =', uri);
         await page.goto(uri);
 
