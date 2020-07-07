@@ -165,11 +165,11 @@ html2canvas(
 //const pdf = require('html-pdf');
 //const options = { format: 'Letter'};
 
-pdf.create(song_html, options).toFile(export_file, function(err, res) {
-  if (err) {
-    return console.log('ERROR =', err);
-  }
-  else  {
+//pdf.create(song_html, options).toFile(export_file, function(err, res) {
+//  if (err) {
+//    return console.log('ERROR =', err);
+//  }
+//  else  {
     console.log('OK: ', res); // { filename: '/app/businesscard.pdf' }
 
         res.download(export_file, song_title + '.pdf', function (err) {
@@ -203,8 +203,8 @@ pdf.create(song_html, options).toFile(export_file, function(err, res) {
           }
         });
 // here
-  }
-});
+//  }
+//});
 // there
       })();
     });
