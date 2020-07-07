@@ -138,7 +138,10 @@ router.post('/export-setup', function (req, res) {
 
       (async () => {
         console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): callback, running puppeteer...')
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+          headless: true,
+          args: ['--no-sandbox'],
+        });
         const page = await browser.newPage();
 
         const uri = 'http://localhost:3000/export/' + html_srcfile;
