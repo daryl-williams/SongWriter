@@ -160,26 +160,7 @@ router.post('/export-setup', function (req, res) {
         await page.pdf({ path: export_file, format: "Letter" });
         await browser.close();
 
-/*
-html2canvas(
-  song_html,
-  {scale: 2}
-).then(canvas => {
-  let pdf = new jsPDF('p', 'mm', 'a4');
-  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-  pdf.save(export_file);
-});
-*/
-
-//const pdf = require('html-pdf');
-//const options = { format: 'Letter'};
-
-//pdf.create(song_html, options).toFile(export_file, function(err, res) {
-//  if (err) {
-//    return console.log('ERROR =', err);
-//  }
-//  else  {
-    console.log('OK: ', res); // { filename: '/app/businesscard.pdf' }
+//console.log('OK: ', res); // { filename: '/app/businesscard.pdf' }
 
         res.download(export_file, song_title + '.pdf', function (err) {
           if (err) {
@@ -187,6 +168,7 @@ html2canvas(
           }
           else {
             console.log('JSN:/server/routes/index.js:post(/export-setup).fs.WriteFile(): exported song successfully.');
+            /*
             try {
               fs.unlink(html_songfile, (err) => { 
                 if (err) {
@@ -209,12 +191,9 @@ html2canvas(
             catch(err) {
              console.log(err);
            }
+            */
           }
         });
-// here
-//  }
-//});
-// there
       })();
     });
   }
