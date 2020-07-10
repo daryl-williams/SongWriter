@@ -110,21 +110,7 @@ export function lmssFormat() {
     }
   }
   else if (jsn.meta.action === 'print' || jsn.meta.action === 'preview') {
-    // Print or display the song Preview.
-
-//    if (document.querySelectorAll('.lyrics-beat') !== null) {
-//      document.querySelectorAll('.lyrics-beat').forEach(element => {
-//        element.style.paddingTop = '5px';
-//        element.style.marginBottom = '.5em';
-//      });
-//    }
-
- //   if (jsn.meta.action === 'preview') {
-//      toggle_console();
-//      if (document.querySelector('.page') !== null) {
- //       //document.querySelector('.page').style.overflow = 'auto';
-  //    }
-//    }
+    // Print the song...
     if (jsn.meta.action === 'print') {
 
       //jsn.meta.previous_action = jsn.meta.previous_action;
@@ -218,15 +204,20 @@ export function lmssFormat() {
     else if (jsn.song.header.beats_per_bar === 4) {
       bar_container.className += 'bar-container-CT';
     }
+
+    if (document.getElementById('song-grid') !== null) {
+      document.getElementById('song-grid').style.gridGap = '10px !important';
+    }
+
     bar_container.id = 'bar-container' + bar_number;
     bar_container.setAttribute('data-type', 'measure');
     bar_container.style.width = '2in';
 
     if (jsn.meta.action === 'preview' || jsn.meta.action === 'print') {
-      bar_container.style.border = 'none';
+      //bar_container.style.border = 'none';
       //bar_container.style.height = '.5in';
-//      if (document.selectQueryAll('.chord-beat') !== null) {
- //     }
+      //if (document.selectQueryAll('.chord-beat') !== null) {
+      //}
     }
 
     // and append the bar_container to the song_grid.
@@ -367,6 +358,19 @@ export function lmssFormat() {
       lyrics_div = null;
       beat_div = null;
     }
+  }
+
+  if (document.getElementById('song-grid') !== null) {
+    document.getElementById('song-grid').style.gridRowGap = '20px';
+    document.getElementById('song-grid').style.gridColumnGap = '5px';
+  }
+
+  let barlist = document.querySelectorAll('.measure');
+  for (let i=0, len=barlist.length; i<len; ++i) {
+    //barlist[i].style.border = 'thin solid green';
+    barlist[i].style.borderRight  = 'thin solid green';
+    barlist[i].style.borderBottom = 'thin solid green';
+    //barlist[i].style.backgroundColor = 'pink';
   }
 
   bar_container= null;

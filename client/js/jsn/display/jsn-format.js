@@ -227,6 +227,12 @@ export function jsnFormat() {
       beat_div.className += 'beat-div';
       beat_div.setAttribute('data-type', 'beat');
 
+    //beat_div.style.backgroundImage = 'linear-gradient(90deg, red 33.33%, white 33.33%, white 66.66%, blue 66.66%';
+    //beat_div.style.backgroundImage = 'linear-gradient(90deg, ghostwhite 33.33%, mintcream 33.33%, white 66.66%, grey 66.66%);';
+    //beat_div.style.backgroundImage = 'linear-gradient(90deg, white 0%, white 32%, red %)';
+    //beat_div.style.backgroundImage = 'linear-gradient(to right, #3056ff 0%, #3056ff 32%, #ff3033 33%, #ff282c 66%, #2989d8 67%, #2989d8 67%, #7db9e8 100%)';
+    beat_div.style.backgroundImage =   'linear-gradient(to right, #fff    0%, #fff    32%, #f6f6f6 33%, #f6f6f6 66%, #eee 67%, #eee 67%)'; //, #fff    100%)';
+
       if (jsn.song.header.beats_per_bar === 3) {
         beat_div.className = 'beat-3QT';
       }
