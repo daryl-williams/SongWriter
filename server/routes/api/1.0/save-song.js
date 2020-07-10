@@ -19,8 +19,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 const router = require('express').Router({mergeParams: true});
+
+const nodemailer = require('nodemailer');
 
 router.post('/', function(req, res)
 {
@@ -40,19 +41,63 @@ router.post('/', function(req, res)
   let song_file = file_store_root + '/' + song_title + '.jsn';
   console.log('JSN:/server/routes/api/1.0/save-song.js: song_file =', song_file);
 
+  var transporter = nodemailer.createTransport({
+    host: 'weblane.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+      user: 'daryl@weblane.com',
+      pass: '1Npw4m2R@daryl@weblane.c0m!.',
+      pass: '1n3Mai1pw4weblane!.'
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  const mailOptions = {
+    from: 'daryl@weblane.com',
+    to: 'daryl@weblane.com',
+    subject: 'Song Saved on Heroku: ' + song_title,
+    text: 'Should be attached.',
+    attachments: [
+      {
+        filename: song_title,
+        path: song_file,
+      }
+    ]
+  };
+
   try {
-    fs.writeFileSync(song_file, JSON.stringify(req.body));
+    fs.writeFile(song_file, JSON.stringify(req.body), (err) => {
+      if (err) {
+        console.log('JSN:/server/routes/api/1.0/save-song.js: writeFile ERROR =', err)
+      }
+      else {
+        console.log('JSN:/server/routes/api/1.0/save-song.js: wrote file: ', song_file)
+
+        transporter.sendMail(mailOptions, function (err, info) {
+          if (err) {
+            console.log('JSN:/server/routes/api/1.0/save-song.js: semdMail ERROR =', err)
+          }
+          else {
+            console.log('JSN:/server/routes/api/1.0/save-song.js: semdMail INFO =', info)
+          }
+        });
+
+        // Return result to the client.
+        let json = {
+          "status": request_status,
+        }
+        res.send(json);
+      }
+    });
   }
   catch (err) {
     request_status = 'error';
     console.error('JSN:/server/routes/api/1.0/save-song.js: ERROR: writing file:', song_file, ', error =', err);
   }
-
-  // Return result to the client.
-  let json = {
-    "status": request_status,
-  }
-  res.send(json);
 });
 
 router.get('*', function(req, res, next) {
