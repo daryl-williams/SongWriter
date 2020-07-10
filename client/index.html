@@ -91,12 +91,12 @@
         <div class="toolbar-item dropdown-menu-container">
           <div onclick='' class="dropdown-label disabled">Tools</div>
           <ul class="dropdown-menu hide">
-            <li id="tools-metronome" class="tools-menu-item disabled">
+            <li id="tools-metronome" class="tools-menu-item">
               Metronome
               <ul id="metronome-controls" class="dropdown-submenu">
                 <li>
                   BPM 
-                  <input disabled id="bpm-input" class="slider"
+                  <input id="bpm-input" class="slider"
                     type="range"
                     min="10"
                     max="300"
@@ -107,7 +107,7 @@
                   <span id="bpm-output"></span>
 
                   Metronme Sound
-                  <select disabled id="metronome-sound-select">
+                  <select id="metronome-sound-select">
                     <option>Click</option>
                     <option>Bell</option>
                     <option>Banjo</option>

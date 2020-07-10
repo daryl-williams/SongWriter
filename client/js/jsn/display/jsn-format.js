@@ -350,6 +350,11 @@ export function jsnFormat() {
     }
   }
 
+  let barlist = document.querySelectorAll('.measure');
+  for (let i=0, len=barlist.length; i<len; ++i) {
+    barlist[i].style.border = 'thin solid green';
+  }
+
   bar_container= null;
 
   if (document.getElementById('song-grid') !== null) {

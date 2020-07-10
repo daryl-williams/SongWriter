@@ -26,6 +26,7 @@ svg {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(1in, 2in));
   grid-gap: 1px;
+  grid-row-gap: 10px;
   justify-content: center;
   margin-bottom: 2em;
 }
