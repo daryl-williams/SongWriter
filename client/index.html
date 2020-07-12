@@ -89,13 +89,14 @@
         </div>
 
         <div class="toolbar-item dropdown-menu-container">
-          <div onclick='' class="dropdown-label disabled">Tools</div>
+          <div onclick='' class="dropdown-label">Tools</div>
           <ul class="dropdown-menu hide">
-            <li id="tools-metronome" class="tools-menu-item">
+            <li id="tools-metronome" class="disabled tools-menu-item">
               Metronome
-              <ul id="metronome-controls" class="dropdown-submenu">
-                <li>
-                  BPM 
+              <ul id="metronome-controls" class="hide tools-menu dropdown-submenu">
+                <li class="tools-menu-item" class="disabled tools-menu-item">
+                  BPM &nbsp;
+<!--
                   <input id="bpm-input" class="slider"
                     type="range"
                     min="10"
@@ -104,15 +105,23 @@
                     value="120"
                     data-orientation="vertical"
                   >
+                  <output id="metronome-bpm" for="bpm-input" onforminput="value = foo.valueAsNumber;"></output>
+-->
+                  <input id="bpm-input" type="number" size="10" value="60">
                   <span id="bpm-output"></span>
 
-                  Metronme Sound
-                  <select id="metronome-sound-select">
+                </li>
+                <li class="disabled tools-menu-item">
+                  Sound <select id="metronome-sound-select">
                     <option>Click</option>
                     <option>Bell</option>
                     <option>Banjo</option>
                     <option>Woodblock</option>
                   </select>
+                </li>
+                <li class="disabled tools-menu-item metronome-startstop">
+                  <button>Start</button>
+	          <button>Stop</button>
                 </li>
               </ul>
             </li>
@@ -144,7 +153,7 @@
         </div>
 
         <div class="toolbar-item">
-          Metronme Sound
+          Metronome Sound
           <select disabled id="metronome-sound-select">
             <option>Click</option>
             <option>Bell</option>

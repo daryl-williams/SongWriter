@@ -24,78 +24,31 @@
 import { jsn } from '../index.js';
 
 export function metronome(event) {
-	/*
-	 * This method is called when <TODO>
-	 */
-	console.log('jsn:/client/js/events/metronome.js:metronome(): event.target =', event.target);
+  /*
+   * This method is called when <TODO>
+   */
+  console.log('jsn:/client/js/events/metronome.js:metronome(): event.target =', event.target);
 
-	event.preventDefault();
+  event.preventDefault();
 
-  event.target.firstElementChild.style.visibility = 'visible';
+  if (event.target.children.length > 0) {
+    event.target.children[0].classList.remove('disabled')
+    event.target.children[0].classList.add('show')
+    console.log('jsn:/client/js/events/metronome.js:metronome(): event.target.classList =', event.target.classList);
+  }
+  else if (event.target.innerText === 'Start') {
+    console.log('jsn:/client/js/events/metronome.js:metronome(): event.target.innerText =', event.target.innerText);
+    // create a new synth and route the output to master
+    const synth = new Tone.MembraneSynth().toMaster();
+    // play a note with the synth we setup
+    synth.triggerAttackRelease("C2", "8n");
+  }
+  else if (event.target.innerText === 'Stop') {
+    console.log('jsn:/client/js/events/metronome.js:metronome(): event.target.innerText =', event.target.innerText);
+  }
+  else {
+    console.log('jsn:/client/js/events/metronome.js:metronome(): ERROR unknown event.target.Text =', event.target.Text);
+  }
 
-
-	return;
-
-	console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): SONG CLICKED =', event.target.innerText);
-
-	// Remove any existing selected song-item.
-	if (document.getElementsByClassName('selected-song song-list-item') !== null) {
-		let len = document.getElementsByClassName('selected-song song-list-item').length;
-		for (let sel_ndx=0; sel_ndx<len; ++sel_ndx) {
-			document.getElementsByClassName('selected-song song-list-item')[sel_ndx].classList.remove('selected-song');
-		}
-	}
-
-	// Add the selected-song class to the song-list-item element so it gets highlighted.
-	event.target.classList.add('selected-song');
-
-/*
-	if (document.getElementById('file-browser-files') !== null) {
-		let html = '<ul id="song-list">';
-		for (let song_ndx=0; song_ndx<jsn.meta.songList.length; ++song_ndx) {
-			let songname = jsn.meta.songList[song_ndx].id;
-			//console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): songname =', songname);
-			if (songname === event.target.innerText) {
-				let filelist = jsn.meta.songList[song_ndx].filelist;
-				//console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): FILELIST =', filelist);
-				for (let file_ndx=0; file_ndx<filelist.length; ++file_ndx) {
-					let fq_filename = filelist[file_ndx];
-					let fname = fq_filename.substring(fq_filename.lastIndexOf('/')+1);
-					html += '<li class="song-list-item">' + fname + '</li>\n';
-				}
-			}
-		}
-		html += '</ul>\n';
-		document.getElementById('file-browser-files').innerHTML = html;
-	}
-*/
-
-	if (event.type === 'dblclick') {
-		jsn.events.openFile();
-	}
-
-	return;
-
-				// Setup the event click handler for song-list elements.
-				if (document.getElementsByClassName('song-list-item') !== null) {
-					let els = document.getElementsByClassName('song-list-item');
-					for (let i=0; i<els.length; ++i) {
-/*
-								els[i].addEventListener('click', function(event) {
-									console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): SONG CLICKED =', event.target.innerText);
-
-									// Add the selected class to the song-list-item element so it gets highlighted.
-									if (document.getElementsByClassName('selected-tag song-list-item') !== null) {
-										for (let sel_ndx=0; sel_ndx<document.getElementsByClassName('selected-tag song-list-item').length;++sel_ndx) {
-											document.getElementsByClassName('selected-tag song-list-item')[sel_ndx].classList.remove('selected-tag');
-										}
-									}
-
-									els[i].classList.add('selected-tag');
-									html += '</ul>\n';
-								});
-*/
-					}
-				}
 }
 

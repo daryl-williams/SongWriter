@@ -70,6 +70,12 @@ window.onload = function() {
   });
 */
 
+  if (document.getElementById('metronome-bpm') !== null) {
+    document.getElementById('metronome-bpm').addEventListener("input", () => {
+      bubble.innerHTML = rangel.value;
+    });
+  }
+
   if (document.getElementById('chord-delete-button') !== null) {
     document.getElementById('chord-delete-button').addEventListener('click', jsn.events.selectChordClickHandler);
   }
@@ -82,7 +88,7 @@ window.onload = function() {
         if (document.getElementById('save-menu-option') !== null) {
           document.getElementById('save-menu-option').classList.toggle('disabled');
         }
-
+/*
         // And the rest of the view menu options.
         const view_menu_items = document.querySelectorAll('.view-menu-item');
         for (let i=0, len=view_menu_items.length; i<len; ++i) {
@@ -91,6 +97,17 @@ window.onload = function() {
           }
           view_menu_items[i].addEventListener('click', jsn.events.setView);
         }
+
+        // And the Tools menu options.
+//        const tools_menu_items = document.querySelectorAll('.tools-menu-item');
+//        for (let i=0, len=tools_menu_items.length; i<len; ++i) {
+//          if (tools_menu_items[i].id != 'toolsmenu-toggle-console') {
+//            tools_menu_items[i].classList.toggle('disabled');
+//          }
+//          tools_menu_items[i].addEventListener('click', jsn.events.setView);
+//        }
+*/
+
         jsn.display.jsnFormat();
       }
     });
@@ -233,9 +250,6 @@ window.onload = function() {
   for (let i=0, len=view_menu_items.length; i<len; i++) {
     //console.log('JSN:/client/js/index.js:window.onload(): >>> view_menu_item['+i+'].classList =', view_menu_items[i].classList);
     if ( !view_menu_items[i].classList.contains('disabled') ) {
-      //view_menu_items[i].addEventListener('click', jsn.events.setView);
-      //view_menu_items[i].addEventListener('click', jsn.events.selectSong);
-      //view_menu_items[i].addEventListener('dblclick', jsn.events.selectSong);
       view_menu_items[i].addEventListener('click', jsn.events.openFile);
       view_menu_items[i].addEventListener('dblclick', jsn.events.openFile);
     }
@@ -246,13 +260,9 @@ window.onload = function() {
   //console.log('JSN:/client/js/index.js:window.onload(): >>> tools_menu_items =', tools_menu_items);
   for (let i=0, len=tools_menu_items.length; i<len; i++) {
     //console.log('JSN:/client/js/index.js:window.onload(): >>> tools_menu_items['+i+'].classList =', tools_menu_items[i].classList);
-//    if (! tools_menu_items[i].classList.contains('disabled')) {
+    if (! tools_menu_items[i].classList.contains('disabled')) {
       tools_menu_items[i].addEventListener('click', jsn.events.metronomeHandler);
-      let coords = tools_menu_items[i].getBoundingClientRect();
-      //console.log('JSN:/client/js/index.js:window.onload(): >>> COORDNATES =', coords);
-      let submenu_x = coords.x + coords.width + 5;
-      let submenu_y = coords.y;
-//    }
+    }
   }
 
   // Get dropdown help-menu elements.

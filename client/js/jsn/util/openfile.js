@@ -167,6 +167,16 @@ export function openFile(song_name) {
       view_menu_items[i].addEventListener('click', jsn.events.setView);
     }
 
+    // And the tools menu options.
+    const tools_menu_items = document.querySelectorAll('.tools-menu-item');
+    for (let i=0, len=tools_menu_items.length; i<len; ++i) {
+      tools_menu_items[i].classList.toggle('disabled');
+      if (tools_menu_items[i].classList.contains('disabled')) {
+        tools_menu_items[i].classList.toggle('disabled');
+      }
+      tools_menu_items[i].addEventListener('click', jsn.events.metronomeHandler);
+    }
+
     // Now that we have a song we can turn on the metronome.
     if (document.getElementById('tools-metronome') !== null) {
       if (document.querySelector('#tools-metronome').classList.contains('disabled')) {

@@ -3,265 +3,265 @@
  */
 
 *, *:before, *:after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
-	min-height: 100vh;
-	height: 100vh;
-	font-family: 'Open Sans', 'sans-serif';
-	font-size: 12pt;
-	color: #444;
-	background-color: #fff;
-	padding: 0px;
-	margin: 0px;
-	box-sizing: border-box;
-	overflow: hidden;
-	user-select: none;
+  min-height: 100vh;
+  height: 100vh;
+  font-family: 'Open Sans', 'sans-serif';
+  font-size: 12pt;
+  color: #444;
+  background-color: #fff;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  overflow: hidden;
+  user-select: none;
 }
 
 nav {
-	width: 100%;
+  width: 100%;
 }
 
 i {
-	vertical-align: middle;
+  vertical-align: middle;
 }
 
 .page {
-	width: 100vw;
-	height: 100vh;
+  width: 100vw;
+  height: 100vh;
 /*
  * overflow: scroll;
  */
 }
 
 .hide {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .show {
-	visibility: visible;
+  visibility: visible;
 }
 
 #app-header {
-	position: relative;
-	z-index: 3;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	color: #000;
-	background-color: #d0e5ff;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  color: #000;
+  background-color: #d0e5ff;
 }
 
 #app-console {
-	position: relative;
-	z-index: 1;
-	/* Set display to flexbox */
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	border: thin groove #ddd;
-	background-color: #eee;
-	background-color: aliceblue;
+  position: relative;
+  z-index: 1;
+  /* Set display to flexbox */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  border: thin groove #ddd;
+  background-color: #eee;
+  background-color: aliceblue;
 }
 
 #app-console.hide {
-	display: none;
+  display: none;
 }
 
 #app-console.show {
-	display: flex;
+  display: flex;
 }
 
 .app-multiuse {
-	position: relative;
-	align-items: center;
-	width: 80%;
-	width: 100%;
-	border: 1px solid silver;
-	overflow: hidden;
+  position: relative;
+  align-items: center;
+  width: 80%;
+  width: 100%;
+  border: 1px solid silver;
+  overflow: hidden;
 }
 
 #preferences-container {
-	position: relative;
-	z-index: -10;
-	margin: 0px;
-	height: 200px;
-	width: 40%;
-	display: grid;
-	grid-gap: 1px;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: [preferences-header] 28px [preferences-content] 1fr [preferences-content] 1fr;
-	grid-template-areas:
-		"preferences-header  preferences-header"
-		"preferences-content preferences-content"
-		"preferences-content preferences-content";
+  position: relative;
+  z-index: -10;
+  margin: 0px;
+  height: 200px;
+  width: 40%;
+  display: grid;
+  grid-gap: 1px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: [preferences-header] 28px [preferences-content] 1fr [preferences-content] 1fr;
+  grid-template-areas:
+    "preferences-header  preferences-header"
+    "preferences-content preferences-content"
+    "preferences-content preferences-content";
 
-	transition: width .75s ease;
-	display: none;
+  transition: width .75s ease;
+  display: none;
 }
 
 /*
 #preferences-container.closed {
-	width: 0px;
-	padding: 0px;
-	visibility: hidden;
+  width: 0px;
+  padding: 0px;
+  visibility: hidden;
 }
 */
 
 /*
 .preferences-header {
-	grid-area: preferences-header;
+  grid-area: preferences-header;
 }
 
 .preferences-content {
-	border: thin solid #ddd;
+  border: thin solid #ddd;
 }
 
 .preferences-content select {
-	width: 50%;
+  width: 50%;
 }
 
 .splitter {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	align-items: center;
-	width: 12px;  
-	background-color: #ddd;
-	color: #000;
-	height: 100%;
-	border: thin solid #aaa;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 12px;  
+  background-color: #ddd;
+  color: #000;
+  height: 100%;
+  border: thin solid #aaa;
 }
 
 .fa-hand-o-left,
 .fa-hand-o-right {
-	cursor: pointer;
-	font-size: 8px !important;
+  cursor: pointer;
+  font-size: 8px !important;
 }
 
 .fa-circle-o {
-	cursor: col-resize;  
-	font-size: 8px !important;
+  cursor: col-resize;  
+  font-size: 8px !important;
 }
 
 .fa-toggle-on, .fa-toggle-off {
-	font-size: 16px !important;
+  font-size: 16px !important;
 }
 
 #chords-container {
-	position: relative;
-	z-index: 5;
-	cursor: pointer;
-	flex: 2;
-	flex-wrap: nowrap;
-	height: 220px;
-	padding: .5em;
-	overflow-y: scroll;
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
+  flex: 2;
+  flex-wrap: nowrap;
+  height: 220px;
+  padding: .5em;
+  overflow-y: scroll;
 }
 
 #chords-container.closed {
-	width: 0px;
-	padding: 0px;
-	visibility: hidden;
+  width: 0px;
+  padding: 0px;
+  visibility: hidden;
 }
 */
 
 #chords-additional {
-	display: grid;
-	grid-template-columns: repeat(7, 80px);
+  display: grid;
+  grid-template-columns: repeat(7, 80px);
 }
 
 #song-content {
-	position: relative;
-	font-size: 10pt;
-	padding: .25em;
-	z-index: 2;
-	height: 60vh;
-	overflow: auto;
-	padding-bottom: 1em;
+  position: relative;
+  font-size: 10pt;
+  padding: .25em;
+  z-index: 2;
+  height: 60vh;
+  overflow: auto;
+  padding-bottom: 1em;
 }
 
 .app-footer {
-	visibility: hidden;
-	/*
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	z-index: 1;
-	*/
+  visibility: hidden;
+  /*
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  */
 
-	/*
-	grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row-start: 5;
-	grid-row-end: 5;
-	*/
-	height: 28px;
-	margin-top: 1em;
-	/*
-	margin-bottom: 2em;
-	*/
-	background-color: #d0e5ff;
-	/* Reverse of the toolbar background. */
-	background: linear-gradient(to left top, rgba(2,0,36,1) 0%, rgba(208,229,255,1) 0%, rgba(0,212,255,1) 100%);
+  /*
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 5;
+  grid-row-end: 5;
+  */
+  height: 28px;
+  margin-top: 1em;
+  /*
+  margin-bottom: 2em;
+  */
+  background-color: #d0e5ff;
+  /* Reverse of the toolbar background. */
+  background: linear-gradient(to left top, rgba(2,0,36,1) 0%, rgba(208,229,255,1) 0%, rgba(0,212,255,1) 100%);
 }
 
 .hidden {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .visible {
-	visibility: visible;
+  visibility: visible;
 }
 
 .selected-chord-div {
-	background-color: aliceblue;
+  background-color: aliceblue;
 }
 
 /*
-	** no grid support? **
+  ** no grid support? **
 @media screen and (min-width: 500px) {
-	.song-form {
-		float: left;
-		width: 19.1489%;
-	}
+  .song-form {
+    float: left;
+    width: 19.1489%;
+  }
 
-	.content {
-		float: right;
-		width: 79.7872%;
-	}
+  .content {
+    float: right;
+    width: 79.7872%;
+  }
 
-	.page {
-		margin: 0 auto;
-		grid-template-columns: 1fr 3fr;
-	}
-	
-	.toolbar, .song-footer {
-		grid-column: 1 / -1;
-		** needed for the floated layout **
-		clear: both;
-	}
+  .page {
+    margin: 0 auto;
+    grid-template-columns: 1fr 3fr;
+  }
+  
+  .toolbar, .song-footer {
+    grid-column: 1 / -1;
+    ** needed for the floated layout **
+    clear: both;
+  }
 
-	.song-content {
-		grid-column: 1 / -1;
-		** needed for the floated layout **
-		clear: both;
-	}
+  .song-content {
+    grid-column: 1 / -1;
+    ** needed for the floated layout **
+    clear: both;
+  }
 }
 
 .page > * {
-	background-color: #444;
-	color: #fff;
+  background-color: #444;
+  color: #fff;
 //  border-radius: 5px;
 //  padding: 20px;
-	font-size: 150%;
-	** needed for the floated layout**
-	margin-bottom: 10px;
+  font-size: 150%;
+  ** needed for the floated layout**
+  margin-bottom: 10px;
 }
 */
 /*
@@ -270,23 +270,24 @@ i {
 /*
 We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps.
 @supports (display: grid) {
-	.page > * {
-		width: auto;
-		margin: 0;
-	}
+  .page > * {
+    width: auto;
+    margin: 0;
+  }
 }
 */
 
+.metronome-startstop {
+  margin-top: 1em;
+}
+
 #metronome-controls {
-	display: block;
-	visibility: hidden;
-	width: 200px;
-	height: 300px;
-	background-color: #fff;
-	border: thin solid blue;
+  display: block;
+  width: 200px;
+  height: 300px;
 }
 
 #chord-delete-button {
-	margin-left: 2em;
+  margin-left: 2em;
 }
 
