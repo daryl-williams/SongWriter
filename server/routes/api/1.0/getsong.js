@@ -19,44 +19,68 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 const router = require('express').Router({mergeParams: true});
 
 router.get('/', function(req, res)
 {
-	console.log('JSN:/server/routes/api/1.0/getsong.js: req.params =', req.params);
+  console.log('JSN:/server/routes/api/1.0/getsong.js: >>>>> req.params =', req.params.song_name);
+  const song_name = req.params.song_name;
+  console.log('JSN:/server/routes/api/1.0/getsong.js: >>>>> song_name =', song_name);
 
-	const fs = require('fs');
-	//const path = require('path');
+  if (process.env.SONG_STORAGE === 'remote') {
+    const axios = require('axios');
+    (async () => {
+      try {
+        const uri = 'http://weblane.com:5253/api/getsong/' + encodeURIComponent(req.params.song_name);
+        console.log('JSN:/server/routes/api/1.0/getsong.js: storage URI =', uri);
+        let response = await axios.get(uri);
+        //console.log('JSN:/server/routes/api/1.0/getsong.js: response =', response);
+        console.log('JSN:/server/routes/api/1.0/getsong.js: response.data =', response.data);
 
-	let song_file = './client/songs/' + req.params.song_name;
-	console.log('JSN:/server/routes/api/1.0/getsong.js: song_file =', song_file);
+        //const song = JSON.stringify(response.data);
+        const song = response.data;
+        console.log('JSN:/server/routes/api/1.0/getsong.js: Returning song =', song);
+        res.send(song);
+      }
+      catch(error) {
+        console.log('JSN:/server/routes/api/1.0/getsong.js: axios get ERROR =', error);
+      }
+    })();
+  }
+  else if (process.env.SONG_STORAGE === 'mongo') {
+  }
+  else if (process.env.SONG_STORAGE === 'file') {
+    const fs = require('fs');
+    //const path = require('path');
 
-	try {
-		var song = fs.readFileSync(song_file, 'utf8');
-	}
-	catch(err) {
-		err.statusCode = 404;
-		res.send(err);
-		return;
-	}
+    let song_file = './client/songs/' + req.params.song_name;
+    console.log('JSN:/server/routes/api/1.0/getsong.js: song_file =', song_file);
 
-	console.log('JSN:/server/routes/api/1.0/getsong.js: RETURNING song =', song);
-	res.json(song);
-	//return song;
+    try {
+      var song = fs.readFileSync(song_file, 'utf8');
+      console.log('JSN:/server/routes/api/1.0/getsong.js: RETURNING song =', song);
+      res.json(song);
+      //return song;
+    }
+    catch(err) {
+      err.statusCode = 404;
+      res.send(err);
+      return;
+    }
+  }
 });
 
 router.get('*', function(req, res, next) {
-	console.log('JSN:/server/routes/api/1.0/getsong.js: >>> NOTICE: no such route!');
-	var json = {
-		'status': 'error',
-		'msg': 'No such resource.',
-	};
-	let err = new Error();
-	err.statusCode = 404;
-	res.send(json);
-	//res.send('routes/api/1.0/getsong: No such resource', 404);
-	//res.status(404).send('routes/api/1.0/getsong: No such resource');
+  console.log('JSN:/server/routes/api/1.0/getsong.js: >>> NOTICE: no such route!');
+  var json = {
+    'status': 'error',
+    'msg': 'No such resource.',
+  };
+  let err = new Error();
+  err.statusCode = 404;
+  res.send(json);
+  //res.send('routes/api/1.0/getsong: No such resource', 404);
+  //res.status(404).send('routes/api/1.0/getsong: No such resource');
 });
 
 /*

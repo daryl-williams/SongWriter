@@ -126,7 +126,12 @@ export function openFile(song_name) {
       return;
     }
 
-    jsn.song = JSON.parse(song);
+    if (typeof song === 'object') {
+      jsn.song = song;
+    }
+    else {
+      jsn.song = JSON.parse(song);
+    }
     console.log('jsn:/client/js/jsn/util/openfile.js:openFile:getsong(): jsn.song =', jsn.song);
 
     if (jsn.meta.fileBrowser) {

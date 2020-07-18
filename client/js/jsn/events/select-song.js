@@ -24,66 +24,66 @@
 import { jsn } from '../index.js';
 
 export function selectSong(event) {
-	/*
-	 * This method is called when <TODO>
-	 */
-	console.log('jsn:/client/js/events/select-action.js:selectSong(): event.type =', event.type);
-	console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): SONG CLICKED =', event.target.innerText);
+  /*
+   * This method is called when <TODO>
+   */
+  console.log('jsn:/client/js/events/select-action.js:selectSong(): event.type =', event.type);
+  console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): SONG CLICKED =', event.target.innerText);
 
-	event.preventDefault();
+  event.preventDefault();
 
-	let get_songtitle = function(el) {
-		if (el.innerText === '') {
-			alert('Please select a song to open.');
-			return;
-		}
-		else {
-			return el.innerText;
-		}
-	}
+  let get_songtitle = function(el) {
+    if (el.innerText === '') {
+      alert('Please select a song to open.');
+      return;
+    }
+    else {
+      return el.innerText;
+    }
+  }
 
-	jsn.meta.action = 'edit';
-	let song_name = undefined;
+  jsn.meta.action = 'edit';
+  let song_name = undefined;
 
-	if (event.type == 'click') {
-		// The submit button was pressed now we want
-		// to find the element with class: selected-song.
-		if (event.target.type == 'submit') {
-			// The submit button was pressed now we want
-			// to find the element with class: selected-song.
-			if (document.querySelector('.selected-song')) {
-				// We found it, so continue on...
-				song_name = get_songtitle(document.querySelector('.selected-song'));
-			}
-			else {
-				alert('You must first select a song to open.');
-				return;
-			}
-		}
-		else {
-			if (event.target.classList.contains('song-list-item')) {
-				event.target.classList.add('selected-song');
-				return;
-			}
-			else {
-				song_name = get_songtitle(event.target);
-			}
-		}
-	}
-	else if (event.type == 'dblclick') {
-		if (event.target.type != 'submit') {
-			song_name = get_songtitle(event.target);
-		}
-	}
+  if (event.type == 'click') {
+    // The submit button was pressed now we want
+    // to find the element with class: selected-song.
+    if (event.target.type == 'submit') {
+      // The submit button was pressed now we want
+      // to find the element with class: selected-song.
+      if (document.querySelector('.selected-song')) {
+        // We found it, so continue on...
+        song_name = get_songtitle(document.querySelector('.selected-song'));
+      }
+      else {
+        alert('You must first select a song to open.');
+        return;
+      }
+    }
+    else {
+      if (event.target.classList.contains('song-list-item')) {
+        event.target.classList.add('selected-song');
+        return;
+      }
+      else {
+        song_name = get_songtitle(event.target);
+      }
+    }
+  }
+  else if (event.type == 'dblclick') {
+    if (event.target.type != 'submit') {
+      song_name = get_songtitle(event.target);
+    }
+  }
 
-	// By now we should have our song_name.
-	console.log('jsn:/client/js/events/openfile.js:openFile(): song_name =', song_name);
+  // By now we should have our song_name.
+  console.log('jsn:/client/js/events/openfile.js:openFile(): song_name =', song_name);
 
-	// Hide the Opened Recent submenu.
-	//event.target.parentElement.style.visibility = 'hidden';
-	event.target.parentElement.classList.add('hide');
-	console.log('jsn:/client/js/events/openfile.js:openFile(): target.parentElement =', event.target.parentElement.classList);
+  // Hide the Opened Recent submenu.
+  //event.target.parentElement.style.visibility = 'hidden';
+  event.target.parentElement.classList.add('hide');
+  console.log('jsn:/client/js/events/openfile.js:openFile(): target.parentElement =', event.target.parentElement.classList);
 
-	jsn.openFile(song_name);
+  jsn.openFile(song_name);
 }
 

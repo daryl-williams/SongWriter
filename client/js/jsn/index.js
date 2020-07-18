@@ -44,6 +44,7 @@ class jsnApp {
     }, false);
 
     if (!jsnApp.instance) {
+      this.storageType = 'remote';
       this.doubleTime = false;
       this.exportFile = exportFile;
       this.openFile = openFile;

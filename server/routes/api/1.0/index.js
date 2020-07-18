@@ -23,7 +23,7 @@ const router = require('express').Router({mergeParams: true});
 
 // Route Handlers
 router.use("/help/:topic", require('./help.js'));
-router.use("/save", require('./save-song.js'));
+router.use("/save", require('./save/index.js'));
 router.use("/getsongs-by-tag", require('./getsongs-by-tag.js'));
 router.use("/getmeta", require('./getmeta.js'));
 router.use("/getsong/:song_name", require('./getsong.js'));

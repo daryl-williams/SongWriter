@@ -40,7 +40,6 @@ export function saveSong() {
     }
   }
 
-
   //let song_str = 'song=' + JSON.stringify(this.song);
   //let encoded_song_str = encodeURI('song=' + JSON.stringify(this.song));
   //console.log('lsf:/lachlan.js:saveSong(): encoded_song_str =', encoded_song_str);
@@ -54,7 +53,6 @@ export function saveSong() {
   let self = this;
 
   const saveSong = async function(url, json) {
-
     let options = {
       method: "POST",
       body: song_str,

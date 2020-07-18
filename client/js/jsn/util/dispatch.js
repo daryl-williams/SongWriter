@@ -26,7 +26,7 @@ class Dispatch {
     //console.log('/client/js/jsn/util/dispatch.js:constructor(): this =', this);
   }
 
-  async dispatchRequest(url, request_type, content_type, options) {
+  async dispatchRequest(url, request_type, return_content_type, options) {
     console.log('/client/js/jsn/util/dispatch.js:dispatchRequest(): REQUEST options =', options);
 
     let response = null;
@@ -40,7 +40,7 @@ class Dispatch {
     else {
       console.log('/client/js/jsn/util/dispatch.js:dispatchRequest(): ERROR unknow request_type =', request_type);
     }
-    console.log('/client/js/jsn/util/dispatch.js:dispatchRequest(): response =', response);
+    //console.log('/client/js/jsn/util/dispatch.js:dispatchRequest(): response =', response);
 
     if (!response.ok) {
       console.error('/client/js/util/dispatch.js:dispatchRequest(): fetch ERROR, response =', response);
@@ -57,17 +57,17 @@ class Dispatch {
 //console.log('/client/js/util/dispatch.js:dispatchRequest(): >>> 0. returning TXT =', txt);
 //}
 
-    if (content_type === 'json') {
+    if (return_content_type === 'json') {
       const json = await response.json();
       //console.log('/client/js/util/dispatch.js:dispatchRequest(): >>> 1. returning JSON =', json);
       return json;
     }
-    else if (content_type === 'html') {
+    else if (return_content_type === 'text' || return_content_type === 'html') {
       const html = await response.text();
       //console.log('/client/js/util/dispatch.js:dispatchRequest(): >>> 1. returning JSON =', json);
       return html;
     }
-    else if (content_type === 'blob') {
+    else if (return_content_type === 'blob') {
       let filename = '';
       if (response.headers.get('content-type') === 'application/pdf') {
         filename = response.headers.get('content-disposition')
@@ -89,22 +89,22 @@ class Dispatch {
       return json;
     }
     else {
-      console.log('/client/js/util/dispatch.js:dispatchRequest(): ERROR: unknow content-type', content_type);
+      console.log('/client/js/util/dispatch.js:dispatchRequest(): ERROR: unknow content-type', return_content_type);
       return null;
     }
   }
 
-  async post(url, content_type, options) {
+  async post(url, return_content_type, options) {
     console.log('/client/js/util/dispatch.js:post(): url =', url);
     console.log('/client/js/util/dispatch.js:post(): options =', options);
 
-    let response = await this.dispatchRequest(url, 'POST', content_type, options);
+    let response = await this.dispatchRequest(url, 'POST', return_content_type, options);
     return response;
   }
 
-  async get(url, content_type) {
+  async get(url, return_content_type) {
     //console.log('/client/js/util/dispatch.js:get(): url =', url);
-    let response = await this.dispatchRequest(url, 'GET', content_type);
+    let response = await this.dispatchRequest(url, 'GET', return_content_type);
     return response;
   }
 }

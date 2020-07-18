@@ -38,15 +38,15 @@ console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): added cli
     }
 
     const get_song_tags = async function(url, content_type) {
-      let songtags = await jsn.dispatch.get(url, content_type);
-      //console.log('jsn:/client/js/jsn/display/file-browser.js:songtags(): songtags =', songtags);
+      let songs_by_tag = await jsn.dispatch.get(url, content_type);
+      //console.log('jsn:/client/js/jsn/display/file-browser.js:songs_by_tag(): songs_by_tag =', songs_by_tag);
 
-      jsn.meta.tagList = songtags.result;
+      jsn.meta.tagList = songs_by_tag;
 
       let html = '<ul id="song-tags-list">\n';
 
       let filelist = [];
-      let taglist = songtags.result;
+      let taglist = songs_by_tag;
 
       function compare(a, b) {
         // Use toUpperCase() to ignore character casing
@@ -70,15 +70,9 @@ console.log('jsn:/client/js/jsn/display/file-browser.js:fileBrowser(): added cli
         for (let tag_ndx=0; tag_ndx<taglist.length; ++tag_ndx) {
 
           let tagname = taglist[tag_ndx].id;
-          //console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songtags[' + tag_ndx + '].id =', taglist[tag_ndx].id);
-          console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songtags[' + tag_ndx + '].id =', tagname);
+          //console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songs_by_tag[' + tag_ndx + '].id =', taglist[tag_ndx].id);
+          console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songs_by_tag[' + tag_ndx + '].id =', tagname);
 
-//          Object.values(taglist).includes(tagname);
-
-//          if (Object.values(taglist[tag_ndx]).includes(tagname) === true) {
-//            // The tag name is already in the list.
-//            console.log('jsn:/client/js/jsn/display/file-browser.js:get_song_tags(): songtags[' + tag_ndx + '] = is already in the list.');
-//          }
           if (tag_ndx === 0) {
             html += '<li class="selected-tag song-tag-item" >' + taglist[tag_ndx].id + '</li>\n';
           }
