@@ -5,6 +5,7 @@
 if (process.env.NODE_ENV === 'development') {
   require('dotenv').config()
 }
+console.log('JSN:/index.js: NODE_ENV =', process.env.NODE_ENV);
 
 const express = require("express");
 const app = express();
